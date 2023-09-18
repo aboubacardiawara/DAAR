@@ -1,34 +1,42 @@
 package com.daar;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.daar.automate.Automate;
+import com.daar.automate.AutomateBuilder;
 import com.daar.automate.IAutomate;
 
 /**
  * Unit test for simple App.
  */
 public class AppTest {
+
+    protected AutomateBuilder automateBuilder;
+
+    @Before
+    public void before() {
+        this.automateBuilder = new AutomateBuilder();
+    }
+
     /**
-     * Rigorous Test :-)
+     * Creating a simple automate with two states and one transition.
      */
     @Test
     public void automateUnCaractere() {
-        IAutomate automate1 = example1();
-        assertTrue(automate1.getId() == 0);
-        assertTrue(automate1.getTransition('a').getId() == 1);
-        assertTrue(automate1.getTransition('a').isAcceptingState());
+        IAutomate automate = exampleAutomateAcceptingA();
+        assertTrue(automate.getId() == 0);
+        assertTrue(automate.getTransition('a').getId() == 1);
+        assertTrue(automate.isAnInitialState());
+        assertTrue(automate.getTransition('a').isAcceptingState());
+        assertFalse(automate.getTransition('a').isAnInitialState());
+        assertFalse(automate.isAcceptingState());
     }
 
-    private IAutomate example1() {
-        IAutomate etatInitial = new Automate(0);
-        IAutomate etatFinal = new Automate(1);
-        System.out.println(etatInitial);
-        System.out.println(etatFinal);
-        etatInitial.addTransition('a', etatFinal);
-
-        return etatInitial;
+    private IAutomate exampleAutomateAcceptingA() {
+        return this.automateBuilder.buildFrom(null);
     }
 }

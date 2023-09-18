@@ -15,10 +15,12 @@ public class AutomateBuilder {
 
     private IAutomate buildSimple(RegExTree regExTree) {
         IAutomate etatInitial = new Automate(0);
+        etatInitial.makeAsInitialState();
         IAutomate etatFinal = new Automate(1);
+        etatFinal.makeAsFinalState();
         etatInitial.addTransition('a', etatFinal);
 
-        return etatFinal;
+        return etatInitial;
     }
 
 }

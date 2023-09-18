@@ -10,4 +10,10 @@ public interface IAutomate {
 
     public boolean isAcceptingState();
 
+    public boolean isAnInitialState();
+
+    public void makeAsFinalState();
+
+    public void makeAsInitialState();
+
 }
