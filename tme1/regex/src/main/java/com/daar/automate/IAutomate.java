@@ -6,7 +6,7 @@ public interface IAutomate {
 
     public int getId();
 
-    public IAutomate getTransition(char c);
+    public IAutomate getTransition(char c) throws NoSuchTransition;
 
     public boolean isAcceptingState();
 

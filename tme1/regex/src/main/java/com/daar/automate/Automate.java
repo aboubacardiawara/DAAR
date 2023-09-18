@@ -34,8 +34,11 @@ public class Automate implements IAutomate {
     }
 
     @Override
-    public IAutomate getTransition(char c) {
-        return this.transitions.get(c);
+    public IAutomate getTransition(char c) throws NoSuchTransition {
+        IAutomate automate = this.transitions.get(c);
+        if (automate == null)
+            throw new NoSuchTransition();
+        return automate;
     }
 
     @Override

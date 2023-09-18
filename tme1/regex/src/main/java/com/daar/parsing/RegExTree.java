@@ -3,12 +3,20 @@ package com.daar.parsing;
 import java.util.ArrayList;
 
 public class RegExTree {
-    public int root;
-    public ArrayList<RegExTree> subTrees;
+    private int root;
+    private ArrayList<RegExTree> subTrees;
 
     public RegExTree(int root, ArrayList<RegExTree> subTrees) {
         this.root = root;
         this.subTrees = subTrees;
+    }
+
+    public int getRoot() {
+        return root;
+    }
+
+    public ArrayList<RegExTree> getSubTrees() {
+        return subTrees;
     }
 
     // FROM TREE TO PARENTHESIS
@@ -22,13 +30,13 @@ public class RegExTree {
     }
 
     public String rootToString() {
-        if (root == Closure.CONCAT)
+        if (root == EClosure.CONCAT)
             return ".";
-        if (root == Closure.ETOILE)
+        if (root == EClosure.ETOILE)
             return "*";
-        if (root == Closure.ALTERN)
+        if (root == EClosure.ALTERN)
             return "|";
-        if (root == Closure.DOT)
+        if (root == EClosure.DOT)
             return ".";
         return Character.toString((char) root);
     }
