@@ -10,7 +10,15 @@ public class AutomateBuilder {
      * @return
      */
     public IAutomate buildFrom(RegExTree regExTree) {
-        return null;
+        return buildSimple(regExTree);
+    }
+
+    private IAutomate buildSimple(RegExTree regExTree) {
+        IAutomate etatInitial = new Automate(0);
+        IAutomate etatFinal = new Automate(1);
+        etatInitial.addTransition('a', etatFinal);
+
+        return etatFinal;
     }
 
 }
