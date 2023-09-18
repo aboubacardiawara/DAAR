@@ -10,15 +10,19 @@ public class AutomateBuilder {
      * @return
      */
     public IAutomate buildFrom(RegExTree regExTree) {
-        return buildSimple(regExTree);
+        return null;
     }
 
-    private IAutomate buildSimple(RegExTree regExTree) {
+    public IAutomate buildFrom(char c) {
+        return buildSimple(c);
+    }
+
+    private IAutomate buildSimple(char c) {
         IAutomate etatInitial = new Automate(0);
         etatInitial.makeAsInitialState();
         IAutomate etatFinal = new Automate(1);
         etatFinal.makeAsFinalState();
-        etatInitial.addTransition('a', etatFinal);
+        etatInitial.addTransition(c, etatFinal);
 
         return etatInitial;
     }

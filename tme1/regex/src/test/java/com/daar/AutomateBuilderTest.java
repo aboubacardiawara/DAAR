@@ -30,15 +30,16 @@ public class AutomateBuilderTest {
      */
     @Test
     public void automateUnCaractereA() {
+        char car = 'a';
         IAutomate automate = exampleAutomateAcceptingA();
         assertTrue(automate.getId() == 0);
 
         try {
-            assertTrue(automate.getTransition('a').getId() == 1);
+            assertTrue(automate.getTransition(car).getId() == 1);
             assertFalse(automate.isAcceptingState());
             assertTrue(automate.isAnInitialState());
-            assertTrue(automate.getTransition('a').isAcceptingState());
-            assertFalse(automate.getTransition('a').isAnInitialState());
+            assertTrue(automate.getTransition(car).isAcceptingState());
+            assertFalse(automate.getTransition(car).isAnInitialState());
         } catch (NoSuchTransition e) {
             fail("Error should not occur");
         }
@@ -49,13 +50,14 @@ public class AutomateBuilderTest {
      */
     @Test
     public void automateUnCaractereB() {
-        IAutomate automate = exampleAutomateAcceptingA();
+        char car = 'b';
+        IAutomate automate = exampleAutomateAcceptingB();
         assertTrue(automate.getId() == 0);
         try {
-            assertTrue(automate.getTransition('b').getId() == 1);
+            assertTrue(automate.getTransition(car).getId() == 1);
             assertTrue(automate.isAnInitialState());
-            assertTrue(automate.getTransition('b').isAcceptingState());
-            assertFalse(automate.getTransition('b').isAnInitialState());
+            assertTrue(automate.getTransition(car).isAcceptingState());
+            assertFalse(automate.getTransition(car).isAnInitialState());
             assertFalse(automate.isAcceptingState());
         } catch (NoSuchTransition e) {
             fail("Error should not occur");
@@ -63,7 +65,11 @@ public class AutomateBuilderTest {
     }
 
     private IAutomate exampleAutomateAcceptingA() {
-        return this.automateBuilder.buildFrom(null);
+        return this.automateBuilder.buildFrom('a');
+    }
+
+    private IAutomate exampleAutomateAcceptingB() {
+        return this.automateBuilder.buildFrom('b');
     }
 
 }
