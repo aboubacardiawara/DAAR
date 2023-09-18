@@ -27,4 +27,15 @@ public class AutomateBuilder {
         return etatInitial;
     }
 
+    public IAutomate buildFromUnion(IAutomate r1, IAutomate r2) {
+        IAutomate initialState = new Automate(0);
+        IAutomate finalState = new Automate(0);
+        initialState.addEmptyTransitionTo(r1);
+        initialState.addEmptyTransitionTo(r2);
+        r1.addEmptyTransitionTo(finalState);
+        r2.addEmptyTransitionTo(finalState);
+
+        return initialState;
+    }
+
 }

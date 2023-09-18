@@ -1,5 +1,6 @@
 package com.daar.automate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,12 +9,14 @@ public class Automate implements IAutomate {
     protected Map<Character, IAutomate> transitions;
     protected boolean isInitialState;
     protected boolean isAcceptingState;
+    private ArrayList<IAutomate> emptyTransitions;
 
     public Automate(int id) {
         this.id = id;
         this.transitions = new HashMap<>();
         this.isInitialState = false;
         this.isAcceptingState = false;
+        this.emptyTransitions = new ArrayList<IAutomate>();
     }
 
     public int getId() {
@@ -54,6 +57,16 @@ public class Automate implements IAutomate {
     @Override
     public void makeAsInitialState() {
         this.isInitialState = true;
+    }
+
+    @Override
+    public ArrayList<IAutomate> getEmptyTransitions() {
+        return this.emptyTransitions;
+    }
+
+    @Override
+    public void addEmptyTransitionTo(IAutomate automate) {
+        this.emptyTransitions.add(automate);
     }
 
 }

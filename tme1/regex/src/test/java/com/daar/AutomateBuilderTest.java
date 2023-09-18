@@ -22,7 +22,28 @@ public class AutomateBuilderTest {
 
     @Test
     public void buildingAnUnionOfTwoAutomate() {
+        // R1: (1) -- (a) --> ((2))
+        // R2: (3) -- (b) --> ((4))
+        // R1 | R2:
+        // 1) (0) -- (eps) --> (1) -- (a) --> ((2)) -- (eps) --> ((5))
+        // 2) (0) -- (eps) --> (3) -- (b) --> ((4)) -- (eps) --> ((5))
 
+        IAutomate R1 = exampleAutomateAcceptingA();
+        IAutomate R2 = exampleAutomateAcceptingB();
+        IAutomate automateFromUnion = this.automateBuilder.buildFromUnion(R1, R2);
+
+        assertTrue(
+                automateFromUnion.getEmptyTransitions().contains(R1),
+                "Empty transitions contains R1");
+        assertTrue(
+                automateFromUnion.getEmptyTransitions().contains(R2),
+                "Empty transitions also contains R2");
+
+    }
+
+    @Test
+    void testSurLesId() {
+        // fail("Ajouter un test sur les ids, la nature des etats ....");
     }
 
     /**
