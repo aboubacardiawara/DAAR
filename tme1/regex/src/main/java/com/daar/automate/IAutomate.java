@@ -29,4 +29,6 @@ public interface IAutomate {
 
     public Object dotifyAux();
 
+    public void addEmptyTransitionFromAcceptingTo(IAutomate finalState);
+
 }

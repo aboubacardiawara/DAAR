@@ -42,8 +42,10 @@ public class AutomateBuilder {
         IAutomate finalState = new Automate(currentId());
         initialState.addEmptyTransitionTo(r1);
         initialState.addEmptyTransitionTo(r2);
-        r1.addEmptyTransitionTo(finalState);
-        r2.addEmptyTransitionTo(finalState);
+        // rajoute un etat final a partir de l'etat final de R1 ou r2 (cheche l'etat
+        // final)
+        r1.addEmptyTransitionFromAcceptingTo(finalState);
+        r2.addEmptyTransitionFromAcceptingTo(finalState);
 
         return initialState;
     }

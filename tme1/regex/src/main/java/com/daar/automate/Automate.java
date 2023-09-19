@@ -36,6 +36,43 @@ public class Automate implements IAutomate {
         return isAcceptingState;
     }
 
+    public void addEmptyTransitionFromAcceptingTo(IAutomate automate) {
+        IAutomate acceptingState = findAcceptingState();// cheche l'etat final
+
+        acceptingState.addEmptyTransitionTo(automate);
+    }
+
+    private IAutomate findAcceptingState() {
+        if (isAcceptingState) {
+            return this;
+        } else {
+            IAutomate result = null; // Initialisez result à null
+
+            // Parcourez les transitions
+            for (Map.Entry<Character, IAutomate> entry : transitions.entrySet()) {
+                IAutomate automate = entry.getValue();
+                if (automate.isAcceptingState()) {
+                    result = automate;
+                    break; // Sortez de la boucle si un état acceptant est trouvé
+                }
+            }
+
+            // Si un état acceptant a été trouvé, retournez-le
+            if (result != null) {
+                return result;
+            }
+
+            // Parcourez les transitions vides
+            for (IAutomate automate : emptyTransitions) {
+                if (automate.isAcceptingState()) {
+                    result = automate;
+                    break;
+                }
+            }
+            return result;
+        }
+    }
+
     @Override
     public IAutomate getTransition(char c) throws NoSuchTransition {
         IAutomate automate = this.transitions.get(c);
@@ -107,11 +144,12 @@ public class Automate implements IAutomate {
                 automate -> {
                     stringBuilder.append("\t" + this.id + " -> " + automate.getId());
                     stringBuilder.append(" [label=\"\"]\n");
+                    stringBuilder.append(automate.dotifyAux());
                 });
-
         this.transitions.forEach((car, automate) -> {
             stringBuilder.append("\t" + this.id + " -> " + automate.getId());
             stringBuilder.append(" [label=\"" + car + "\"]\n");
+            stringBuilder.append(automate.dotifyAux());
         });
         return stringBuilder.toString();
     }
