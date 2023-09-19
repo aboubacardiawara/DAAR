@@ -4,6 +4,16 @@ import com.daar.parsing.RegExTree;
 
 public class AutomateBuilder {
 
+    protected int id;
+
+    public AutomateBuilder() {
+        this.id = 0;
+    }
+
+    public int currentId() {
+        return this.id++;
+    }
+
     /**
      * Build an NDFA from a RegExTree.
      * 
@@ -18,9 +28,9 @@ public class AutomateBuilder {
     }
 
     private IAutomate buildSimple(char c) {
-        IAutomate etatInitial = new Automate(0);
+        IAutomate etatInitial = new Automate(currentId());
         etatInitial.makeAsInitialState();
-        IAutomate etatFinal = new Automate(1);
+        IAutomate etatFinal = new Automate(currentId());
         etatFinal.makeAsFinalState();
         etatInitial.addTransition(c, etatFinal);
 
@@ -28,8 +38,8 @@ public class AutomateBuilder {
     }
 
     public IAutomate buildFromUnion(IAutomate r1, IAutomate r2) {
-        IAutomate initialState = new Automate(0);
-        IAutomate finalState = new Automate(0);
+        IAutomate initialState = new Automate(currentId());
+        IAutomate finalState = new Automate(currentId());
         initialState.addEmptyTransitionTo(r1);
         initialState.addEmptyTransitionTo(r2);
         r1.addEmptyTransitionTo(finalState);

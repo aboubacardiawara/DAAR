@@ -2,6 +2,8 @@ package com.daar;
 
 import java.util.Scanner;
 
+import com.daar.automate.AutomateBuilder;
+import com.daar.automate.IAutomate;
 import com.daar.parsing.EClosure;
 import com.daar.parsing.RegExTree;
 import com.daar.parsing.RegexParser;
@@ -20,7 +22,7 @@ public class App {
     }
 
     // MAIN
-    public static void main(String arg[]) {
+    public static void main2(String arg[]) {
         System.out.println("Welcome to Bogota, Mr. Thomas Anderson.");
         if (arg.length != 0) {
             regEx = arg[0];
@@ -51,5 +53,13 @@ public class App {
         System.out.println("  >> ...");
         System.out.println("  >> Parsing completed.");
         System.out.println("Goodbye Mr. Anderson.");
+    }
+
+    public static void main(String[] args) {
+        AutomateBuilder automateBuilder = new AutomateBuilder();
+        IAutomate R1 = automateBuilder.buildFrom('a');
+        IAutomate R2 = automateBuilder.buildFrom('b');
+        IAutomate automateFromUnion = automateBuilder.buildFromUnion(R1, R2);
+        System.out.println(automateFromUnion);
     }
 }
