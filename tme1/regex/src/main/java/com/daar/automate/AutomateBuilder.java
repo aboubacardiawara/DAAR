@@ -59,4 +59,20 @@ public class AutomateBuilder {
         return initialState;
     }
 
+    public IAutomate buildFromconcatenation(IAutomate r1, IAutomate r2)
+    {    
+          r1.addEmptyTransitionFromAcceptingTo(r2);
+          r1.getAcceptingState().unMakeAsAcceptingState();
+          r2.unMakeInitialState();
+          return r1; 
+    }
+
+
+      public IAutomate buildFromFor(IAutomate r1)
+    {      
+        IAutomate initialState = new Automate(currentId());
+        IAutomate finalState = new Automate(currentId());
+        return null ;
+    }
+
 }

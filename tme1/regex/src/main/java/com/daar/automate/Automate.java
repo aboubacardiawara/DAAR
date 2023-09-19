@@ -42,7 +42,9 @@ public class Automate implements IAutomate {
         acceptingState.addEmptyTransitionTo(automate);
     }
 
-    private IAutomate findAcceptingState() {
+  
+
+    public  IAutomate findAcceptingState() { 
         if (isAcceptingState) {
             return this;
         } else {

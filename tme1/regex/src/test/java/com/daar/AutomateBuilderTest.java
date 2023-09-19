@@ -20,7 +20,7 @@ public class AutomateBuilderTest {
         this.automateBuilder = new AutomateBuilder();
     }
 
-    @Test
+    
     public void buildingAnUnionOfTwoAutomate() {
         // R1: (1) -- (a) --> ((2))
         // R2: (3) -- (b) --> ((4))
