@@ -110,12 +110,13 @@ public class Automate implements IAutomate {
     public String dotify() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("digraph {\n");
+        if (isInitialState)
+            stringBuilder.append("\t" + id + " [color=\"red\"]\n");
         if (emptyTransitions.isEmpty() && transitions.isEmpty()) {
             stringBuilder.append("\t" + id + "\n");
         } else {
             this.emptyTransitions.forEach(
                     automate -> {
-
                         stringBuilder.append("\t" + id + " -> " + automate.getId());
                         stringBuilder.append(" [label=\"\"]\n");
                         stringBuilder.append(automate.dotifyAux());
@@ -140,18 +141,42 @@ public class Automate implements IAutomate {
         if (this.getEmptyTransitions().isEmpty() && this.getTransitions().isEmpty()) {
             return "";
         }
+        if (isAcceptingState)
+            stringBuilder.append("\t" + id + " [color=\"green\"]\n");
+        if (isInitialState)
+            stringBuilder.append("\t" + id + " [color=\"red\"]\n");
         this.emptyTransitions.forEach(
                 automate -> {
+                    if (automate.isAcceptingState())
+                        stringBuilder.append("\t" + automate.getId() + " [color=\"green\"]\n");
                     stringBuilder.append("\t" + this.id + " -> " + automate.getId());
                     stringBuilder.append(" [label=\"\"]\n");
                     stringBuilder.append(automate.dotifyAux());
                 });
         this.transitions.forEach((car, automate) -> {
+            if (automate.isAcceptingState())
+                stringBuilder.append("\t" + automate.getId() + " [color=\"green\"]\n");
             stringBuilder.append("\t" + this.id + " -> " + automate.getId());
             stringBuilder.append(" [label=\"" + car + "\"]\n");
             stringBuilder.append(automate.dotifyAux());
+
         });
         return stringBuilder.toString();
+    }
+
+    @Override
+    public void unMakeInitialState() {
+        this.isInitialState = false;
+    }
+
+    @Override
+    public IAutomate getAcceptingState() {
+        return this.findAcceptingState();
+    }
+
+    @Override
+    public void unMakeAsAcceptingState() {
+        this.isAcceptingState = false;
     }
 
 }

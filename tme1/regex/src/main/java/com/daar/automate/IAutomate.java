@@ -27,8 +27,14 @@ public interface IAutomate {
 
     public Map<Character, IAutomate> getTransitions();
 
-    public Object dotifyAux();
+    public String dotifyAux();
 
     public void addEmptyTransitionFromAcceptingTo(IAutomate finalState);
+
+    public void unMakeInitialState();
+
+    public IAutomate getAcceptingState();
+
+    public void unMakeAsAcceptingState();
 
 }

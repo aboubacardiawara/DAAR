@@ -39,9 +39,13 @@ public class AutomateBuilder {
 
     public IAutomate buildFromUnion(IAutomate r1, IAutomate r2) {
         IAutomate initialState = new Automate(currentId());
+        initialState.makeAsInitialState();
+        r1.unMakeInitialState();
+        r1.getAcceptingState().unMakeAsAcceptingState();
         IAutomate finalState = new Automate(currentId());
         initialState.addEmptyTransitionTo(r1);
         initialState.addEmptyTransitionTo(r2);
+
         // rajoute un etat final a partir de l'etat final de R1 ou r2 (cheche l'etat
         // final)
         r1.addEmptyTransitionFromAcceptingTo(finalState);
