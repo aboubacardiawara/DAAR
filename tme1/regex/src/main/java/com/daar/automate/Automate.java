@@ -2,7 +2,9 @@ package com.daar.automate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Automate implements IAutomate {
     protected int id;
@@ -10,6 +12,7 @@ public class Automate implements IAutomate {
     protected boolean isInitialState;
     protected boolean isAcceptingState;
     private ArrayList<IAutomate> emptyTransitions;
+    private Set<Integer> visitedAutomateIds;
 
     public Automate(int id) {
         this.id = id;
@@ -17,6 +20,7 @@ public class Automate implements IAutomate {
         this.isInitialState = false;
         this.isAcceptingState = false;
         this.emptyTransitions = new ArrayList<IAutomate>();
+        this.visitedAutomateIds = new HashSet<Integer>();
     }
 
     public int getId() {
@@ -113,6 +117,10 @@ public class Automate implements IAutomate {
 
     @Override
     public String dotify() {
+        if (visitedAutomateIds.contains(id)) {
+            return "";
+        }
+        visitedAutomateIds.add(id);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("digraph {\n");
         if (isInitialState)
@@ -141,7 +149,10 @@ public class Automate implements IAutomate {
 
     @Override
     public String dotifyAux() {
-
+        if (visitedAutomateIds.contains(id)) {
+            return "";
+        }
+        visitedAutomateIds.add(id);
         StringBuilder stringBuilder = new StringBuilder();
         if (this.getEmptyTransitions().isEmpty() && this.getTransitions().isEmpty()) {
             return "";

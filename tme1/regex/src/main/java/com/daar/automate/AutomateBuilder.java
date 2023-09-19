@@ -85,7 +85,7 @@ public class AutomateBuilder {
         IAutomate r1_accpeting =  r1.getAcceptingState();
         initialState.addEmptyTransitionTo(r1);
         r1_accpeting.addEmptyTransitionTo(finalState);
-        //r1_accpeting.addEmptyTransitionTo(r1); 
+        r1_accpeting.addEmptyTransitionTo(r1); 
         // natures des etats
         initialState.makeAsInitialState();
         initialState.addEmptyTransitionTo(finalState);
