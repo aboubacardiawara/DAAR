@@ -69,4 +69,51 @@ public class Automate implements IAutomate {
         this.emptyTransitions.add(automate);
     }
 
+    @Override
+    public String dotify() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("digraph {\n");
+        if (emptyTransitions.isEmpty() && transitions.isEmpty()) {
+            stringBuilder.append("\t" + id + "\n");
+        } else {
+            this.emptyTransitions.forEach(
+                    automate -> {
+
+                        stringBuilder.append("\t" + id + " -> " + automate.getId());
+                        stringBuilder.append(" [label=\"\"]\n");
+                        stringBuilder.append(automate.dotifyAux());
+                    });
+
+            this.transitions.forEach((car, child) -> {
+
+                stringBuilder.append("\t" + id + " -> " + child.getId());
+                stringBuilder.append(" [label=\"" + car + "\"]\n");
+                stringBuilder.append(child.dotifyAux());
+            });
+        }
+
+        stringBuilder.append("}");
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public String dotifyAux() {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        if (this.getEmptyTransitions().isEmpty() && this.getTransitions().isEmpty()) {
+            return "";
+        }
+        this.emptyTransitions.forEach(
+                automate -> {
+                    stringBuilder.append("\t" + this.id + " -> " + automate.getId());
+                    stringBuilder.append(" [label=\"\"]\n");
+                });
+
+        this.transitions.forEach((car, automate) -> {
+            stringBuilder.append("\t" + this.id + " -> " + automate.getId());
+            stringBuilder.append(" [label=\"" + car + "\"]\n");
+        });
+        return stringBuilder.toString();
+    }
+
 }

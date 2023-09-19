@@ -60,6 +60,6 @@ public class App {
         IAutomate R1 = automateBuilder.buildFrom('a');
         IAutomate R2 = automateBuilder.buildFrom('b');
         IAutomate automateFromUnion = automateBuilder.buildFromUnion(R1, R2);
-        System.out.println(automateFromUnion);
+        System.out.println(automateFromUnion.dotify());
     }
 }

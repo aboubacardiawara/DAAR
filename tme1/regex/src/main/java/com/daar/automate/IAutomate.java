@@ -1,6 +1,7 @@
 package com.daar.automate;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public interface IAutomate {
 
@@ -21,5 +22,11 @@ public interface IAutomate {
     public ArrayList<IAutomate> getEmptyTransitions();
 
     public void addEmptyTransitionTo(IAutomate r1);
+
+    public String dotify();
+
+    public Map<Character, IAutomate> getTransitions();
+
+    public Object dotifyAux();
 
 }
