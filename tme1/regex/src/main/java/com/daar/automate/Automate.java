@@ -2,7 +2,9 @@ package com.daar.automate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Automate implements IAutomate {
     protected int id;
@@ -10,6 +12,7 @@ public class Automate implements IAutomate {
     protected boolean isInitialState;
     protected boolean isAcceptingState;
     private ArrayList<IAutomate> emptyTransitions;
+    private Set<Integer> visitedAutomateIds;
 
     public Automate(int id) {
         this.id = id;
@@ -17,6 +20,7 @@ public class Automate implements IAutomate {
         this.isInitialState = false;
         this.isAcceptingState = false;
         this.emptyTransitions = new ArrayList<IAutomate>();
+        this.visitedAutomateIds = new HashSet<Integer>();
     }
 
     public int getId() {
@@ -38,13 +42,13 @@ public class Automate implements IAutomate {
 
     public void addEmptyTransitionFromAcceptingTo(IAutomate automate) {
         IAutomate acceptingState = findAcceptingState();// cheche l'etat final
-
+        if (acceptingState == null) {
+            System.out.println("halte ");
+        }
         acceptingState.addEmptyTransitionTo(automate);
     }
 
-  
-
-    public  IAutomate findAcceptingState() { 
+    public IAutomate findAcceptingState() {
         if (isAcceptingState) {
             return this;
         } else {
@@ -66,11 +70,25 @@ public class Automate implements IAutomate {
 
             // Parcourez les transitions vides
             for (IAutomate automate : emptyTransitions) {
-                if (automate.isAcceptingState()) {
-                    result = automate;
-                    break;
+                result = automate.findAcceptingState();
+                if (result != null) {
+                    break; // Sortez de la boucle si un état acceptant est trouvé
                 }
             }
+
+            // Si un état acceptant n'a pas été trouvé dans les transitions directes ni les
+            // transitions vides,
+            // recherchez récursivement dans les transitions.
+            if (result == null) {
+                for (Map.Entry<Character, IAutomate> entry : transitions.entrySet()) {
+                    IAutomate automate = entry.getValue();
+                    result = automate.findAcceptingState();
+                    if (result != null) {
+                        break; // Sortez de la boucle si un état acceptant est trouvé
+                    }
+                }
+            }
+
             return result;
         }
     }
@@ -110,6 +128,10 @@ public class Automate implements IAutomate {
 
     @Override
     public String dotify() {
+        if (visitedAutomateIds.contains(id)) {
+            return "";
+        }
+        visitedAutomateIds.add(id);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("digraph {\n");
         if (isInitialState)
@@ -138,7 +160,10 @@ public class Automate implements IAutomate {
 
     @Override
     public String dotifyAux() {
-
+        if (visitedAutomateIds.contains(id)) {
+            return "";
+        }
+        visitedAutomateIds.add(id);
         StringBuilder stringBuilder = new StringBuilder();
         if (this.getEmptyTransitions().isEmpty() && this.getTransitions().isEmpty()) {
             return "";

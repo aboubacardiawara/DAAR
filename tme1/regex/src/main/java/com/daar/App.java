@@ -55,9 +55,33 @@ public class App {
         System.out.println("Goodbye Mr. Anderson.");
     }
 
-    public static void main(String[] args) {
-        System.out.println(exempleComplexe().dotify());
-        
+    public static  IAutomate tree_to_automat(AutomateBuilder automateBuilder, RegExTree tress){
+
+         if (tress.rootToString()=="|"){
+                IAutomate R1 = tree_to_automat(automateBuilder, tress.getSubTrees().get(0));
+                IAutomate R2= tree_to_automat(automateBuilder, tress.getSubTrees().get(1));
+                return automateBuilder.buildFromUnion(R1, R2);
+        }
+        if (tress.rootToString()=="*"){
+                IAutomate R1 = tree_to_automat(automateBuilder, tress.getSubTrees().get(0));
+                return automateBuilder.buildFromClosure(R1);
+        } 
+        if (tress.rootToString()=="."){
+                IAutomate R1 = tree_to_automat(automateBuilder, tress.getSubTrees().get(0));
+                IAutomate R2= tree_to_automat(automateBuilder, tress.getSubTrees().get(1));
+                return  automateBuilder.buildFromconcatenation(R1, R2);
+        }else{
+             return automateBuilder.buildFrom(tress.rootToString().charAt(0));
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        String regEx = "a|b";
+        RegexParser parser = new RegexParser();
+        RegExTree tree_reg = parser.parse(regEx);
+        IAutomate automat_rsult = tree_to_automat(automateBuilder, tree_reg);
+        System.out.println(automat_rsult.dotify());
+
     }
 
     public static IAutomate exempleComplexe() {
