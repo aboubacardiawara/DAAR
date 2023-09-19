@@ -42,13 +42,13 @@ public class Automate implements IAutomate {
 
     public void addEmptyTransitionFromAcceptingTo(IAutomate automate) {
         IAutomate acceptingState = findAcceptingState();// cheche l'etat final
-
+        if (acceptingState == null) {
+            System.out.println("halte ");
+        }
         acceptingState.addEmptyTransitionTo(automate);
     }
 
-  
-
-    public  IAutomate findAcceptingState() { 
+    public IAutomate findAcceptingState() {
         if (isAcceptingState) {
             return this;
         } else {
@@ -75,9 +75,7 @@ public class Automate implements IAutomate {
                     break;
                 }
             }
-            if (result == null) {
-                System.out.println("halte ");
-            }
+
             return result;
         }
     }

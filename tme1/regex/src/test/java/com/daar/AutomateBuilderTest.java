@@ -20,13 +20,8 @@ public class AutomateBuilderTest {
         this.automateBuilder = new AutomateBuilder();
     }
 
-    
+    @Test
     public void buildingAnUnionOfTwoAutomate() {
-        // R1: (1) -- (a) --> ((2))
-        // R2: (3) -- (b) --> ((4))
-        // R1 | R2:
-        // 1) (0) -- (eps) --> (1) -- (a) --> ((2)) -- (eps) --> ((5))
-        // 2) (0) -- (eps) --> (3) -- (b) --> ((4)) -- (eps) --> ((5))
 
         IAutomate R1 = exampleAutomateAcceptingA();
         IAutomate R2 = exampleAutomateAcceptingB();
