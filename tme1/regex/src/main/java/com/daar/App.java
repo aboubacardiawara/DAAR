@@ -56,6 +56,17 @@ public class App {
     }
 
     public static void main(String[] args) {
+        exempleClosure();
+    }
+
+    public static void exempleClosure() {
+        AutomateBuilder automateBuilder = new AutomateBuilder();
+        IAutomate R1 = automateBuilder.buildFrom('a');
+        IAutomate automateFromUnion = automateBuilder.buildFromClosure(R1);
+        System.out.println(automateFromUnion.dotify());
+    }
+
+    public static void exempleUnion() {
         AutomateBuilder automateBuilder = new AutomateBuilder();
         IAutomate R1 = automateBuilder.buildFrom('a');
         IAutomate R2 = automateBuilder.buildFrom('b');
