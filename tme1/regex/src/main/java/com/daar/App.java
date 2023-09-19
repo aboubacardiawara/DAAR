@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.lang.Exception;
 
 public class App {
-
+    private static final AutomateBuilder automateBuilder = new AutomateBuilder();
     // REGEX
     private static String regEx;
 
@@ -56,10 +56,31 @@ public class App {
     }
 
     public static void main(String[] args) {
-        AutomateBuilder automateBuilder = new AutomateBuilder();
+        System.out.println(exempleComplexe().dotify());
+        
+    }
+
+    public static IAutomate exempleComplexe() {
+        return automateBuilder.buildFromClosure(automateBuilder.buildFromClosure(exempleClosure()));
+    }
+
+    public static IAutomate exempleConcatenation() {
         IAutomate R1 = automateBuilder.buildFrom('a');
         IAutomate R2 = automateBuilder.buildFrom('b');
-        IAutomate automateFromUnion = automateBuilder.buildFromconcatenation(R1, R2);
-        System.out.println(automateFromUnion.dotify());
+        IAutomate automateFromConcatenation = automateBuilder.buildFromconcatenation(R1, R2);
+        return automateFromConcatenation;
+    }
+
+    public static IAutomate exempleClosure() {
+        IAutomate R1 = automateBuilder.buildFrom('a');
+        IAutomate automateFromClosure = automateBuilder.buildFromClosure(R1);
+        return automateFromClosure;
+    }
+
+    public static IAutomate exempleUnion() {
+        IAutomate R1 = automateBuilder.buildFrom('a');
+        IAutomate R2 = automateBuilder.buildFrom('b');
+        IAutomate automateFromUnion = automateBuilder.buildFromUnion(R1, R2);
+        return automateFromUnion;
     }
 }
