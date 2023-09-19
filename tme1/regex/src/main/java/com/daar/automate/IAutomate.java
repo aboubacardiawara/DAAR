@@ -31,10 +31,12 @@ public interface IAutomate {
 
     public void addEmptyTransitionFromAcceptingTo(IAutomate finalState);
 
+
     public void unMakeInitialState();
 
     public IAutomate getAcceptingState();
 
     public void unMakeAsAcceptingState();
-
+    
+    public IAutomate findAcceptingState();
 }
