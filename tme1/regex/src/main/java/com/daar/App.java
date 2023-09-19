@@ -60,7 +60,7 @@ public class App {
     }
 
     public static IAutomate exempleComplexe() {
-        return automateBuilder.buildFromconcatenation(exempleUnion(), exempleClosure());
+        return automateBuilder.buildFromClosure(automateBuilder.buildFromClosure(exempleClosure()));
     }
 
     public static IAutomate exempleConcatenation() {

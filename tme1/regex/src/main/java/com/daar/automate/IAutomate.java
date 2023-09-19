@@ -37,4 +37,6 @@ public interface IAutomate {
 
     public void unMakeAsAcceptingState();
 
+    public IAutomate findAcceptingState();
+
 }

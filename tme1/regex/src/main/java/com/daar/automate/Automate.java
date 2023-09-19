@@ -70,9 +70,22 @@ public class Automate implements IAutomate {
 
             // Parcourez les transitions vides
             for (IAutomate automate : emptyTransitions) {
-                if (automate.isAcceptingState()) {
-                    result = automate;
-                    break;
+                result = automate.findAcceptingState();
+                if (result != null) {
+                    break; // Sortez de la boucle si un état acceptant est trouvé
+                }
+            }
+
+            // Si un état acceptant n'a pas été trouvé dans les transitions directes ni les
+            // transitions vides,
+            // recherchez récursivement dans les transitions.
+            if (result == null) {
+                for (Map.Entry<Character, IAutomate> entry : transitions.entrySet()) {
+                    IAutomate automate = entry.getValue();
+                    result = automate.findAcceptingState();
+                    if (result != null) {
+                        break; // Sortez de la boucle si un état acceptant est trouvé
+                    }
                 }
             }
 
