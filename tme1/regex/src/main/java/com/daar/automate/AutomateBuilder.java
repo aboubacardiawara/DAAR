@@ -39,9 +39,6 @@ public class AutomateBuilder {
 
     public IAutomate buildFromUnion(IAutomate r1, IAutomate r2) {
         IAutomate initialState = new Automate(currentId());
-        initialState.makeAsInitialState();
-        r1.unMakeInitialState();
-        r1.getAcceptingState().unMakeAsAcceptingState();
         IAutomate finalState = new Automate(currentId());
         initialState.addEmptyTransitionTo(r1);
         initialState.addEmptyTransitionTo(r2);
@@ -50,6 +47,14 @@ public class AutomateBuilder {
         // final)
         r1.addEmptyTransitionFromAcceptingTo(finalState);
         r2.addEmptyTransitionFromAcceptingTo(finalState);
+
+        // changement de la nature des etats
+        initialState.makeAsInitialState();
+        r1.unMakeInitialState();
+        r1.getAcceptingState().unMakeAsAcceptingState();
+        r2.unMakeInitialState();
+        r2.getAcceptingState().unMakeAsAcceptingState();
+        finalState.makeAsFinalState();
 
         return initialState;
     }

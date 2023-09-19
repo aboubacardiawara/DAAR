@@ -30,6 +30,7 @@ public class AutomateBuilderTest {
 
         IAutomate R1 = exampleAutomateAcceptingA();
         IAutomate R2 = exampleAutomateAcceptingB();
+
         IAutomate automateFromUnion = this.automateBuilder.buildFromUnion(R1, R2);
 
         assertTrue(

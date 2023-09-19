@@ -69,6 +69,9 @@ public class Automate implements IAutomate {
                     break;
                 }
             }
+            if (result == null) {
+                System.out.println("halte ");
+            }
             return result;
         }
     }
