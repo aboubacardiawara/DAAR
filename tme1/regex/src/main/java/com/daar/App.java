@@ -76,7 +76,7 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
-        String regEx = "a|b";
+        String regEx = "";
         RegexParser parser = new RegexParser();
         RegExTree tree_reg = parser.parse(regEx);
         IAutomate automat_rsult = tree_to_automat(automateBuilder, tree_reg);

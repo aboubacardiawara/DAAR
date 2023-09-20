@@ -160,18 +160,19 @@ public class Automate implements IAutomate {
 
     @Override
     public String dotifyAux() {
-        if (visitedAutomateIds.contains(id)) {
-            return "";
-        }
-        visitedAutomateIds.add(id);
         StringBuilder stringBuilder = new StringBuilder();
-        if (this.getEmptyTransitions().isEmpty() && this.getTransitions().isEmpty()) {
-            return "";
-        }
         if (isAcceptingState)
             stringBuilder.append("\t" + id + " [color=\"green\"]\n");
         if (isInitialState)
             stringBuilder.append("\t" + id + " [color=\"red\"]\n");
+        if (visitedAutomateIds.contains(id)) {
+            return "";
+        }
+        visitedAutomateIds.add(id);
+        if (this.getEmptyTransitions().isEmpty() && this.getTransitions().isEmpty()) {
+            return stringBuilder.toString();
+        }
+
         this.emptyTransitions.forEach(
                 automate -> {
                     if (automate.isAcceptingState())
