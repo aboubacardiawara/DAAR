@@ -19,7 +19,7 @@ public class AutomateBuilder {
      * 
      * @return
      */
-    public IAutomate buildFrom(RegExTree regExTree) {
+    public IAutomate buildFrom(String string) {
         return null;
     }
 
