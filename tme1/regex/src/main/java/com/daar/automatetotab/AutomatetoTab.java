@@ -1,5 +1,6 @@
 package com.daar.automatetotab;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,7 +15,7 @@ public class AutomatetoTab {
         Set<IAutomate> initialStates = collectInitialState(automateLocal);
         Row first_row = new Row(); 
         first_row.setDepartureStates(initialStates);
-        
+        //mettre les boucles dans une focntion 
         initialStates.forEach(localAutomate -> {
         localAutomate.getTransitions().forEach(
             (transitionKey, exitAutomate) -> {
@@ -25,35 +26,57 @@ public class AutomatetoTab {
         });  
     
         //Make containFinalState and Make containInitialState
-        for (IAutomate element : initialStates) {
+        for(IAutomate element : initialStates) {
             if (element.isAcceptingState())
                 first_row.containFinalState=true; 
             if (element.isAnInitialState())
                 first_row.containInitialState=true; 
         }
-        //affichage de la liste TransitionsByPosition pour le caractère a
-        for (IAutomate e : first_row.getTransitionsByPosition(97) )
-            System.out.println(e.getId());
 
-        //ajout des autres lignes 
+        //affichage de la liste TransitionsByPosition pour le caractère b
+        for(IAutomate e : first_row.getTransitionsByPosition(97) )
+            //System.out.println(e.getId());
+
         table.add(first_row);  
+
+        //creation des nouvelles row suivant la fist_row 
+        first_row.getTransitionsStates().forEach((car, new_state)-> {
+            Row new_row =new Row ();
+            new_row.setDepartureStates(new_state);
+            new_state.forEach(localAutomate -> {
+                localAutomate.getTransitions().forEach(
+                    (transitionKey, exitAutomate) -> {
+                        Set<IAutomate> reachable_SET = new HashSet<>(); 
+                        Set<IAutomate> reachableStates = reachableStates(reachable_SET,exitAutomate);     
+                        new_row.updateStateAt(reachableStates, (int)transitionKey);
+                    }); 
+            }); 
+            //affichage de la liste TransitionsByPosition pour le caractère b
+            for(IAutomate e : new_row.getTransitionsByPosition(97) )
+                    System.out.println(e.getId());  //resultat 7,9,6
+            
+        table.add(first_row);  
+            table.add(new_row);
+         });
+
         return table;
     }
 
 /**
  * Explore 
  */
-private Set<IAutomate> reachableStates(Set<IAutomate> reachable_SET ,IAutomate exitAutomate) {
-    
-    reachable_SET.add(exitAutomate);
-    if (exitAutomate.isAcceptingState()) return reachable_SET;
-    exitAutomate.getEmptyTransitions().forEach(
-            rechebale_automate-> {
-            reachable_SET.add(rechebale_automate);
-            reachableStates(reachable_SET, rechebale_automate);            
-        });
-    return reachable_SET;
-}
+    private Set<IAutomate> reachableStates(Set<IAutomate> reachable_SET ,IAutomate exitAutomate) {
+        reachable_SET.add(exitAutomate);
+
+        if (exitAutomate.isAcceptingState()) return reachable_SET;
+        
+        exitAutomate.getEmptyTransitions().forEach(
+                rechebale_automate-> {
+                reachable_SET.add(rechebale_automate);
+                reachableStates(reachable_SET, rechebale_automate);            
+            });
+        return reachable_SET;
+    }  
 
     public Set<IAutomate> collectInitialState(IAutomate automateLocal){
         Set<IAutomate> res = new HashSet<>();
@@ -68,13 +91,18 @@ class Row {
     protected boolean containInitialState = false;
     
     /** L'ensemble dees etats d'arrivée à partir des etats de depart */
-    protected Set<IAutomate>[] transitionsStates; 
+    protected HashMap<Integer, Set<IAutomate>> transitionsStates;  //a list we have to defibe the size(256) or it will a null pointer
     
     /** Les etats de depart. Les etats d'arrivés sont calculé en fonction de ceux-ci */
     protected Set<IAutomate> departureStates;
     
+
     public Row() {
-        this.transitionsStates = new HashSet[256];;
+        this.transitionsStates = new HashMap<>();
+    }
+
+     public HashMap<Integer, Set<IAutomate>> getTransitionsStates() {
+        return transitionsStates;
     }
 
     public void setDepartureStates(Set<IAutomate> initialStates) {
@@ -82,8 +110,8 @@ class Row {
     }
     
     public void updateStateAt(Set<IAutomate> states, int i) {
-        if (transitionsStates[i] == null) transitionsStates[i] = new HashSet<>();
-        transitionsStates[i].addAll(states);
+        if (transitionsStates.containsKey(i)) transitionsStates.put(i, states);
+        transitionsStates.put(i, states);
     }
 
     public boolean containsFinalState() {
@@ -93,7 +121,7 @@ class Row {
         return containInitialState;
     }
     public Set<IAutomate> getTransitionsByPosition(int ascciPosition) {
-        return transitionsStates[ascciPosition];
+        return transitionsStates.get(ascciPosition);
     }
     
     public Set<IAutomate> getDepartureStates() {
