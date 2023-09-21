@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.daar.automate.AutomateBuilder;
 import com.daar.automate.IAutomate;
+import com.daar.automatetotab.AutomatetoTab;
 import com.daar.parsing.EClosure;
 import com.daar.parsing.RegExTree;
 import com.daar.parsing.RegexParser;
@@ -81,6 +82,8 @@ public class App {
         RegExTree tree_reg = parser.parse(regEx);
         IAutomate automat_rsult = tree_to_automat(automateBuilder, tree_reg);
         System.out.println(automat_rsult.dotify());
+        AutomatetoTab regEx_table= new AutomatetoTab();
+        regEx_table.automateLocalToTab(automat_rsult);
 
     }
 

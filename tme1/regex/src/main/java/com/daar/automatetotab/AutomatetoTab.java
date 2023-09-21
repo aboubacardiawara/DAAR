@@ -18,28 +18,40 @@ public class AutomatetoTab {
         initialStates.forEach(localAutomate -> {
         localAutomate.getTransitions().forEach(
             (transitionKey, exitAutomate) -> {
-                Set<IAutomate> reachableStates = reachableStates(exitAutomate);     
-                first_row.updateStateAt(reachableStates, (int) transitionKey);
+                Set<IAutomate> reachable_SET = new HashSet<>(); 
+                Set<IAutomate> reachableStates = reachableStates(reachable_SET,exitAutomate);     
+                first_row.updateStateAt(reachableStates, (int)transitionKey);
             }); 
-        });
+        });  
+    
+        //Make containFinalState and Make containInitialState
+        for (IAutomate element : initialStates) {
+            if (element.isAcceptingState())
+                first_row.containFinalState=true; 
+            if (element.isAnInitialState())
+                first_row.containInitialState=true; 
+        }
+        //affichage de la liste TransitionsByPosition pour le caractère a
+        for (IAutomate e : first_row.getTransitionsByPosition(97) )
+            System.out.println(e.getId());
 
         //ajout des autres lignes 
-        table.add(first_row);   
+        table.add(first_row);  
         return table;
     }
 
 /**
  * Explore 
  */
-private Set<IAutomate> reachableStates(IAutomate exitAutomate) {
-    Set<IAutomate> reachable_SET = new HashSet<>(); 
-    exitAutomate.getTransitions().forEach(
-        (car, next_autmate) -> {
-                next_autmate.getEmptyTransitions().forEach(
-                     rechebale_automate-> {
-                     reachable_SET.add(rechebale_automate);
-                    
-        });});
+private Set<IAutomate> reachableStates(Set<IAutomate> reachable_SET ,IAutomate exitAutomate) {
+    
+    reachable_SET.add(exitAutomate);
+    if (exitAutomate.isAcceptingState()) return reachable_SET;
+    exitAutomate.getEmptyTransitions().forEach(
+            rechebale_automate-> {
+            reachable_SET.add(rechebale_automate);
+            reachableStates(reachable_SET, rechebale_automate);            
+        });
     return reachable_SET;
 }
 
@@ -61,6 +73,10 @@ class Row {
     /** Les etats de depart. Les etats d'arrivés sont calculé en fonction de ceux-ci */
     protected Set<IAutomate> departureStates;
     
+    public Row() {
+        this.transitionsStates = new HashSet[256];;
+    }
+
     public void setDepartureStates(Set<IAutomate> initialStates) {
         this.departureStates = initialStates;
     }
