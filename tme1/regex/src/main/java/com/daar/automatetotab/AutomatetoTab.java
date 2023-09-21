@@ -10,46 +10,45 @@ import com.daar.automate.IAutomate;
 public class AutomatetoTab {
 
     public List<Row> automateLocalToTab(IAutomate automateLocal) {
-          List<Row> table = new ArrayList<>();
-          Set<IAutomate> initialStates = collectInitialState(automateLocal);
-          Row first_row = new Row(); 
-          first_row.setDepartureStates(initialStates);
-          
-          initialStates.forEach(localAutomate -> {
-            localAutomate.getTransitions().forEach(
-                (transitionKey, exitAutomate) -> {
-                    Set<IAutomate> reachableStates = reachableStates(exitAutomate);     
-                    first_row.updateStateAt(reachableStates, (int) transitionKey);
-                }
-            );
-           
-          });
+        List<Row> table = new ArrayList<>();
+        Set<IAutomate> initialStates = collectInitialState(automateLocal);
+        Row first_row = new Row(); 
+        first_row.setDepartureStates(initialStates);
         
-          table.add(first_row);
-          
-          return table;
+        initialStates.forEach(localAutomate -> {
+        localAutomate.getTransitions().forEach(
+            (transitionKey, exitAutomate) -> {
+                Set<IAutomate> reachableStates = reachableStates(exitAutomate);     
+                first_row.updateStateAt(reachableStates, (int) transitionKey);
+            }); 
+        });
+
+        //ajout des autres lignes 
+        table.add(first_row);   
+        return table;
     }
 
-    /**
-     * Explore 
-     */
-    private Set<IAutomate> reachableStates(IAutomate exitAutomate) {
-        Set<IAutomate> reachable_SET = new HashSet<>(); 
-        exitAutomate.getEmptyTransitions().forEach(
-            rechebale_automate-> {
-                reachable_SET.add(rechebale_automate);
-            }
-        ); 
-        return reachable_SET;
-    }
+/**
+ * Explore 
+ */
+private Set<IAutomate> reachableStates(IAutomate exitAutomate) {
+    Set<IAutomate> reachable_SET = new HashSet<>(); 
+    exitAutomate.getTransitions().forEach(
+        (car, next_autmate) -> {
+                next_autmate.getEmptyTransitions().forEach(
+                     rechebale_automate-> {
+                     reachable_SET.add(rechebale_automate);
+                    
+        });});
+    return reachable_SET;
+}
 
     public Set<IAutomate> collectInitialState(IAutomate automateLocal){
         Set<IAutomate> res = new HashSet<>();
         res.add(automateLocal);
         res.addAll(automateLocal.getEmptyTransitions());
         return res;
-    }
-   
+    } 
 }
 
 class Row {
