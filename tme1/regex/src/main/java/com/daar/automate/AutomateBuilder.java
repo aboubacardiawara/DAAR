@@ -1,5 +1,7 @@
 package com.daar.automate;
 
+import java.lang.annotation.Documented;
+
 import com.daar.parsing.RegExTree;
 
 public class AutomateBuilder {

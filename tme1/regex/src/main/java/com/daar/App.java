@@ -66,7 +66,7 @@ public class App {
             IAutomate R1 = tree_to_automat(automateBuilder, tress.getSubTrees().get(0));
             return automateBuilder.buildFromClosure(R1);
         }
-        if (tress.rootToString() == ".") {
+        if (tress.rootToString() == ".") {  //caractère qlq  
             IAutomate R1 = tree_to_automat(automateBuilder, tress.getSubTrees().get(0));
             IAutomate R2 = tree_to_automat(automateBuilder, tress.getSubTrees().get(1));
             return automateBuilder.buildFromconcatenation(R1, R2);
@@ -76,7 +76,7 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
-        String regEx = "";
+        String regEx = "(a|b)a*";
         RegexParser parser = new RegexParser();
         RegExTree tree_reg = parser.parse(regEx);
         IAutomate automat_rsult = tree_to_automat(automateBuilder, tree_reg);
