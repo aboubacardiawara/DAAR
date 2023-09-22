@@ -10,20 +10,16 @@ import com.daar.automate.IAutomate;
 
 public class AutomatetoTab {
 
+
+    
+
     public List<Row> automateLocalToTab(IAutomate automateLocal) {
         List<Row> table = new ArrayList<>();
         Set<IAutomate> initialStates = collectInitialState(automateLocal);
         Row first_row = new Row(); 
         first_row.setDepartureStates(initialStates);
-        //mettre les boucles dans une focntion 
-        initialStates.forEach(localAutomate -> {
-        localAutomate.getTransitions().forEach(
-            (transitionKey, exitAutomate) -> {
-                Set<IAutomate> reachable_SET = new HashSet<>(); 
-                Set<IAutomate> reachableStates = reachableStates(reachable_SET,exitAutomate);     
-                first_row.updateStateAt(reachableStates, (int)transitionKey);
-            }); 
-        });  
+
+        construct_rechable_states(initialStates, first_row);
     
         //Make containFinalState and Make containInitialState
         for(IAutomate element : initialStates) {
@@ -35,32 +31,24 @@ public class AutomatetoTab {
 
         //affichage de la liste TransitionsByPosition pour le caractère b
         for(IAutomate e : first_row.getTransitionsByPosition(97) )
-            //System.out.println(e.getId());
+            //System.out.println(e.getId()); 
 
         table.add(first_row);  
 
         //creation des nouvelles row suivant la fist_row 
-        first_row.getTransitionsStates().forEach((car, new_state)-> {
+        first_row.getTransitionsStates().forEach((car, new_state)->{
             Row new_row =new Row ();
             new_row.setDepartureStates(new_state);
-            new_state.forEach(localAutomate -> {
-                localAutomate.getTransitions().forEach(
-                    (transitionKey, exitAutomate) -> {
-                        Set<IAutomate> reachable_SET = new HashSet<>(); 
-                        Set<IAutomate> reachableStates = reachableStates(reachable_SET,exitAutomate);     
-                        new_row.updateStateAt(reachableStates, (int)transitionKey);
-                    }); 
-            }); 
+            construct_rechable_states( new_state,new_row);
+        
             //affichage de la liste TransitionsByPosition pour le caractère b
             for(IAutomate e : new_row.getTransitionsByPosition(97) )
-                    System.out.println(e.getId());  //resultat 7,9,6
-            
-        table.add(first_row);  
+                    System.out.println(e.getId());  //resultat 7,9,6   
             table.add(new_row);
          });
-
         return table;
     }
+
 
 /**
  * Explore 
@@ -84,6 +72,17 @@ public class AutomatetoTab {
         res.addAll(automateLocal.getEmptyTransitions());
         return res;
     } 
+
+    private void construct_rechable_states(Set<IAutomate> initialStates, Row row){
+        initialStates.forEach(localAutomate ->{
+        localAutomate.getTransitions().forEach(
+            (transitionKey, exitAutomate) ->{
+                Set<IAutomate> reachable_SET = new HashSet<>(); 
+                Set<IAutomate> reachableStates = reachableStates(reachable_SET,exitAutomate);     
+                row.updateStateAt(reachableStates, (int)transitionKey);
+            }); 
+        });   
+    }
 }
 
 class Row {
@@ -127,5 +126,8 @@ class Row {
     public Set<IAutomate> getDepartureStates() {
         return departureStates;
     }
+
+
+  
     
 }
