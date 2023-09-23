@@ -92,7 +92,6 @@ public class AutomateBuilder {
         r1.unMakeInitialState();
         r1_accpeting.unMakeAsAcceptingState();
         finalState.makeAsFinalState();
-
         return initialState;
     }
 

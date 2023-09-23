@@ -5,13 +5,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.daar.automate.Automate;
 import com.daar.automate.IAutomate;
 
 
 public class AutomatetoTab {
 
-
-    
 
     public List<Row> automateLocalToTab(IAutomate automateLocal) {
         List<Row> table = new ArrayList<>();
@@ -66,6 +65,15 @@ public class AutomatetoTab {
             });
             
         return table ;
+    }
+
+
+    public IAutomate table_to_automate(List<Row> table){
+        IAutomate automae_reduit= new Automate(0);
+        for (Row row: table ){
+            
+        }
+        return null;
     }
 
     private List<Set<IAutomate>> getAlldepartures(List<Row> table) {
