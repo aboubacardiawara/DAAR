@@ -29,24 +29,51 @@ public class AutomatetoTab {
                 first_row.containInitialState=true; 
         }
 
-        //affichage de la liste TransitionsByPosition pour le caractère b
-        for(IAutomate e : first_row.getTransitionsByPosition(97) )
-            //System.out.println(e.getId()); 
+        //affichage de la liste TransitionsByPosition pour le caractère b pour la premère ligne 
+        for(IAutomate e : first_row.getTransitionsByPosition(98) )
+            System.out.print(e.getId()); 
 
+        System.out.print("\n"); 
         table.add(first_row);  
 
-        //creation des nouvelles row suivant la fist_row 
-        first_row.getTransitionsStates().forEach((car, new_state)->{
-            Row new_row =new Row ();
+        //creation des nouvelles row suivant la fist_row
+        return generating_other_row(table, first_row);
+    }
+
+
+    private List<Row> generating_other_row( List<Row> table,Row row) {
+        row.getTransitionsStates().forEach((car, new_state)->{
+            Row  new_row =new Row ();
             new_row.setDepartureStates(new_state);
             construct_rechable_states( new_state,new_row);
-        
-            //affichage de la liste TransitionsByPosition pour le caractère b
-            for(IAutomate e : new_row.getTransitionsByPosition(97) )
-                    System.out.println(e.getId());  //resultat 7,9,6   
+
+            for(IAutomate element : new_row.getDepartureStates()){
+                if (element.isAcceptingState()) new_row.containFinalState=true; 
+                if (element.isAnInitialState()) new_row.containInitialState=true; 
+            }
             table.add(new_row);
-         });
-        return table;
+
+            //affichage de la liste TransitionsByPosition pour le caractère b
+            for(IAutomate e : new_row.getTransitionsByPosition(97))
+                    System.out.print(e.getId());  //resultat 7,9,6   
+            System.out.print("\n"); 
+
+            // on refait la meme operation pour les ligne suivante 
+            new_row.getTransitionsStates().forEach((car_, state) -> {
+                //Verifie si la nouvelle transition n'a pas été traité 
+                if(!getAlldepartures(table).contains(new_row.getTransitionsByPosition((int) car_)))  generating_other_row(table, new_row);
+            });
+            });
+            
+        return table ;
+    }
+
+    private List<Set<IAutomate>> getAlldepartures(List<Row> table) {
+        List<Set<IAutomate>>  All_departures=new ArrayList<>() ;
+            for(Row e : table){
+                All_departures.add(e.getDepartureStates());
+            }
+            return All_departures;
     }
 
 
@@ -78,8 +105,8 @@ public class AutomatetoTab {
         localAutomate.getTransitions().forEach(
             (transitionKey, exitAutomate) ->{
                 Set<IAutomate> reachable_SET = new HashSet<>(); 
-                Set<IAutomate> reachableStates = reachableStates(reachable_SET,exitAutomate);     
-                row.updateStateAt(reachableStates, (int)transitionKey);
+                Set<IAutomate> reachableStates = reachableStates(reachable_SET,exitAutomate);    
+                if (reachableStates!=null) row.updateStateAt(reachableStates, (int)transitionKey);
             }); 
         });   
     }
