@@ -10,7 +10,7 @@ import com.daar.parsing.RegExTree;
 import com.daar.parsing.RegexParser;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import java.lang.Exception;
 
 public class App {
@@ -83,8 +83,8 @@ public class App {
         IAutomate automat_rsult = tree_to_automat(automateBuilder, tree_reg);
         System.out.println(automat_rsult.dotify());
         AutomatetoTab regEx_table= new AutomatetoTab();
-        regEx_table.automateLocalToTab(automat_rsult);
-
+        IAutomate automate_Finale= regEx_table.minimizeAutomate(automat_rsult);
+        System.out.println(automate_Finale.dotify());  //on va bien rigoler au moment du debug. :)))))  OMG
     }
 
     public static IAutomate exempleComplexe() {

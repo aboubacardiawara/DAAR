@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.daar.automate.Automate;
@@ -11,8 +12,13 @@ import com.daar.automate.IAutomate;
 
 public class AutomatetoTab {
 
+    private int id = 0;
 
-    public List<Row> automateLocalToTab(IAutomate automateLocal) {
+    public IAutomate minimizeAutomate(IAutomate automate) {
+        return tableToAutomate(this.automateLocalToTab(automate));
+    }
+
+    private List<Row> automateLocalToTab(IAutomate automateLocal) {
         List<Row> table = new ArrayList<>();
         Set<IAutomate> initialStates = collectInitialState(automateLocal);
         Row first_row = new Row(); 
@@ -68,13 +74,73 @@ public class AutomatetoTab {
     }
 
 
-    public IAutomate table_to_automate(List<Row> table){
-        IAutomate automae_reduit= new Automate(0);
-        for (Row row: table ){
-            
-        }
-        return null;
+    private IAutomate tableToAutomate(List<Row> table){
+        Map<Set<Integer>, IAutomate> repository = collectAllAutomates(table);
+        IAutomate automateReduite = setUpFeatures(repository, table);
+        return automateReduite;
     }
+
+    private IAutomate setUpFeatures(Map<Set<Integer>, IAutomate> repo, List<Row> table) {
+        table.forEach(row -> {
+            Set<IAutomate> automates0 = row.getDepartureStates();
+            Set<Integer> key = automatesSetToIntegerSet(automates0);
+            IAutomate newGenerationAutomate = repo.get(key);
+            //  config the nature of state
+            if (row.containsInitialState())
+                newGenerationAutomate.makeAsInitialState();
+            if (row.containFinalState)
+                newGenerationAutomate.makeAsFinalState();
+            // config the transitions of the state
+            row.getTransitionsStates().forEach((ascci, automatesSet) -> {
+                char transitionKey = (char) (int) ascci;
+                //char transitionKey = (char) (ascci.toString()).charAt(0);
+               
+                newGenerationAutomate.addTransition(transitionKey, repo.get(automatesSetToIntegerSet(automatesSet)));
+            });
+        });
+
+        return repo.get(automatesSetToIntegerSet(table.get(0).getDepartureStates()));
+    }
+
+    private  int currentId() {
+        return id++;
+    }
+
+    /**
+     * On veut creer tous les etats de la nouvelle automate reduite à partir du tableau.
+     * Ici on ne definira ni leur nature (initial, accepting), ni leurs transitions.
+     */
+    private Map<Set<Integer>, IAutomate> collectAllAutomates(List<Row> table) {
+        Map<Set<Integer>, IAutomate> repo = new HashMap<>();
+        table.forEach(row -> {
+            // initial state
+            Set<IAutomate> automates = row.getDepartureStates();
+            Set<Integer> key = automatesSetToIntegerSet(automates);
+            if (! repo.containsKey(key)) {
+                repo.put(key, new Automate(currentId()));
+            }
+            // transitions states
+            row.getTransitionsStates().forEach((ascci, automatesSet) -> {
+                Set<Integer> key2 = automatesSetToIntegerSet(automatesSet);
+                if (! repo.containsKey(key2))
+                    repo.put(key, new Automate(currentId()));
+            });       
+        });
+        return repo;
+    }
+
+
+    /**
+     * Construit un ensemble d'entiers (id) à partir d'un ensemble d'automates. 
+     */
+    private Set<Integer> automatesSetToIntegerSet(Set<IAutomate> automates) {
+         Set<Integer> list_integer =  new HashSet<>();
+        automates.forEach(automate -> { 
+            list_integer.add(automate.getId());
+        });
+        return list_integer;
+    }
+
 
     private List<Set<IAutomate>> getAlldepartures(List<Row> table) {
         List<Set<IAutomate>>  All_departures=new ArrayList<>() ;
@@ -161,8 +227,39 @@ class Row {
     public Set<IAutomate> getDepartureStates() {
         return departureStates;
     }
-
-
-  
     
 }
+// CONSTRUCTION DE L'AUTOMATE REDUITE FROM THE TAB 
+
+/**
+creer un dictionnaire ensemble_automates_ids -> objet_automate. C'est notre repertoire d'automates à partir du tableau
+ensuite creer reparcourir le tableau.
+	pour chaque row:
+		e0 :: Set<IAutomate> = ensembles_de_depart de row
+		automate = repository.get(
+		pour chaque transitions  dans row.transitionsStates :: Hashmap[]:
+			objet = repository.get(transitions) // on recuperer l'objet deja construit
+			// on creer une transitions automate -> tous les objets
+			// on defini la nature de automate: final ou init (row nous le dira)
+ 
+
+Exemple
+ repository {
+    {4,0,2} -> automate0,
+    {1,5,3,6,9} -> automate1,
+    {2, 6, 8, 9, 56} -> automate2, 
+    {7,6,9} -> automate3
+}
+
+maintenant on reparcours le tab
+- row 0:
+    {4,0,2} -> automate0; 
+    - nature: automate0.makeInit();
+    - transitions:
+        - 1) a -> {1,5,3,6,9}; automate0.addtransiton(a, repo.get({1,5,3,6,9}))
+        ...
+A la fin, on aura construit l'automate reduite. Enfin j'espère. C'est bon convaincue ?
+
+ }
+
+*/
