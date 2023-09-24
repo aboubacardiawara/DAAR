@@ -11,6 +11,10 @@ import com.daar.parsing.RegexParser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.lang.Exception;
 
 public class App {
@@ -43,14 +47,22 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
-        String regEx = "c|(ab)*";
+        String regEx = "c|(lyna)*|(abou)*";
         RegexParser parser = new RegexParser();
         RegExTree tree_reg = parser.parse(regEx);
         IAutomate automat_rsult = tree_to_automat(automateBuilder, tree_reg);
-        System.out.println(automat_rsult.dotify());
+        exportToFile(automat_rsult, "epsilonAutomate.dot");
         AutomatetoTab regEx_table = new AutomatetoTab();
         IAutomate automate_Finale = regEx_table.minimizeAutomate(automat_rsult);
-        System.out.println(automate_Finale.dotify()); // on va bien rigoler au moment du debug. :))))) OMG
+        exportToFile(automate_Finale, "reducedAutomate.dot"); // on va bien rigoler au moment du debug. :))))) OMG
+    }
+
+    private static void exportToFile(IAutomate automate, String fileName) {
+        try (Writer writer = new FileWriter(fileName)) {
+            writer.write(automate.dotify());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static IAutomate exempleComplexe() {

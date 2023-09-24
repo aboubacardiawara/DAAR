@@ -67,6 +67,8 @@ public class AutomatetoTab {
 
     private IAutomate tableToAutomate(List<Row> table) {
         Map<Set<Integer>, IAutomate> repository = collectAllAutomates(table);
+        System.out.println(repository);
+        System.out.println(table);
         IAutomate automateReduite = setUpFeatures(repository, table);
         return automateReduite;
     }
@@ -157,11 +159,22 @@ public class AutomatetoTab {
         return reachable_SET;
     }
 
-    public Set<IAutomate> collectInitialState(IAutomate automateLocal) {
+    public Set<IAutomate> collectInitialState(IAutomate automate) {
         Set<IAutomate> res = new HashSet<>();
-        res.add(automateLocal);
-        res.addAll(automateLocal.getEmptyTransitions());
+        res.add(automate);
+        Set<IAutomate> visited = new HashSet<>();
+        collectInitialStateAux(automate, res, visited);
         return res;
+    }
+
+    private void collectInitialStateAux(IAutomate automate, Set<IAutomate> res, Set<IAutomate> visited) {
+        if (visited.contains(automate))
+            return;
+        visited.add(automate);
+        automate.getEmptyTransitions().forEach(automate_ -> {
+            res.add(automate_);
+            collectInitialStateAux(automate_, res, visited);
+        });
     }
 
     private void construct_rechable_states(Set<IAutomate> initialStates, Row row) {

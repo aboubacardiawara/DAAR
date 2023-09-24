@@ -208,5 +208,9 @@ public class Automate implements IAutomate {
         this.isAcceptingState = false;
     }
 
-   
+    @Override
+    public String toString() {
+        return "Automate [id=" + id + "]";
+    }
+
 }
