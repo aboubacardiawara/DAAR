@@ -39,4 +39,6 @@ public interface IAutomate {
 
     public IAutomate findAcceptingState();
 
+    public boolean match(String subtrs) throws NoSuchTransition;
+
 }

@@ -1,13 +1,10 @@
 digraph {
 	1 [color="red"]
-	1 -> 5 [label="S"]
-	5 -> 7 [label="a"]
-	7 -> 9 [label="o"]
+	1 -> 3 [label="H"]
+	3 -> 5 [label="e"]
+	5 -> 7 [label="l"]
+	7 -> 9 [label="l"]
 	10 [color="green"]
-	9 -> 10 [label="n"]
+	9 -> 10 [label="o"]
 	10 [color="green"]
-	5 -> 11 [label="r"]
-	11 -> 9 [label="o"]
-	5 -> 12 [label="g"]
-	12 -> 9 [label="o"]
 }
