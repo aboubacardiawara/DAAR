@@ -9,6 +9,7 @@ import com.daar.automatetotab.AutomatetoTab;
 import com.daar.parsing.EClosure;
 import com.daar.parsing.RegExTree;
 import com.daar.parsing.RegexParser;
+import com.daar.reconnaissance.Reconnaissance;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
-        String regEx = "S(a|g|r)on";
+        String regEx = "Hello";
         RegexParser parser = new RegexParser();
         RegExTree tree_reg = parser.parse(regEx);
         IAutomate automat_rsult = tree_to_automat(automateBuilder, tree_reg);
@@ -57,6 +58,9 @@ public class App {
         AutomatetoTab regEx_table = new AutomatetoTab();
         IAutomate automate_Finale = regEx_table.minimizeAutomate(automat_rsult);
         exportToFile(automate_Finale, "reducedAutomate.dot");
+        Boolean is_match = Reconnaissance.match("Hello world", automate_Finale);
+        System.out.println(is_match);
+
     }
 
     private static void exportToFile(IAutomate automate, String fileName) {
