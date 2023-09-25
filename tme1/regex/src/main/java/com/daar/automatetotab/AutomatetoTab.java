@@ -41,25 +41,27 @@ public class AutomatetoTab {
     }
 
     private List<Row> generating_other_row(List<Row> table, Row row) {
-        row.getTransitionsStates().forEach((car, new_state) -> {
+        row.getTransitionsStates().forEach((car, new_state) ->{
             Row new_row = new Row();
-            new_row.setDepartureStates(new_state);
-            construct_rechable_states(new_state, new_row);
+            if (new_state!=null && !getAlldepartures(table).contains(new_state)){
+                new_row.setDepartureStates(new_state);
+                construct_rechable_states(new_state, new_row);
 
-            for (IAutomate element : new_row.getDepartureStates()) {
-                if (element.isAcceptingState())
-                    new_row.containFinalState = true;
-                if (element.isAnInitialState())
-                    new_row.containInitialState = true;
+                for (IAutomate element : new_row.getDepartureStates()){
+                    if (element.isAcceptingState())
+                        new_row.containFinalState = true;
+                    if (element.isAnInitialState())
+                        new_row.containInitialState = true;
+                }
+                table.add(new_row);
+
+                // on refait la meme operation pour les lignes suivantes
+                new_row.getTransitionsStates().forEach((car_, state) ->{
+                    // Verifie si la nouvelle transition (car, transition) n'a pas été traité
+                    if (!getAlldepartures(table).contains(new_row.getTransitionsByPosition((int) car_)))
+                        generating_other_row(table, new_row);
+                });
             }
-            table.add(new_row);
-
-            // on refait la meme operation pour les ligne suivante
-            new_row.getTransitionsStates().forEach((car_, state) -> {
-                // Verifie si la nouvelle transition n'a pas été traité
-                if (!getAlldepartures(table).contains(new_row.getTransitionsByPosition((int) car_)))
-                    generating_other_row(table, new_row);
-            });
         });
 
         return table;
