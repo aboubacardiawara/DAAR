@@ -50,7 +50,7 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
-        String regEx = "Hello";
+        String regEx = "S(a|r|g)*on";
         RegexParser parser = new RegexParser();
         RegExTree tree_reg = parser.parse(regEx);
         IAutomate automat_rsult = tree_to_automat(automateBuilder, tree_reg);
@@ -58,7 +58,7 @@ public class App {
         AutomatetoTab regEx_table = new AutomatetoTab();
         IAutomate automate_Finale = regEx_table.minimizeAutomate(automat_rsult);
         exportToFile(automate_Finale, "reducedAutomate.dot");
-        Boolean is_match = Reconnaissance.match("Hello world", automate_Finale);
+        Boolean is_match = Reconnaissance.match("Saon", automate_Finale);
         System.out.println(is_match);
 
     }
