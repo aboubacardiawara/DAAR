@@ -1,5 +1,5 @@
 digraph {
 	1 [color="red"]
-	1 -> 2 [label="c"]
+	1 -> 2 [label="a"]
 	2 [color="green"]
 }
