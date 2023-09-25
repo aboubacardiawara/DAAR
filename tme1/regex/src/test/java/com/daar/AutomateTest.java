@@ -101,13 +101,23 @@ public class AutomateTest {
     @Test
     public void testMotVideForPlus() {
         String pattern = "a+";
+        String pattern2 = "e+";
         IAutomate automate = this.automateBuilder.buildFromRegex(pattern);
+        IAutomate automate2 = this.automateBuilder.buildFromRegex(pattern2);
         assertFalse(automate.match(""));
         assertFalse(Reconnaissance.match("", automate));
         assertTrue(automate.match("a"));
         assertTrue(Reconnaissance.match("a", automate));
         assertTrue(automate.match("aaa"));
         assertTrue(Reconnaissance.match("aaa", automate));
+        assertTrue(Reconnaissance.match("plusieurs", automate));
+    }
+
+    @Test
+    public void testBrutePattern() {
+        String pattern = "e";
+        IAutomate automate = this.automateBuilder.buildFromRegex(pattern);
+        assertTrue(Reconnaissance.match("plusieurs", automate));
     }
 
 }

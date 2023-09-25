@@ -24,10 +24,8 @@ public class App {
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
     public static void main(String[] args) throws Exception {
-        String regEx = "a*";
-        IAutomate automate = automateBuilder.buildFromRegex(regEx);
-        Boolean is_match = Reconnaissance.match("", automate);
-        System.out.println(is_match);
+        String regEx = "e+";
+        Reconnaissance.search("note.txt", regEx);
     }
 
 }

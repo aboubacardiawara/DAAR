@@ -16,15 +16,6 @@ public class AutomateBuilder {
         return this.id++;
     }
 
-    /**
-     * Build an NDFA from a RegExTree.
-     * 
-     * @return
-     */
-    public IAutomate buildFrom(String string) {
-        return null;
-    }
-
     public IAutomate buildFrom(char c) {
         return buildSimple(c);
     }

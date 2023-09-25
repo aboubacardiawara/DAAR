@@ -1,5 +1,10 @@
 package com.daar.reconnaissance;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+import com.daar.automate.AutomateBuilder;
 import com.daar.automate.IAutomate;
 import com.daar.automate.NoSuchTransition;
 
@@ -26,4 +31,24 @@ public class Reconnaissance {
         return false;
     }
 
+    public static void search(String fileName, String regex) {
+        try {
+            FileReader fileReader = new FileReader(fileName);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            IAutomate automate = new AutomateBuilder().buildFromRegex(regex);
+
+            String ligne;
+            int i = 1;
+            while ((ligne = bufferedReader.readLine()) != null) {
+                if (match(ligne, automate))
+                    System.out.println(i + ". " + ligne);
+
+                i++;
+            }
+
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
