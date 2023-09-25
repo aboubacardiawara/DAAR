@@ -67,8 +67,6 @@ public class AutomatetoTab {
 
     private IAutomate tableToAutomate(List<Row> table) {
         Map<Set<Integer>, IAutomate> repository = collectAllAutomates(table);
-        System.out.println(repository);
-        System.out.println(table);
         IAutomate automateReduite = setUpFeatures(repository, table);
         return automateReduite;
     }

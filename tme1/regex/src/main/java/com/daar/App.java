@@ -1,6 +1,7 @@
 package com.daar;
 
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 import com.daar.automate.AutomateBuilder;
 import com.daar.automate.IAutomate;
@@ -19,6 +20,7 @@ import java.lang.Exception;
 
 public class App {
     private static final AutomateBuilder automateBuilder = new AutomateBuilder();
+    private static final Logger LOGGER = Logger.getLogger(App.class.getName());
     // REGEX
     private static String regEx;
 
@@ -47,14 +49,14 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
-        String regEx = "c|(lyna)*|(abou)*";
+        String regEx = "S(a|g|r)on";
         RegexParser parser = new RegexParser();
         RegExTree tree_reg = parser.parse(regEx);
         IAutomate automat_rsult = tree_to_automat(automateBuilder, tree_reg);
         exportToFile(automat_rsult, "epsilonAutomate.dot");
         AutomatetoTab regEx_table = new AutomatetoTab();
         IAutomate automate_Finale = regEx_table.minimizeAutomate(automat_rsult);
-        exportToFile(automate_Finale, "reducedAutomate.dot"); // on va bien rigoler au moment du debug. :))))) OMG
+        exportToFile(automate_Finale, "reducedAutomate.dot");
     }
 
     private static void exportToFile(IAutomate automate, String fileName) {
