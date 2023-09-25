@@ -6,7 +6,6 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -217,8 +216,13 @@ public class Automate implements IAutomate {
     }
 
     @Override
-    public boolean match(String subtrs) throws NoSuchTransition {
-        return matchAux(subtrs, this);
+    public boolean match(String subtrs) {
+        try {
+            return matchAux(subtrs, this);
+        } catch (NoSuchTransition e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public boolean matchAux(String subtrs, IAutomate automate) throws NoSuchTransition {
@@ -226,15 +230,11 @@ public class Automate implements IAutomate {
             System.out.println(true);
             return automate.isAcceptingState();
         }
-
         Character head = subtrs.charAt(0);
-        // System.out.println(head);
         if (automate.getTransitions().keySet().isEmpty()) {
-            return true; // on a parcourus la chaine de caractère a un certaine niveau et on a parcourus
-                         // touuuuuuuuut le graphe
+            return true;
         }
         if (!automate.getTransitions().containsKey(head)) {
-            System.out.println("je suis la ");
             return false;
         }
         IAutomate nextautomate = automate.getTransition(head);
