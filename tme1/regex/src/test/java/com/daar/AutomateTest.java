@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import com.daar.automate.Automate;
 import com.daar.automate.AutomateBuilder;
 import com.daar.automate.IAutomate;
+import com.daar.reconnaissance.Reconnaissance;
 
 /**
  * Unit test for simple App.
@@ -83,6 +84,30 @@ public class AutomateTest {
         assertTrue(automate.match("Son"));
         assertFalse(automate.match("Sn"));
         assertFalse(automate.match("Sakon"));
+    }
+
+    @Test
+    public void testMotVideForEtoile() {
+        String pattern = "a*";
+        IAutomate automate = this.automateBuilder.buildFromRegex(pattern);
+        assertTrue(automate.match(""));
+        assertTrue(Reconnaissance.match("", automate));
+        assertTrue(automate.match("a"));
+        assertTrue(Reconnaissance.match("a", automate));
+        assertTrue(automate.match("aaa"));
+        assertTrue(Reconnaissance.match("aaa", automate));
+    }
+
+    @Test
+    public void testMotVideForPlus() {
+        String pattern = "a+";
+        IAutomate automate = this.automateBuilder.buildFromRegex(pattern);
+        assertFalse(automate.match(""));
+        assertFalse(Reconnaissance.match("", automate));
+        assertTrue(automate.match("a"));
+        assertTrue(Reconnaissance.match("a", automate));
+        assertTrue(automate.match("aaa"));
+        assertTrue(Reconnaissance.match("aaa", automate));
     }
 
 }

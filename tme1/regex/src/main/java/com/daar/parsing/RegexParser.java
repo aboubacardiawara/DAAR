@@ -34,6 +34,8 @@ public class RegexParser {
             return EClosure.DOT;
         if (c == '*')
             return EClosure.ETOILE;
+        if (c == '+')
+            return EClosure.PLUS;
         if (c == '|')
             return EClosure.ALTERN;
         if (c == '(')
@@ -48,6 +50,8 @@ public class RegexParser {
             result = processParenthese(result);
         while (containEtoile(result))
             result = processEtoile(result);
+        while (containPlus(result))
+            result = processPlus(result);
         while (containConcat(result))
             result = processConcat(result);
         while (containAltern(result))
@@ -101,6 +105,13 @@ public class RegexParser {
         return false;
     }
 
+    private boolean containPlus(ArrayList<RegExTree> trees) {
+        for (RegExTree t : trees)
+            if (t.getRoot() == EClosure.PLUS && t.getSubTrees().isEmpty())
+                return true;
+        return false;
+    }
+
     private ArrayList<RegExTree> processEtoile(ArrayList<RegExTree> trees) throws Exception {
         ArrayList<RegExTree> result = new ArrayList<RegExTree>();
         boolean found = false;
@@ -113,6 +124,25 @@ public class RegexParser {
                 ArrayList<RegExTree> subTrees = new ArrayList<RegExTree>();
                 subTrees.add(last);
                 result.add(new RegExTree(EClosure.ETOILE, subTrees));
+            } else {
+                result.add(t);
+            }
+        }
+        return result;
+    }
+
+    private ArrayList<RegExTree> processPlus(ArrayList<RegExTree> trees) throws Exception {
+        ArrayList<RegExTree> result = new ArrayList<RegExTree>();
+        boolean found = false;
+        for (RegExTree t : trees) {
+            if (!found && t.getRoot() == EClosure.PLUS && t.getSubTrees().isEmpty()) {
+                if (result.isEmpty())
+                    throw new Exception();
+                found = true;
+                RegExTree last = result.remove(result.size() - 1);
+                ArrayList<RegExTree> subTrees = new ArrayList<RegExTree>();
+                subTrees.add(last);
+                result.add(new RegExTree(EClosure.PLUS, subTrees));
             } else {
                 result.add(t);
             }

@@ -90,15 +90,30 @@ public class AutomateBuilder {
         try {
             regexTree = parser.parse(regex);
             IAutomate automateWithEpsilonTransitions = regexTree.toAutomate();
-            // automateWithEpsilonTransitions.exportToFile("epsilonAutomate.dot");
+            automateWithEpsilonTransitions.exportToFile("epsilonAutomate.dot");
             AutomatetoTab regexTable = new AutomatetoTab();
             IAutomate deterministicAutomate = regexTable.minimizeAutomate(automateWithEpsilonTransitions);
-            // deterministicAutomate.exportToFile("derministicAutomate.dot");
+            deterministicAutomate.exportToFile("derministicAutomate.dot");
             return deterministicAutomate;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public IAutomate buildFromPlus(IAutomate r1) {
+        IAutomate initialState = new Automate(currentId());
+        IAutomate finalState = new Automate(currentId());
+        IAutomate r1Accepting = r1.getAcceptingState();
+        initialState.addEmptyTransitionTo(r1);
+        r1Accepting.addEmptyTransitionTo(finalState);
+        r1Accepting.addEmptyTransitionTo(r1);
+        // natures des etats
+        initialState.makeAsInitialState();
+        r1.unMakeInitialState();
+        r1Accepting.unMakeAsAcceptingState();
+        finalState.makeAsFinalState();
+        return initialState;
     }
 
 }

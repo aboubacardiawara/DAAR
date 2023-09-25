@@ -9,4 +9,5 @@ public class EClosure {
     public static final int PARENTHESEOUVRANT = 0x16641664;
     public static final int PARENTHESEFERMANT = 0x51515151;
     public static final int DOT = 0xD07;
+    public static final int PLUS = 0xABCD;
 }

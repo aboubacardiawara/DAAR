@@ -24,9 +24,9 @@ public class App {
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
     public static void main(String[] args) throws Exception {
-        String regEx = "S(a|g|r)*on";
+        String regEx = "a*";
         IAutomate automate = automateBuilder.buildFromRegex(regEx);
-        Boolean is_match = Reconnaissance.match("Hello world", automate);
+        Boolean is_match = Reconnaissance.match("", automate);
         System.out.println(is_match);
     }
 

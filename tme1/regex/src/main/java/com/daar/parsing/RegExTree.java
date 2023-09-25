@@ -43,6 +43,8 @@ public class RegExTree {
             return "|";
         if (root == EClosure.DOT)
             return ".";
+        if (root == EClosure.PLUS)
+            return "+";
         return Character.toString((char) root);
     }
 
@@ -59,6 +61,10 @@ public class RegExTree {
         if (regExTree.rootToString() == "*") {
             IAutomate R1 = toAutomateAux(automateBuilder, regExTree.getSubTrees().get(0));
             return automateBuilder.buildFromClosure(R1);
+        }
+        if (regExTree.rootToString() == "+") {
+            IAutomate R1 = toAutomateAux(automateBuilder, regExTree.getSubTrees().get(0));
+            return automateBuilder.buildFromPlus(R1);
         }
         if (regExTree.rootToString() == ".") { // caractère qlq
             IAutomate R1 = toAutomateAux(automateBuilder, regExTree.getSubTrees().get(0));
