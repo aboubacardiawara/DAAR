@@ -236,39 +236,3 @@ class Row {
     }
 
 }
-// CONSTRUCTION DE L'AUTOMATE REDUITE FROM THE TAB
-
-/**
- * creer un dictionnaire ensemble_automates_ids -> objet_automate. C'est notre
- * repertoire d'automates à partir du tableau
- * ensuite creer reparcourir le tableau.
- * pour chaque row:
- * e0 :: Set<IAutomate> = ensembles_de_depart de row
- * automate = repository.get(
- * pour chaque transitions dans row.transitionsStates :: Hashmap[]:
- * objet = repository.get(transitions) // on recuperer l'objet deja construit
- * // on creer une transitions automate -> tous les objets
- * // on defini la nature de automate: final ou init (row nous le dira)
- * 
- * 
- * Exemple
- * repository {
- * {4,0,2} -> automate0,
- * {1,5,3,6,9} -> automate1,
- * {2, 6, 8, 9, 56} -> automate2,
- * {7,6,9} -> automate3
- * }
- * 
- * maintenant on reparcours le tab
- * - row 0:
- * {4,0,2} -> automate0;
- * - nature: automate0.makeInit();
- * - transitions:
- * - 1) a -> {1,5,3,6,9}; automate0.addtransiton(a, repo.get({1,5,3,6,9}))
- * ...
- * A la fin, on aura construit l'automate reduite. Enfin j'espère. C'est bon
- * convaincue ?
- * 
- * }
- * 
- */
