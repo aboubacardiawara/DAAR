@@ -1,0 +1,84 @@
+Date : 2023-09-25 21:48:53
+Directory : d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex
+Total : 30 files,  1693 codes, 124 comments, 216 blanks, all 2033 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| Java           |         25 |      1,460 |        116 |        210 |      1,786 |
+| XML            |          3 |        223 |          8 |          6 |        237 |
+| Graphviz (DOT) |          2 |         10 |          0 |          0 |         10 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                           | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                              |         30 |      1,693 |        124 |        216 |      2,033 |
+| . (Files)                                                                                                      |          3 |         91 |          8 |          6 |        105 |
+| src                                                                                                            |         12 |      1,017 |        102 |        208 |      1,327 |
+| src\main                                                                                                       |         10 |        858 |         92 |        171 |      1,121 |
+| src\main\java                                                                                                  |         10 |        858 |         92 |        171 |      1,121 |
+| src\main\java\com                                                                                              |         10 |        858 |         92 |        171 |      1,121 |
+| src\main\java\com\daar                                                                                         |         10 |        858 |         92 |        171 |      1,121 |
+| src\main\java\com\daar (Files)                                                                                 |          1 |         27 |          0 |          6 |         33 |
+| src\main\java\com\daar\automate                                                                                |          4 |        327 |         17 |         80 |        424 |
+| src\main\java\com\daar\automatetotab                                                                           |          1 |        175 |         60 |         41 |        276 |
+| src\main\java\com\daar\parsing                                                                                 |          3 |        310 |          9 |         40 |        359 |
+| src\main\java\com\daar\reconnaissance                                                                          |          1 |         19 |          6 |          4 |         29 |
+| src\test                                                                                                       |          2 |        159 |         10 |         37 |        206 |
+| src\test\java                                                                                                  |          2 |        159 |         10 |         37 |        206 |
+| src\test\java\com                                                                                              |          2 |        159 |         10 |         37 |        206 |
+| src\test\java\com\daar                                                                                         |          2 |        159 |         10 |         37 |        206 |
+| target                                                                                                         |         15 |        585 |         14 |          2 |        601 |
+| target\classes                                                                                                 |         11 |        374 |         14 |          2 |        390 |
+| target\classes\com                                                                                             |         11 |        374 |         14 |          2 |        390 |
+| target\classes\com\daar                                                                                        |         11 |        374 |         14 |          2 |        390 |
+| target\classes\com\daar (Files)                                                                                |          1 |         17 |          0 |          0 |         17 |
+| target\classes\com\daar\automate                                                                               |          4 |        108 |          9 |          2 |        119 |
+| target\classes\com\daar\automatetotab                                                                          |          2 |        112 |          0 |          0 |        112 |
+| target\classes\com\daar\parsing                                                                                |          3 |        128 |          5 |          0 |        133 |
+| target\classes\com\daar\reconnaissance                                                                         |          1 |          9 |          0 |          0 |          9 |
+| target\surefire-reports                                                                                        |          2 |        142 |          0 |          0 |        142 |
+| target\test-classes                                                                                            |          2 |         69 |          0 |          0 |         69 |
+| target\test-classes\com                                                                                        |          2 |         69 |          0 |          0 |         69 |
+| target\test-classes\com\daar                                                                                   |          2 |         69 |          0 |          0 |         69 |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                       | language       | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\derministicAutomate.dot                                       | Graphviz (DOT) |          5 |          0 |          0 |          5 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\epsilonAutomate.dot                                           | Graphviz (DOT) |          5 |          0 |          0 |          5 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\pom.xml                                                       | XML            |         81 |          8 |          6 |         95 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\App.java                               | Java           |         27 |          0 |          6 |         33 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\automate\Automate.java                 | Java           |        209 |          7 |         37 |        253 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\automate\AutomateBuilder.java          | Java           |         91 |         10 |         18 |        119 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\automate\IAutomate.java                | Java           |         24 |          0 |         22 |         46 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\automate\NoSuchTransition.java         | Java           |          3 |          0 |          3 |          6 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\automatetotab\AutomatetoTab.java       | Java           |        175 |         60 |         41 |        276 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\parsing\EClosure.java                  | Java           |         11 |          0 |          2 |         13 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\parsing\RegExTree.java                 | Java           |         66 |          1 |         11 |         78 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\parsing\RegexParser.java               | Java           |        233 |          8 |         27 |        268 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\reconnaissance\Reconnaissance.java     | Java           |         19 |          6 |          4 |         29 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\test\java\com\daar\AutomateBuilderTest.java               | Java           |         67 |          7 |         18 |         92 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\test\java\com\daar\AutomateTest.java                      | Java           |         92 |          3 |         19 |        114 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\App.class                             | Java           |         17 |          0 |          0 |         17 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\automate\Automate.class               | Java           |         71 |          9 |          2 |         82 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\automate\AutomateBuilder.class        | Java           |         25 |          0 |          0 |         25 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\automate\IAutomate.class              | Java           |          7 |          0 |          0 |          7 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\automate\NoSuchTransition.class       | Java           |          5 |          0 |          0 |          5 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\automatetotab\AutomatetoTab.class     | Java           |         87 |          0 |          0 |         87 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\automatetotab\Row.class               | Java           |         25 |          0 |          0 |         25 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\parsing\EClosure.class                | Java           |          9 |          0 |          0 |          9 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\parsing\RegExTree.class               | Java           |         28 |          5 |          0 |         33 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\parsing\RegexParser.class             | Java           |         91 |          0 |          0 |         91 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\reconnaissance\Reconnaissance.class   | Java           |          9 |          0 |          0 |          9 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\surefire-reports\TEST-com.daar.AutomateBuilderTest.xml | XML            |         68 |          0 |          0 |         68 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\surefire-reports\TEST-com.daar.AutomateTest.xml        | XML            |         74 |          0 |          0 |         74 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\test-classes\com\daar\AutomateBuilderTest.class        | Java           |         35 |          0 |          0 |         35 |
+| d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\test-classes\com\daar\AutomateTest.class               | Java           |         34 |          0 |          0 |         34 |
+| Total                                                                                                          |                |      1,693 |        124 |        216 |      2,033 |
++----------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

@@ -78,10 +78,10 @@ public class AutomateTest {
 
     @Test
     public void testExampleCours() {
-        String pattern = "S(a|g|r)*on";
+        String pattern = "S(a|g|r)+on";
         IAutomate automate = this.automateBuilder.buildFromRegex(pattern);
         assertTrue(automate.match("Saragon"));
-        assertTrue(automate.match("Son"));
+        assertFalse(automate.match("Son"));
         assertFalse(automate.match("Sn"));
         assertFalse(automate.match("Sakon"));
     }

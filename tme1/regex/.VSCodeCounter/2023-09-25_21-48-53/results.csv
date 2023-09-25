@@ -1,0 +1,32 @@
+"filename", "language", "XML", "Graphviz (DOT)", "Java", "comment", "blank", "total"
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\derministicAutomate.dot", "Graphviz (DOT)", 0, 5, 0, 0, 0, 5
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\epsilonAutomate.dot", "Graphviz (DOT)", 0, 5, 0, 0, 0, 5
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\pom.xml", "XML", 81, 0, 0, 8, 6, 95
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\App.java", "Java", 0, 0, 27, 0, 6, 33
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\automate\Automate.java", "Java", 0, 0, 209, 7, 37, 253
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\automate\AutomateBuilder.java", "Java", 0, 0, 91, 10, 18, 119
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\automate\IAutomate.java", "Java", 0, 0, 24, 0, 22, 46
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\automate\NoSuchTransition.java", "Java", 0, 0, 3, 0, 3, 6
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\automatetotab\AutomatetoTab.java", "Java", 0, 0, 175, 60, 41, 276
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\parsing\EClosure.java", "Java", 0, 0, 11, 0, 2, 13
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\parsing\RegExTree.java", "Java", 0, 0, 66, 1, 11, 78
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\parsing\RegexParser.java", "Java", 0, 0, 233, 8, 27, 268
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\main\java\com\daar\reconnaissance\Reconnaissance.java", "Java", 0, 0, 19, 6, 4, 29
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\test\java\com\daar\AutomateBuilderTest.java", "Java", 0, 0, 67, 7, 18, 92
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\src\test\java\com\daar\AutomateTest.java", "Java", 0, 0, 92, 3, 19, 114
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\App.class", "Java", 0, 0, 17, 0, 0, 17
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\automate\Automate.class", "Java", 0, 0, 71, 9, 2, 82
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\automate\AutomateBuilder.class", "Java", 0, 0, 25, 0, 0, 25
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\automate\IAutomate.class", "Java", 0, 0, 7, 0, 0, 7
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\automate\NoSuchTransition.class", "Java", 0, 0, 5, 0, 0, 5
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\automatetotab\AutomatetoTab.class", "Java", 0, 0, 87, 0, 0, 87
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\automatetotab\Row.class", "Java", 0, 0, 25, 0, 0, 25
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\parsing\EClosure.class", "Java", 0, 0, 9, 0, 0, 9
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\parsing\RegExTree.class", "Java", 0, 0, 28, 5, 0, 33
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\parsing\RegexParser.class", "Java", 0, 0, 91, 0, 0, 91
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\classes\com\daar\reconnaissance\Reconnaissance.class", "Java", 0, 0, 9, 0, 0, 9
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\surefire-reports\TEST-com.daar.AutomateBuilderTest.xml", "XML", 68, 0, 0, 0, 0, 68
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\surefire-reports\TEST-com.daar.AutomateTest.xml", "XML", 74, 0, 0, 0, 0, 74
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\test-classes\com\daar\AutomateBuilderTest.class", "Java", 0, 0, 35, 0, 0, 35
+"d:\cours\sorbonne\master\m2\daar\DAAR\tme1\regex\target\test-classes\com\daar\AutomateTest.class", "Java", 0, 0, 34, 0, 0, 34
+"Total", "-", 223, 10, 1460, 124, 216, 2033
