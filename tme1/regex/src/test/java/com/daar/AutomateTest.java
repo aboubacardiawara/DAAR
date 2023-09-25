@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import com.daar.automate.Automate;
+import com.daar.automate.AutomateBuilder;
 import com.daar.automate.IAutomate;
 
 /**
@@ -35,6 +36,12 @@ public class AutomateTest {
         IAutomate acceptingStateAutomate = new Automate(0);
         acceptingStateAutomate.makeAsFinalState();
         assertTrue(acceptingStateAutomate.isAcceptingState());
+    }
+
+    @Test
+    public void buildingAutomateFromRegex() {
+        IAutomate deterministicAutomate = new AutomateBuilder().buildFromRegex("a");
+        assertTrue(deterministicAutomate.isAnInitialState());
     }
 
 }

@@ -41,4 +41,6 @@ public interface IAutomate {
 
     public boolean match(String subtrs) throws NoSuchTransition;
 
+    public void exportToFile(String fileName);
+
 }

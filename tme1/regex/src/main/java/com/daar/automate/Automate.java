@@ -1,5 +1,8 @@
 package com.daar.automate;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -219,24 +222,33 @@ public class Automate implements IAutomate {
     }
 
     public boolean matchAux(String subtrs, IAutomate automate) throws NoSuchTransition {
-        if (subtrs.isEmpty()){
+        if (subtrs.isEmpty()) {
             System.out.println(true);
             return automate.isAcceptingState();
         }
-        
+
         Character head = subtrs.charAt(0);
-        //System.out.println(head);
-        if (automate.getTransitions().keySet().isEmpty()){
-            return true;  //on a parcourus la chaine de caractère a un certaine niveau et on a parcourus touuuuuuuuut le graphe 
+        // System.out.println(head);
+        if (automate.getTransitions().keySet().isEmpty()) {
+            return true; // on a parcourus la chaine de caractère a un certaine niveau et on a parcourus
+                         // touuuuuuuuut le graphe
         }
         if (!automate.getTransitions().containsKey(head)) {
             System.out.println("je suis la ");
             return false;
         }
-        IAutomate nextautomate =  automate.getTransition(head);
+        IAutomate nextautomate = automate.getTransition(head);
         System.out.println(nextautomate.getTransitions().keySet());
-        return  matchAux(subtrs.substring(1), nextautomate);
-    
+        return matchAux(subtrs.substring(1), nextautomate);
+    }
+
+    @Override
+    public void exportToFile(String fileName) {
+        try (Writer writer = new FileWriter(fileName)) {
+            writer.write(dotify());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

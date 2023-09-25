@@ -2,7 +2,9 @@ package com.daar.automate;
 
 import java.lang.annotation.Documented;
 
+import com.daar.automatetotab.AutomatetoTab;
 import com.daar.parsing.RegExTree;
+import com.daar.parsing.RegexParser;
 
 public class AutomateBuilder {
 
@@ -93,6 +95,20 @@ public class AutomateBuilder {
         r1_accpeting.unMakeAsAcceptingState();
         finalState.makeAsFinalState();
         return initialState;
+    }
+
+    public IAutomate buildFromRegex(String regex) {
+        RegexParser parser = new RegexParser();
+        RegExTree regexTree;
+        try {
+            regexTree = parser.parse(regex);
+            IAutomate automateWithEpsilonTransitions = regexTree.toAutomate();
+            AutomatetoTab regexTable = new AutomatetoTab();
+            return regexTable.minimizeAutomate(automateWithEpsilonTransitions);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
