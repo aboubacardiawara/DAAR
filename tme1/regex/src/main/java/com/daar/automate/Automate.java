@@ -229,19 +229,20 @@ public class Automate implements IAutomate {
         }
 
         Character head = subtrs.charAt(0);
-        if (automate.getTransitions().keySet().isEmpty()) {
+        if (automate.getTransitions().isEmpty()) {
             return true; // on a parcourus la chaine de caractère a un certaine niveau et on a parcourus
                          // touuuuuuuuut le graphe
         }
         if (!automate.getTransitions().containsKey(head)) {
             return false;
         }
-        IAutomate nextautomate = automate.getTransition(head);
-        return matchAux(subtrs.substring(1), nextautomate);
-
+        IAutomate nextautomate =  automate.getTransition(head);
+        System.out.println(nextautomate.getTransitions().keySet());
+        return  matchAux(subtrs.substring(1), nextautomate);
+    
     }
 
-    @Override
+ @Override
     public void exportToFile(String fileName) {
         try (Writer writer = new FileWriter(fileName)) {
             writer.write(dotify());

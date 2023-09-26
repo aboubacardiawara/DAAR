@@ -1,6 +1,1 @@
-Ceci est un exemple de texte
-qui s'étend sur plusieurs lignes.
-La regex peut également être utilisée
-pour trouver des motifs sur plusieurs lignes.
-
-N'oubliez pas de sauvegarder ce contenu dans un fichier texte.
+plusieurs

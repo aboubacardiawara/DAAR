@@ -1,7 +1,9 @@
 package com.daar.reconnaissance;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import com.daar.automate.AutomateBuilder;
@@ -36,16 +38,15 @@ public class Reconnaissance {
             FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             IAutomate automate = new AutomateBuilder().buildFromRegex(regex);
+            BufferedWriter writer = new BufferedWriter(new FileWriter("result.txt"));
 
             String ligne;
             int i = 1;
             while ((ligne = bufferedReader.readLine()) != null) {
                 if (match(ligne, automate))
-                    System.out.println(i + ". " + ligne);
-
-                i++;
+                    writer.write(ligne+"\n");
             }
-
+            writer.close();
             bufferedReader.close();
         } catch (IOException e) {
             e.printStackTrace();

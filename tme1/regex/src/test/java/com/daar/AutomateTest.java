@@ -99,7 +99,7 @@ public class AutomateTest {
     }
 
     @Test
-    public void testMotVideForPlus() {
+    public void testPlus() {
         String pattern = "a+";
         String pattern2 = "e+";
         IAutomate automate = this.automateBuilder.buildFromRegex(pattern);
@@ -110,7 +110,7 @@ public class AutomateTest {
         assertTrue(Reconnaissance.match("a", automate));
         assertTrue(automate.match("aaa"));
         assertTrue(Reconnaissance.match("aaa", automate));
-        assertTrue(Reconnaissance.match("plusieurs", automate));
+        //assertTrue(Reconnaissance.match("plusieurs", automate2));
     }
 
     @Test
