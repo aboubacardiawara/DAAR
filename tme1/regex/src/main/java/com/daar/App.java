@@ -28,7 +28,6 @@ public class App {
         String regEx = "S(a|g|r)+on";
         Reconnaissance.search("note.txt", regEx);
         long t1 = System.currentTimeMillis();
-        System.out.println(t1 - t0);
+        LOGGER.info("Durée: " + (t1 - t0) + " (ms)");
     }
-
 }
