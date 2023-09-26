@@ -250,10 +250,91 @@ public class Automate implements IAutomate {
         }
     }
 
+    /**
+     * Optimizing the automate by merging the equivalents states.
+     */
     @Override
     public void optimize() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'optimize'");
+        Map<Set<Tuple>, IAutomate> equivalents = new HashMap<>();
+        Set<Integer> visitedAutomateIds = new HashSet<>();
+        this.optimizeAux(this, equivalents);
+        this.reconstructAutomate(equivalents, this, visitedAutomateIds);
+    }
+
+    private void reconstructAutomate(Map<Set<Tuple>, IAutomate> mergeTable, IAutomate automate,
+            Set<Integer> visitedAutomateIds) {
+        if (visitedAutomateIds.contains(automate.getId())) {
+            return;
+        }
+        visitedAutomateIds.add(automate.getId());
+        automate.getTransitions().forEach((car, automateLocal) -> {
+            Set<Tuple> sortiesAsTuple = automateLocal.transitionsAsTuple();
+            if (mergeTable.containsKey(sortiesAsTuple)) {
+                // cela veut dire que l'automate à dejà subit une fusion
+                // on peut donc le remplacer par l'automate equivalent
+                // dans la table de fusion
+                automate.addTransition(car, mergeTable.get(sortiesAsTuple));
+
+            }
+        });
+
+        automate.getTransitions().forEach((car, automateLocal) -> {
+            reconstructAutomate(mergeTable, automateLocal, visitedAutomateIds);
+        });
+
+    }
+
+    private void optimizeAux(Automate automate, Map<Set<Tuple>, IAutomate> equivalents) {
+        automate.transitions.forEach((car, automateLocal) -> {
+            if (!automateLocal.isAnInitialState()) {
+
+                Set<Integer> transitionsAsTuple = new HashSet<>();
+                IAutomate mergeResult = automateLocal.merge(equivalents.get(transitionsAsTuple));
+                equivalents.put(automateLocal.transitionsAsTuple(), mergeResult);
+            }
+        });
+    }
+
+    @Override
+    public Set<Tuple> transitionsAsTuple() {
+        Set<Tuple> setTuples = new HashSet<>();
+        this.getTransitions().forEach((car, automate) -> {
+            Tuple tuple = new Tuple(car, automate.getId());
+            setTuples.add(tuple);
+        });
+        return setTuples;
+    }
+
+    /**
+     * Les deux automates doivent être equivalents.
+     * Voir le papier pour la notion d'automate equivalent.
+     */
+    @Override
+    public IAutomate merge(IAutomate automate) {
+        return this;
+    }
+
+}
+
+class Tuple {
+    private Character fst;
+    private Integer snd;
+
+    public Tuple(Character fst, Integer snd) {
+        this.fst = fst;
+        this.snd = snd;
+    }
+
+    public Character fst() {
+        return this.fst;
+    }
+
+    public Integer snd() {
+        return this.snd;
+    }
+
+    public String toString() {
+        return "(" + this.fst + ", " + this.snd + ")";
     }
 
 }

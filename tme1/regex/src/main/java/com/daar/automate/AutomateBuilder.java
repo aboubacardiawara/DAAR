@@ -84,6 +84,7 @@ public class AutomateBuilder {
             automateWithEpsilonTransitions.exportToFile("epsilonAutomate.dot");
             AutomatetoTab regexTable = new AutomatetoTab();
             IAutomate deterministicAutomate = regexTable.minimizeAutomate(automateWithEpsilonTransitions);
+            deterministicAutomate.optimize();
             deterministicAutomate.exportToFile("derministicAutomate.dot");
             return deterministicAutomate;
         } catch (Exception e) {

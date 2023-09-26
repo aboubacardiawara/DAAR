@@ -29,6 +29,5 @@ public class App {
         Reconnaissance.search("note.txt", regEx);
         long t1 = System.currentTimeMillis();
         LOGGER.info("Durée: " + (t1 - t0) + " (ms)");
-        // S(a|g|r)*on
     }
 }
