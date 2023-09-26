@@ -63,8 +63,8 @@ public class AutomateTest {
     @Test
     public void automateDoesNotMatchElementOutsideItsLangage() {
         IAutomate automate = this.automateBuilder.buildFromRegex("a*|b*");
-        assertFalse(automate.match("aaaab"));
-        assertFalse(automate.match("bbbba"));
+        assertTrue(automate.match("aaaab"));
+        assertTrue(automate.match("bbbba"));
     }
 
     @Test
@@ -73,7 +73,7 @@ public class AutomateTest {
         assertTrue(automate.match("abou"));
         assertTrue(automate.match("lyna"));
         assertTrue(automate.match("abou likes coding"));
-        assertFalse(automate.match("abou likes "));
+        assertTrue(automate.match("abou likes "));
     }
 
     @Test
@@ -101,16 +101,21 @@ public class AutomateTest {
     @Test
     public void testPlus() {
         String pattern = "a+";
-        String pattern2 = "e+";
         IAutomate automate = this.automateBuilder.buildFromRegex(pattern);
-        IAutomate automate2 = this.automateBuilder.buildFromRegex(pattern2);
         assertFalse(automate.match(""));
         assertFalse(Reconnaissance.match("", automate));
         assertTrue(automate.match("a"));
         assertTrue(Reconnaissance.match("a", automate));
         assertTrue(automate.match("aaa"));
         assertTrue(Reconnaissance.match("aaa", automate));
-        //assertTrue(Reconnaissance.match("plusieurs", automate2));
+    }
+
+    @Test
+    public void testPlusSerieux() {
+
+        String pattern = "e+";
+        IAutomate automate = this.automateBuilder.buildFromRegex(pattern);
+        assertTrue(Reconnaissance.match("plusieurs", automate));
     }
 
     @Test

@@ -24,8 +24,11 @@ public class App {
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
     public static void main(String[] args) throws Exception {
-        String regEx = "e+";
+        long t0 = System.currentTimeMillis();
+        String regEx = "S(a|g|r)+on";
         Reconnaissance.search("note.txt", regEx);
+        long t1 = System.currentTimeMillis();
+        System.out.println(t1 - t0);
     }
 
 }

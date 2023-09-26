@@ -41,13 +41,14 @@ public class Reconnaissance {
             BufferedWriter writer = new BufferedWriter(new FileWriter("result.txt"));
 
             String ligne;
-            int i = 1;
             while ((ligne = bufferedReader.readLine()) != null) {
                 if (match(ligne, automate))
-                    writer.write(ligne+"\n");
+                    writer.write(ligne + "\n");
             }
             writer.close();
             bufferedReader.close();
+            fileReader.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
