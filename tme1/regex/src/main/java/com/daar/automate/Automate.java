@@ -250,4 +250,10 @@ public class Automate implements IAutomate {
         }
     }
 
+    @Override
+    public void optimize() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'optimize'");
+    }
+
 }
