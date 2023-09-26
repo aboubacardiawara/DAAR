@@ -43,4 +43,6 @@ public interface IAutomate {
 
     public void exportToFile(String string);
 
+    public void optimize();
+
 }

@@ -25,9 +25,10 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         long t0 = System.currentTimeMillis();
-        String regEx = "S(a|g|r)+on";
+        String regEx = "ab*";
         Reconnaissance.search("note.txt", regEx);
         long t1 = System.currentTimeMillis();
         LOGGER.info("Durée: " + (t1 - t0) + " (ms)");
+        // S(a|g|r)*on
     }
 }
