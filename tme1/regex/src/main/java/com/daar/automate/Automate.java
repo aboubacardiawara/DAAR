@@ -129,6 +129,7 @@ public class Automate implements IAutomate {
 
     @Override
     public String dotify() {
+        visitedAutomateIds.clear();
         if (visitedAutomateIds.contains(id)) {
             return "";
         }
@@ -243,8 +244,10 @@ public class Automate implements IAutomate {
 
     @Override
     public void exportToFile(String fileName) {
-        try (Writer writer = new FileWriter(fileName)) {
-            writer.write(dotify());
+        try (FileWriter fileWriter = new FileWriter(fileName)) {
+            String contains = dotify();
+            fileWriter.write(contains);
+            fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

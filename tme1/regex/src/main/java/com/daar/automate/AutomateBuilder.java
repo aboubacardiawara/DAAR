@@ -76,18 +76,19 @@ public class AutomateBuilder {
     }
 
     public IAutomate buildFromRegex(String regex) {
+        boolean shouldBeOptimized = false;
         RegexParser parser = new RegexParser();
         RegExTree regexTree;
         try {
             regexTree = parser.parse(regex);
             IAutomate automateWithEpsilonTransitions = regexTree.toAutomate();
-            // automateWithEpsilonTransitions.exportToFile("epsilonAutomate.dot");
+            automateWithEpsilonTransitions.exportToFile("epsilonAutomate.dot");
             AutomatetoTab regexTable = new AutomatetoTab();
             IAutomate deterministicAutomate = regexTable.minimizeAutomate(automateWithEpsilonTransitions);
-
+            if (shouldBeOptimized) {
+                deterministicAutomate.optimize();
+            }
             deterministicAutomate.exportToFile("derministicAutomate.dot");
-            deterministicAutomate.optimize();
-            deterministicAutomate.exportToFile("optimizedAutomate.dot");
             return deterministicAutomate;
         } catch (Exception e) {
             e.printStackTrace();
