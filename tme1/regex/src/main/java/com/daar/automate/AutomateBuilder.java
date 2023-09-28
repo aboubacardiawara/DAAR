@@ -81,13 +81,12 @@ public class AutomateBuilder {
         try {
             regexTree = parser.parse(regex);
             IAutomate automateWithEpsilonTransitions = regexTree.toAutomate();
-            automateWithEpsilonTransitions.exportToFile("epsilonAutomate.dot");
+            // automateWithEpsilonTransitions.exportToFile("epsilonAutomate.dot");
             AutomatetoTab regexTable = new AutomatetoTab();
             IAutomate deterministicAutomate = regexTable.minimizeAutomate(automateWithEpsilonTransitions);
 
-            deterministicAutomate.optimize();
             deterministicAutomate.exportToFile("derministicAutomate.dot");
-            System.out.println(" dot" +deterministicAutomate.dotify());
+            deterministicAutomate.optimize();
             deterministicAutomate.exportToFile("optimizedAutomate.dot");
             return deterministicAutomate;
         } catch (Exception e) {

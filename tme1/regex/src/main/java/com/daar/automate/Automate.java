@@ -255,7 +255,6 @@ public class Automate implements IAutomate {
      */
     @Override
     public void optimize() {
-        System.out.println("Optimizing the automate");
         Map<Set<Tuple>, IAutomate> equivalents = new HashMap<>();
         Set<Integer> visitedAutomateIds = new HashSet<>();
         this.optimizeAux(this, equivalents, new HashSet<>());
@@ -263,15 +262,13 @@ public class Automate implements IAutomate {
     }
 
     private void reconstructAutomate(Map<Set<Tuple>, IAutomate> mergeTable, IAutomate automate,
-       Set<Integer> visitedAutomateIds) {
+            Set<Integer> visitedAutomateIds) {
         if (visitedAutomateIds.contains(automate.getId())) {
             return;
         }
         visitedAutomateIds.add(automate.getId());
         automate.getTransitions().forEach((car, automateLocal) -> {
             Set<Tuple> sortiesAsTuple = automateLocal.transitionsAsTuple();
-            System.out.println(mergeTable);
-            System.out.println(sortiesAsTuple);
             if (customContainsChecker(mergeTable, sortiesAsTuple)) {
                 // cela veut dire que l'automate à dejà subit une fusion
                 // on peut donc le remplacer par l'automate equivalent
@@ -281,7 +278,7 @@ public class Automate implements IAutomate {
             }
         });
 
-        automate.getTransitions().forEach((car, automateLocal) ->{
+        automate.getTransitions().forEach((car, automateLocal) -> {
             reconstructAutomate(mergeTable, automateLocal, visitedAutomateIds);
         });
 
@@ -295,12 +292,12 @@ public class Automate implements IAutomate {
         automate.getTransitions().forEach((car, automateLocal) -> {
             if (!automateLocal.isAnInitialState()) {
                 Set<Tuple> transitionsAsTuple = automateLocal.transitionsAsTuple();
-                if (customContainsChecker(equivalents, transitionsAsTuple)) { 
+                if (customContainsChecker(equivalents, transitionsAsTuple)) {
                     IAutomate mergeResult = automateLocal.merge(equivalents.get(transitionsAsTuple));
                     equivalents.put(automateLocal.transitionsAsTuple(), mergeResult);
                 } else {
                     equivalents.put(transitionsAsTuple, automateLocal);
-                    optimizeAux(automateLocal,equivalents, visited);
+                    optimizeAux(automateLocal, equivalents, visited);
                 }
             }
         });
@@ -329,11 +326,11 @@ public class Automate implements IAutomate {
     @Override
     public IAutomate merge(IAutomate automate) {
         IAutomate mergeResult = new Automate(automate.getId());
-        this.getTransitions().forEach((car, transition)-> {
+        this.getTransitions().forEach((car, transition) -> {
             mergeResult.addTransition(car, transition);
         });
-        if (this.isAcceptingState());
-              mergeResult.makeAsFinalState();
+        if (automate.isAcceptingState())
+            mergeResult.makeAsFinalState();
         return mergeResult;
     }
 
@@ -364,18 +361,18 @@ class Tuple {
         return this.snd;
     }
 
-
-    public boolean compare(Object o){
-        if (!(o instanceof Tuple)) return false;
+    public boolean compare(Object o) {
+        if (!(o instanceof Tuple))
+            return false;
         Tuple t = (Tuple) o;
-        return this.fst == t.getFst() && this.snd==t.getSnd();  
+        return this.fst == t.getFst() && this.snd == t.getSnd();
     }
 
-   @Override
-    public boolean equals(Object o){
+    @Override
+    public boolean equals(Object o) {
         return compare(o);
     }
-    
+
     public String toString() {
         return "(" + this.fst + ", " + this.snd + ")";
     }

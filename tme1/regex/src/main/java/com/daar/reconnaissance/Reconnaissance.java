@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import com.daar.automate.AutomateBuilder;
 import com.daar.automate.IAutomate;
@@ -37,9 +38,14 @@ public class Reconnaissance {
         try {
             FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
+            long t0 = System.currentTimeMillis();
             IAutomate automate = new AutomateBuilder().buildFromRegex(regex);
             BufferedWriter writer = new BufferedWriter(new FileWriter("result.txt"));
 
+            long t1 = System.currentTimeMillis();
+            Logger LOGGER = Logger.getLogger(Reconnaissance.class.getName());
+            LOGGER.info("[creation and optimization] Durée: " + (t1 - t0) + " (ms)");
+            t0 = System.currentTimeMillis();
             String ligne;
             while ((ligne = bufferedReader.readLine()) != null) {
                 if (match(ligne, automate))
@@ -48,6 +54,9 @@ public class Reconnaissance {
             writer.close();
             bufferedReader.close();
             fileReader.close();
+
+            t1 = System.currentTimeMillis();
+            LOGGER.info("[Search] Durée: " + (t1 - t0) + " (ms)");
 
         } catch (IOException e) {
             e.printStackTrace();

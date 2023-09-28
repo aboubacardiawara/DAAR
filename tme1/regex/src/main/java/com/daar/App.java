@@ -20,14 +20,10 @@ import java.io.Writer;
 import java.lang.Exception;
 
 public class App {
-    private static final AutomateBuilder automateBuilder = new AutomateBuilder();
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
     public static void main(String[] args) throws Exception {
-        long t0 = System.currentTimeMillis();
-        String regEx = "ab*";
+        String regEx = "S(a|g|r)+on";
         Reconnaissance.search("note.txt", regEx);
-        long t1 = System.currentTimeMillis();
-        LOGGER.info("Durée: " + (t1 - t0) + " (ms)");
     }
 }
