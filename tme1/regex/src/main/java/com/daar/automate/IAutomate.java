@@ -167,4 +167,6 @@ public interface IAutomate {
      */
     public IAutomate merge(IAutomate iAutomate);
 
+    public int  size();
+
 }

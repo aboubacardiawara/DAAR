@@ -10,8 +10,15 @@ import java.util.logging.Logger;
 import com.daar.automate.AutomateBuilder;
 import com.daar.automate.IAutomate;
 import com.daar.automate.NoSuchTransition;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.geom.Path2D;
 
-public class Reconnaissance {
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+public class Reconnaissance extends JPanel {
 
     /**
      * Prend un texte et une automate decrivant un langage
@@ -41,7 +48,6 @@ public class Reconnaissance {
             long t0 = System.currentTimeMillis();
             IAutomate automate = new AutomateBuilder().buildFromRegex(regex);
             BufferedWriter writer = new BufferedWriter(new FileWriter("result.txt"));
-
             long t1 = System.currentTimeMillis();
             Logger LOGGER = Logger.getLogger(Reconnaissance.class.getName());
             LOGGER.info("[creation and optimization] Durée: " + (t1 - t0) + " (ms)");
@@ -54,7 +60,7 @@ public class Reconnaissance {
             writer.close();
             bufferedReader.close();
             fileReader.close();
-
+            
             t1 = System.currentTimeMillis();
             LOGGER.info("[Search] Durée: " + (t1 - t0) + " (ms)");
 
@@ -62,4 +68,32 @@ public class Reconnaissance {
             e.printStackTrace();
         }
     }
+    
+
+
+   
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.blue);
+
+        int width = getWidth();
+        int height = getHeight();
+
+        // Tracer la courbe sinusoïdale
+        Path2D path = new Path2D.Double();
+        for (int x = 0; x < width; x++) {
+            double y = Math.sin(Math.toRadians(x)) * height / 2 + height / 2;
+            if (x == 0) {
+                path.moveTo(x, y);
+            } else {
+                path.lineTo(x, y);
+            }
+        }
+
+        g2d.draw(path);
+    }
+    
 }

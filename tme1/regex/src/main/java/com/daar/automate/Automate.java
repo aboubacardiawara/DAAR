@@ -336,6 +336,34 @@ public class Automate implements IAutomate {
             mergeResult.makeAsFinalState();
         return mergeResult;
     }
+    
+    public int size() {
+        return this.sizeAux(this, new HashSet<Integer>());
+    }
+
+    private int sizeAux(IAutomate automate,Set<Integer> visited2) {
+       
+        if (visited2.contains(automate.getId())) {
+            return 0;
+        }else {
+            int count = 1;
+            visited2.add(automate.getId());
+            //this.
+            
+            for (Map.Entry<Character, IAutomate> entry : automate.getTransitions().entrySet()) {
+                IAutomate transition = entry.getValue();
+                count += sizeAux(transition, visited2);
+            }
+
+            for (IAutomate automateLocal : automate.getEmptyTransitions()) {
+                count += sizeAux(automateLocal, visited2);
+            }
+
+            return count;
+        } 
+    }
+
+
 
 }
 
@@ -388,5 +416,6 @@ class Tuple {
         result = prime * result + ((snd == null) ? 0 : snd.hashCode());
         return result;
     }
+    
 
 }
