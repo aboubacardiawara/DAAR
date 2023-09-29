@@ -76,7 +76,7 @@ public class AutomateBuilder {
     }
 
     public IAutomate buildFromRegex(String regex) {
-        boolean shouldBeOptimized = false;
+        boolean shouldBeOptimized = true;
         RegexParser parser = new RegexParser();
         RegExTree regexTree;
         try {
