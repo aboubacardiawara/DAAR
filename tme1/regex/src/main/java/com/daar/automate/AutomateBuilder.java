@@ -82,11 +82,14 @@ public class AutomateBuilder {
         try {
             regexTree = parser.parse(regex);
             IAutomate automateWithEpsilonTransitions = regexTree.toAutomate();
+            System.out.println("[epsilon. size] " +automateWithEpsilonTransitions.size());
             automateWithEpsilonTransitions.exportToFile("epsilonAutomate.dot");
             AutomatetoTab regexTable = new AutomatetoTab();
             IAutomate deterministicAutomate = regexTable.minimizeAutomate(automateWithEpsilonTransitions);
+            System.out.println("[determ. size] " +deterministicAutomate.size());
             if (shouldBeOptimized) {
                 deterministicAutomate.optimize();
+                System.out.println("[opti. size] " +deterministicAutomate.size());
             }
             deterministicAutomate.exportToFile("derministicAutomate.dot");
             return deterministicAutomate;
