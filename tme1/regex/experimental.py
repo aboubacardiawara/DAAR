@@ -7,8 +7,6 @@ with open('size_result_experimental_deterministic.txt', 'r') as file1:
 with open('size_result_experimental_epsilon.txt', 'r') as file2:
         lignes2 = file2.readlines()
 
-lignes1 = file1.readlines()
-lignes2 = file2.readlines()
 n=10
 show_Time=True 
 if (not show_Time):
