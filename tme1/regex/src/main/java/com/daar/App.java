@@ -7,14 +7,13 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import com.daar.reconnaissance.Reconnaissance;
 
-
 public class App {
-   // private static final Logger LOGGER = Logger.getLogger(App.class.getName());
+    // private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
     public static void main(String[] args) throws Exception {
         String regEx = "S(a|g|r)+on";
-       Reconnaissance.search("note.txt", regEx);
-        //Reconnaissance.experimental();
-       
+        // Reconnaissance.search("note.txt", regEx);
+        Reconnaissance.experimental();
+
     }
 }

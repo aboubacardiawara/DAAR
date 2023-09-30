@@ -1,7 +1,12 @@
 import matplotlib.pyplot as plt
 
-file1= open('size_result_experimental_deterministic.txt', 'r')
-file2= open('size_result_experimental_epsilon.txt', 'r')
+lignes1 = []
+lignes2 = []
+with open('size_result_experimental_deterministic.txt', 'r') as file1:
+        lignes1 = file1.readlines()
+with open('size_result_experimental_epsilon.txt', 'r') as file2:
+        lignes2 = file2.readlines()
+
 lignes1 = file1.readlines()
 lignes2 = file2.readlines()
 n=10
@@ -15,11 +20,11 @@ if (not show_Time):
 
         y = [int(ligne.strip()) for ligne in lignes2]
         plt.plot(x,y)
-else: 
-        file3= open('Time_AFD.txt', 'r')
-        file4= open('Time_Egrep.txt', 'r')
-        lignes3 = file3.readlines()
-        lignes4 = file4.readlines()
+else:
+        with open('Time_AFD.txt', 'r') as file3:
+                lignes3 = file3.readlines()
+        with open('Time_Egrep.txt', 'r') as file4:
+                lignes4 = file4.readlines()
         n=5
         x = list(range(1,n+1))
         y = [int(ligne.strip()) for ligne in lignes3]
