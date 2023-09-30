@@ -9,22 +9,27 @@ public class KMPNaive implements ISearchEngine {
         int textLength = text.length();
         int patternLength = pattern.length();
 
-        for (int i = 0; i <= textLength - patternLength; i++) {
-            int j;
-
-            // Vérifier si le motif correspond au sous-texte actuel
-            for (j = 0; j < patternLength; j++) {
-                if (text.charAt(i + j) != pattern.charAt(j)) {
-                    break; // Les caractères ne correspondent pas, passer au suivant dans le texte
-                }
-            }
-
-            if (j == patternLength) {
-                return i; // Motif trouvé à l'indice i dans le texte
+        for (int textIndex = 0; textIndex <= textLength - patternLength; textIndex++) {
+            if (doesPatternMatch(text, pattern, textIndex)) {
+                return textIndex;
             }
         }
 
-        return -1; // Motif non trouvé dans le texte
+        return -1;
     }
 
+    private boolean doesPatternMatch(String text, String pattern, int startIndex) {
+        int patternLength = pattern.length();
+
+        for (int patternIndex = 0; patternIndex < patternLength; patternIndex++) {
+            char textChar = text.charAt(startIndex + patternIndex);
+            char patternChar = pattern.charAt(patternIndex);
+
+            if (textChar != patternChar) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
