@@ -129,7 +129,7 @@ public class Reconnaissance{
             try {
                 //time for Egrep
                 ProcessBuilder processBuilder = new ProcessBuilder("egrep",regEx,fileName);
-                long startTime = System.nanoTime();
+                long startTime = System.currentTimeMillis();
                 processBuilder.redirectErrorStream(true);
                 Process process = processBuilder.start();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -138,13 +138,13 @@ public class Reconnaissance{
                     //System.out.println(line);  //est ce que on garde
                 }
                 int exitCode = process.waitFor();
-                long endTime = System.nanoTime(); 
+                long endTime = System.currentTimeMillis(); 
                 reader.close();
                 long executionTime = endTime - startTime;
                 writer3.write( executionTime+ "\n");
 
                 //time for AFD:
-                long t0 = System.nanoTime();
+                long t0 = System.currentTimeMillis();
                 FileReader fileReader = new FileReader(fileName);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
                 IAutomate automate = new AutomateBuilder().buildFromRegex(regEx);
@@ -157,7 +157,7 @@ public class Reconnaissance{
                 bufferedReader.close();
                 fileReader.close();
 
-                long t1 = System.nanoTime();
+                long t1 = System.currentTimeMillis();
                 writer4.write( t1-t0+ "\n");
                 dupliquer(fileName); //duplique le contenue de note.txt attention peut bloqueer si
             } catch (Exception e) {

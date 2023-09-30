@@ -23,9 +23,9 @@ else:
         n=5
         x = list(range(1,n+1))
         y = [int(ligne.strip()) for ligne in lignes3]
-        plt.plot(x,y)
+        plt.plot(x,y) #afd 
         y = [int(ligne.strip()) for ligne in lignes4]
-        plt.plot(x,y)
+        plt.plot(x,y) #egrep
 
 plt.show()
 
