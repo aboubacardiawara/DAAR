@@ -1,5 +1,6 @@
 package com.kmp;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -17,10 +18,34 @@ public class KMPTest {
     }
 
     @Test
-    public void testSearch() {
+    public void testSearch0() {
+        String text = "ABABDABACDABABCABAB";
+        String pattern = "ABABD";
+        int position = searchEngine.search(text, pattern);
+        assertEquals(0, position);
+    }
+
+    @Test
+    public void testSearch1() {
+        String text = "ABRACADABRA";
+        String pattern = "CADABRA";
+        int position = searchEngine.search(text, pattern);
+        assertEquals(4, position);
+    }
+
+    @Test
+    public void testSearch2() {
         String text = "ABABDABACDABABCABAB";
         String pattern = "ABABCABAB";
         int position = searchEngine.search(text, pattern);
-        assertTrue(position == 0);
+        assertEquals(10, position);
+    }
+
+    @Test
+    public void testSearch3() {
+        String text = "ABABDABACDABABCABAB";
+        String pattern = "Hello";
+        int position = searchEngine.search(text, pattern);
+        assertEquals(-1, position);
     }
 }
