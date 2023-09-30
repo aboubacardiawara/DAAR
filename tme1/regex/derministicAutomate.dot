@@ -1,14 +1,5 @@
 digraph {
 	1 [color="red"]
-	1 -> 5 [label="S"]
-	5 -> 9 [label="a"]
-	9 -> 9 [label="a"]
-	9 -> 9 [label="r"]
-	9 -> 9 [label="g"]
-	9 -> 16 [label="o"]
-	17 [color="green"]
-	16 -> 17 [label="n"]
-	17 [color="green"]
-	5 -> 9 [label="r"]
-	5 -> 9 [label="g"]
+	1 -> 2 [label="a"]
+	2 [color="green"]
 }

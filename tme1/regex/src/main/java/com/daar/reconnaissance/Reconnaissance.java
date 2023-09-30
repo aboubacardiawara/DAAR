@@ -6,10 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import com.daar.automate.AutomateBuilder;
@@ -17,16 +13,8 @@ import com.daar.automate.IAutomate;
 import com.daar.automate.NoSuchTransition;
 import com.daar.parsing.RegExTree;
 import com.daar.parsing.RegexParser;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.geom.Path2D;
 import com.daar.automatetotab.AutomatetoTab;
 
-import javax.sound.sampled.Line;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
 public class Reconnaissance{
 
     /**
@@ -85,47 +73,19 @@ public class Reconnaissance{
      * 
      */
     public static  void experimental() {
-        try {
-        BufferedWriter writer1 = new BufferedWriter(new FileWriter("size_result_experimental_epsilon.txt"));
-        BufferedWriter writer2= new BufferedWriter(new FileWriter("size_result_experimental_deterministic.txt"));
-        String regex= "ab";
-        RegexParser parser = new RegexParser();
-        int numPoints = 10;
-        int[] yPoints_epsilon= new int[numPoints];
-        int[] yPoints_deterministic= new int[numPoints];
+        testTailleAutomate();
 
-        //TEST: pour la taille des automates
-        for (int x = 0; x <10; x++) {
-            try {
-            RegExTree regexTree = parser.parse(regex);
-            IAutomate automateWithEpsilonTransitions = regexTree.toAutomate();
-            yPoints_epsilon[x] =automateWithEpsilonTransitions.size(); 
-            
-            AutomatetoTab regexTable = new AutomatetoTab();
-            IAutomate deterministicAutomate = regexTable.minimizeAutomate(automateWithEpsilonTransitions);
-            yPoints_deterministic[x] =deterministicAutomate.size();
+        testDureeRechercheAutomate();
+    }
 
-            regex=regex+regex;
-            writer1.write(yPoints_epsilon[x] + "\n");
-            writer2.write(yPoints_deterministic[x] + "\n");
-
-        } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        writer1.close();
-        writer2.close();
-         } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //TEST: pour le temps d'execution
+    private static void testDureeRechercheAutomate() {
         try {
         String regEx = "S(a|g|r)+on";
         BufferedWriter writer3 = new BufferedWriter(new FileWriter("Time_Egrep.txt"));
         BufferedWriter writer4 = new BufferedWriter(new FileWriter("Time_AFD.txt"));
         String fileName="note.txt";
-        for (int x = 0; x <5; x++) { //on fait varier la taille du fichier note on duplique a chaque fois le conenued de note 
+        for (int x = 0; x <5; x++) { 
+            //on fait varier la taille du fichier note on duplique a chaque fois le conenued de note 
             try {
                 //time for Egrep
                 ProcessBuilder processBuilder = new ProcessBuilder("egrep",regEx,fileName);
@@ -159,13 +119,50 @@ public class Reconnaissance{
 
                 long t1 = System.currentTimeMillis();
                 writer4.write( t1-t0+ "\n");
-                dupliquer(fileName); //duplique le contenue de note.txt attention peut bloqueer si
+                //duplique le contenue de note.txt attention peut bloqueer si
+                dupliquer(fileName); 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
             writer3.close();
             writer4.close();
+         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void testTailleAutomate() {
+        try {
+        BufferedWriter writer1 = new BufferedWriter(new FileWriter("size_result_experimental_epsilon.txt"));
+        BufferedWriter writer2= new BufferedWriter(new FileWriter("size_result_experimental_deterministic.txt"));
+        String regex= "ab";
+        RegexParser parser = new RegexParser();
+        int numPoints = 10;
+        int[] yPoints_epsilon= new int[numPoints];
+        int[] yPoints_deterministic= new int[numPoints];
+
+        //TEST: pour la taille des automates
+        for (int x = 0; x <10; x++) {
+            try {
+            RegExTree regexTree = parser.parse(regex);
+            IAutomate automateWithEpsilonTransitions = regexTree.toAutomate();
+            yPoints_epsilon[x] =automateWithEpsilonTransitions.size(); 
+            
+            AutomatetoTab regexTable = new AutomatetoTab();
+            IAutomate deterministicAutomate = regexTable.determinizeAutomate(automateWithEpsilonTransitions);
+            yPoints_deterministic[x] =deterministicAutomate.size();
+
+            regex=regex+regex;
+            writer1.write(yPoints_epsilon[x] + "\n");
+            writer2.write(yPoints_deterministic[x] + "\n");
+
+        } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        writer1.close();
+        writer2.close();
          } catch (IOException e) {
             e.printStackTrace();
         }

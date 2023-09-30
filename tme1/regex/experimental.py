@@ -30,5 +30,4 @@ else:
         y = [int(ligne.strip()) for ligne in lignes4]
         plt.plot(x,y) #egrep
 
-plt.show()
-
+plt.savefig('xp.png')
