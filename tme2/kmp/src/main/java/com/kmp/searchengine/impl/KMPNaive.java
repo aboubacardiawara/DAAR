@@ -1,9 +1,12 @@
-package com.kmp.searchengine;
+package com.kmp.searchengine.impl;
 
 import com.kmp.searchengine.interfaces.ISearchEngine;
 
 public class KMPNaive implements ISearchEngine {
 
+    /**
+     * Runtime complexity: O((n - m + 1) * m)
+     */
     @Override
     public int search(String text, String pattern) {
         int textLength = text.length();

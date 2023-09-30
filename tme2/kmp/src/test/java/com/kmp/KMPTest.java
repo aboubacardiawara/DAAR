@@ -1,51 +1,46 @@
 package com.kmp;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import java.util.stream.Stream;
 
-import com.kmp.searchengine.KMPNaive;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import com.kmp.searchengine.impl.KMPNaive;
+import com.kmp.searchengine.impl.KMPWithLPS;
 import com.kmp.searchengine.interfaces.ISearchEngine;
 
 public class KMPTest {
-    protected ISearchEngine searchEngine;
 
-    @BeforeEach
-    public void setUp() {
-        searchEngine = new KMPNaive();
+    @ParameterizedTest
+    @MethodSource("kmpImplementations")
+    public void testSearchPatternInText(ISearchEngine kmpImplementation) {
+        // Test avec un motif présent dans le texte
+        assertEquals(0, kmpImplementation.search("ABABABACD", "ABA"));
+
+        // Test avec un motif présent dans le texte, mais à la fin
+        assertEquals(6, kmpImplementation.search("ABABABABAC", "ABAC"));
+
+        // Test avec un motif unique présent dans le texte
+        assertEquals(8, kmpImplementation.search("ABABABACD", "D"));
+
+        // Test avec un motif non présent dans le texte
+        assertEquals(-1, kmpImplementation.search("ABABABACD", "XYZ"));
     }
 
-    @Test
-    public void testSearch0() {
-        String text = "ABABDABACDABABCABAB";
-        String pattern = "ABABD";
-        int position = searchEngine.search(text, pattern);
-        assertEquals(0, position);
+    @ParameterizedTest
+    @MethodSource("kmpImplementations")
+    public void testSearchPatternInEmptyText(ISearchEngine kmpImplementation) {
+        // Test avec un texte vide
+        assertEquals(-1, kmpImplementation.search("", "ABA"));
+
+        // Test avec un motif vide (le motif vide est toujours présent dans un texte
+        // vide)
+        assertEquals(0, kmpImplementation.search("ABABABACD", ""));
     }
 
-    @Test
-    public void testSearch1() {
-        String text = "ABRACADABRA";
-        String pattern = "CADABRA";
-        int position = searchEngine.search(text, pattern);
-        assertEquals(4, position);
-    }
-
-    @Test
-    public void testSearch2() {
-        String text = "ABABDABACDABABCABAB";
-        String pattern = "ABABCABAB";
-        int position = searchEngine.search(text, pattern);
-        assertEquals(10, position);
-    }
-
-    @Test
-    public void testSearch3() {
-        String text = "ABABDABACDABABCABAB";
-        String pattern = "Hello";
-        int position = searchEngine.search(text, pattern);
-        assertEquals(-1, position);
+    static Stream<ISearchEngine> kmpImplementations() {
+        return Stream.of(new KMPNaive(), new KMPWithLPS());
     }
 }
