@@ -1,5 +1,7 @@
 package com.daar;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
@@ -10,7 +12,7 @@ public class App {
    // private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
     public static void main(String[] args) throws Exception {
-        //String regEx = "S(a|g|r)+on";
+        String regEx = "S(a|g|r)+on";
        // Reconnaissance.search("note.txt", regEx);
 
         /*JFrame frame = new JFrame("Courbe automate size");
@@ -19,5 +21,6 @@ public class App {
         frame.add(new Reconnaissance());
         frame.setVisible(true); */
         Reconnaissance.experimental();
+       
     }
 }

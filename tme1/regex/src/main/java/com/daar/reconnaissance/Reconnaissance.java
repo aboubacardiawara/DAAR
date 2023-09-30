@@ -5,6 +5,10 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -77,45 +81,21 @@ public class Reconnaissance{
 
 
    
+    /**
+     * 
+     */
     public static  void experimental() {
-       /*super.paintComponent(g);
-
-      
-        g.setColor(Color.BLUE);
-        int width = getWidth();
-        int height = getHeight();
-        int echelleX = 50; // 10 pixels par unité sur l'axe des x
-        int echelleY = 50; 
-       
-
-        // Dessiner les graduations sur l'axe des x
-        g.setColor(Color.BLACK);
-        for (int x = 0; x <= width; x += 50) {
-            g.drawLine(x, height - 5, x, height + 5);
-            g.drawString(Integer.toString(x / echelleX), x - 10, height + 20);
-        }
-
-        // Dessiner les graduations sur l'axe des y
-        for (int y = 0; y <= height; y += 50) {
-            g.drawLine(-5, y, 5, y);
-            g.drawString(Integer.toString((height - y) / echelleY), -30, y + 5);
-        }*/
         try {
-        BufferedWriter writer1 = new BufferedWriter(new FileWriter("result_experimental_epsilon.txt"));
-        BufferedWriter writer2= new BufferedWriter(new FileWriter("result_experimental_deterministic.txt"));
+        BufferedWriter writer1 = new BufferedWriter(new FileWriter("size_result_experimental_epsilon.txt"));
+        BufferedWriter writer2= new BufferedWriter(new FileWriter("size_result_experimental_deterministic.txt"));
         String regex= "ab";
         RegexParser parser = new RegexParser();
         int numPoints = 10;
-
-        //int[] xPoints_epsilon = new int[numPoints];
         int[] yPoints_epsilon= new int[numPoints];
-
-       // int[] xPoints_deterministic= new int[numPoints];
         int[] yPoints_deterministic= new int[numPoints];
 
+        //TEST: pour la taille des automates
         for (int x = 0; x <10; x++) {
-           // xPoints_epsilon[x]=x*50;  //pour la visualisation
-            //xPoints_deterministic[x]=x*50; 
             try {
             RegExTree regexTree = parser.parse(regex);
             IAutomate automateWithEpsilonTransitions = regexTree.toAutomate();
@@ -126,8 +106,6 @@ public class Reconnaissance{
             yPoints_deterministic[x] =deterministicAutomate.size();
 
             regex=regex+regex;
-           // System.out.println("Epsilon=> x:"+xPoints_epsilon[x]+" y:"+yPoints_epsilon[x]);
-            //System.out.println("Deterministic=> x:"+xPoints_deterministic[x]+" y:"+yPoints_deterministic[x]);
             writer1.write(yPoints_epsilon[x] + "\n");
             writer2.write(yPoints_deterministic[x] + "\n");
 
@@ -140,10 +118,80 @@ public class Reconnaissance{
          } catch (IOException e) {
             e.printStackTrace();
         }
-        /*g.drawPolyline(xPoints_epsilon, yPoints_epsilon, numPoints);
-        g.setColor(Color.RED);
-        g.drawPolyline(xPoints_deterministic, yPoints_deterministic, numPoints);
-        */
+
+        //TEST: pour le temps d'execution
+        try {
+        String regEx = "S(a|g|r)+on";
+        BufferedWriter writer3 = new BufferedWriter(new FileWriter("Time_Egrep.txt"));
+        BufferedWriter writer4 = new BufferedWriter(new FileWriter("Time_AFD.txt"));
+        String fileName="note.txt";
+        for (int x = 0; x <5; x++) { //on fait varier la taille du fichier note on duplique a chaque fois le conenued de note 
+            try {
+                //time for Egrep
+                ProcessBuilder processBuilder = new ProcessBuilder("egrep",regEx,fileName);
+                long startTime = System.nanoTime();
+                processBuilder.redirectErrorStream(true);
+                Process process = processBuilder.start();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    //System.out.println(line);  //est ce que on garde
+                }
+                int exitCode = process.waitFor();
+                long endTime = System.nanoTime(); 
+                reader.close();
+                long executionTime = endTime - startTime;
+                writer3.write( executionTime+ "\n");
+
+                //time for AFD:
+                long t0 = System.nanoTime();
+                FileReader fileReader = new FileReader(fileName);
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                IAutomate automate = new AutomateBuilder().buildFromRegex(regEx);
+                String ligne;
+                while ((ligne = bufferedReader.readLine()) != null) {
+                    if (match(ligne, automate))
+                        //System.out.print(ligne + "\n");
+                        continue;
+                }
+                bufferedReader.close();
+                fileReader.close();
+
+                long t1 = System.nanoTime();
+                writer4.write( t1-t0+ "\n");
+                dupliquer(fileName); //duplique le contenue de note.txt attention peut bloqueer si
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+            writer3.close();
+            writer4.close();
+         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void dupliquer(String fileName){ 
+        try {
+             FileReader fileReader = new FileReader(fileName);
+             BufferedReader bufferedReader = new BufferedReader(fileReader);
+ 
+             StringBuilder contenuExistant = new StringBuilder();
+             String ligne;
+             while ((ligne = bufferedReader.readLine()) != null) {
+                 contenuExistant.append(ligne).append("\n");
+             }
+ 
+             FileWriter fileWriter = new FileWriter(fileName);
+ 
+             fileWriter.write(contenuExistant.toString());
+             fileWriter.write("\n");
+             fileWriter.write(contenuExistant.toString());
+             bufferedReader.close();
+             fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
 }
