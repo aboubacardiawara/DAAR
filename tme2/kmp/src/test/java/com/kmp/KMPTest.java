@@ -11,6 +11,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import com.kmp.searchengine.impl.KMPNaive;
 import com.kmp.searchengine.impl.KMPWithLPS;
+import com.kmp.searchengine.impl.KMPWithOptimizedLPS;
+import com.kmp.searchengine.impl.LPSOptimizer;
 import com.kmp.searchengine.interfaces.ISearchEngine;
 
 public class KMPTest {

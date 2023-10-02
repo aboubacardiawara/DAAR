@@ -9,6 +9,8 @@ import com.kmp.searchengine.interfaces.ISearchEngine;
  */
 public class KMPWithLPS implements ISearchEngine {
 
+    private int[] lps;
+
     /**
      * Searches for the given pattern in the input text.
      *
@@ -22,12 +24,14 @@ public class KMPWithLPS implements ISearchEngine {
         int textLength = text.length();
         int patternLength = pattern.length();
         if (patternLength == 0) {
-            // Le motif viide est toujours present en debut de texte
+            // Le motif viide est 
+            // toujours present en debut de texte
             return 0;
         }
-
-        int[] lps = computeLPSArray(pattern);
-        System.out.println("LPS array: " + java.util.Arrays.toString(lps));
+        if (lps == null) {
+            lps = computeLPSArray(pattern);
+        }
+        
         int textIndex = 0;
         int patternIndex = 0;
 
@@ -39,7 +43,7 @@ public class KMPWithLPS implements ISearchEngine {
                 patternIndex++;
                 textIndex++;
             }
-
+            
             if (patternIndex == patternLength) {
                 // Pattern found, retourn the position of the beginning.
                 return textIndex - patternIndex;

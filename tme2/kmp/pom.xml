@@ -81,15 +81,31 @@
           <artifactId>exec-maven-plugin</artifactId>
           <version>3.0.0</version>
           <executions>
-            <execution>
-              <goals>
-                <goal>java</goal>
-              </goals>
+              <execution>
+                <id>default-cli</id>
+                <goals>
+                    <goal>java</goal>
+                </goals>
+                <configuration>
+                    <mainClass>com.kmp.App</mainClass>
+                </configuration>
             </execution>
+            <execution>
+              <id>xp</id> <!-- Un identifiant unique pour cette exécution -->
+              <phase>none</phase> <!-- Cette exécution n'est liée à aucune phase par défaut -->
+              <goals>
+                  <goal>java</goal>
+              </goals>
+              <configuration>
+                  <mainClass>com.kmp.Experimentation</mainClass> <!-- Remplacez par votre classe experimentation -->
+                  <arguments>
+                      <argument>arg1</argument> <!-- Argument 1 pour la classe experimentation -->
+                      <argument>arg2</argument> <!-- Argument 2 pour la classe experimentation -->
+                      <!-- Ajoutez d'autres arguments si nécessaire -->
+                  </arguments>
+              </configuration>
+          </execution>
           </executions>
-          <configuration>
-            <mainClass>com.kmp.App</mainClass>
-          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>

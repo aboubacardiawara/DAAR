@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.kmp.KMPTest" time="0.427" tests="8" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.kmp.KMPTest" time="0.425" tests="8" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-17-openjdk-amd64/lib"/>
-    <property name="sun.java.command" value="/home/lecasseur/git/DAAR/tme2/kmp/target/surefire/surefirebooter16768351210529753249.jar /home/lecasseur/git/DAAR/tme2/kmp/target/surefire 2023-10-02T15-31-36_562-jvmRun1 surefire5766698277733799534tmp surefire_03414574504078402334tmp"/>
+    <property name="sun.java.command" value="/home/lecasseur/git/DAAR/tme2/kmp/target/surefire/surefirebooter14606048638657392813.jar /home/lecasseur/git/DAAR/tme2/kmp/target/surefire 2023-10-02T22-06-31_418-jvmRun1 surefire1939071731717216305tmp surefire_07960341638989117848tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/lecasseur/git/DAAR/tme2/kmp/target/test-classes:/home/lecasseur/git/DAAR/tme2/kmp/target/classes:/home/lecasseur/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.9.0/junit-jupiter-params-5.9.0.jar:/home/lecasseur/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.0/junit-jupiter-api-5.9.0.jar:/home/lecasseur/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/lecasseur/.m2/repository/org/junit/platform/junit-platform-commons/1.9.0/junit-platform-commons-1.9.0.jar:/home/lecasseur/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,7 +27,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="/home/lecasseur/git/DAAR/tme2/kmp/target/surefire/surefirebooter16768351210529753249.jar"/>
+    <property name="surefire.real.class.path" value="/home/lecasseur/git/DAAR/tme2/kmp/target/surefire/surefirebooter14606048638657392813.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.7+7-Ubuntu-0ubuntu122.04.2"/>
     <property name="user.name" value="lecasseur"/>
@@ -51,35 +51,12 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="testLPSOptimizationMami" classname="com.kmp.KMPTest" time="0.106"/>
-  <testcase name="testSearchPatternInText(ISearchEngine)[1]" classname="com.kmp.KMPTest" time="0.063"/>
-  <testcase name="testSearchPatternInText(ISearchEngine)[2]" classname="com.kmp.KMPTest" time="0.007">
-    <system-out><![CDATA[LPS array: [0, 0, 1]
-LPS array: [0, 0, 1, 0]
-LPS array: [0]
-LPS array: [0, 0, 0]
-]]></system-out>
-  </testcase>
-  <testcase name="testSearchPatternInText(ISearchEngine)[3]" classname="com.kmp.KMPTest" time="0.011">
-    <system-out><![CDATA[optimized: 
-LPS array: [0, 0, 1]
-optimized: 
-LPS array: [0, 0, 1, 0]
-optimized: 
-LPS array: [0]
-optimized: 
-LPS array: [0, 0, 0]
-]]></system-out>
-  </testcase>
+  <testcase name="testLPSOptimizationMami" classname="com.kmp.KMPTest" time="0.091"/>
+  <testcase name="testSearchPatternInText(ISearchEngine)[1]" classname="com.kmp.KMPTest" time="0.084"/>
+  <testcase name="testSearchPatternInText(ISearchEngine)[2]" classname="com.kmp.KMPTest" time="0.008"/>
+  <testcase name="testSearchPatternInText(ISearchEngine)[3]" classname="com.kmp.KMPTest" time="0.007"/>
   <testcase name="testLPSOptimizationMAMAMIA" classname="com.kmp.KMPTest" time="0.004"/>
-  <testcase name="testSearchPatternInEmptyText(ISearchEngine)[1]" classname="com.kmp.KMPTest" time="0.006"/>
-  <testcase name="testSearchPatternInEmptyText(ISearchEngine)[2]" classname="com.kmp.KMPTest" time="0.007">
-    <system-out><![CDATA[LPS array: [0, 0, 1]
-]]></system-out>
-  </testcase>
-  <testcase name="testSearchPatternInEmptyText(ISearchEngine)[3]" classname="com.kmp.KMPTest" time="0.008">
-    <system-out><![CDATA[optimized: 
-LPS array: [0, 0, 1]
-]]></system-out>
-  </testcase>
+  <testcase name="testSearchPatternInEmptyText(ISearchEngine)[1]" classname="com.kmp.KMPTest" time="0.007"/>
+  <testcase name="testSearchPatternInEmptyText(ISearchEngine)[2]" classname="com.kmp.KMPTest" time="0.005"/>
+  <testcase name="testSearchPatternInEmptyText(ISearchEngine)[3]" classname="com.kmp.KMPTest" time="0.006"/>
 </testsuite>
