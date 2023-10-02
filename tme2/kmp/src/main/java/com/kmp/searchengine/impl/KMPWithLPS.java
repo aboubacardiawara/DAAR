@@ -27,7 +27,7 @@ public class KMPWithLPS implements ISearchEngine {
         }
 
         int[] lps = computeLPSArray(pattern);
-
+        System.out.println("LPS array: " + java.util.Arrays.toString(lps));
         int textIndex = 0;
         int patternIndex = 0;
 
@@ -61,7 +61,7 @@ public class KMPWithLPS implements ISearchEngine {
      * @param pattern The pattern for which to compute the LPS array.
      * @return The LPS array for the pattern.
      */
-    private int[] computeLPSArray(String pattern) {
+    protected int[] computeLPSArray(String pattern) {
         int patternLength = pattern.length();
         int[] lps = new int[patternLength];
         int length = 0;

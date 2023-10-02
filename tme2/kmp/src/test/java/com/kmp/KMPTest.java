@@ -59,6 +59,6 @@ public class KMPTest {
     }
 
     static Stream<ISearchEngine> kmpImplementations() {
-        return Stream.of(new KMPNaive(), new KMPWithLPS());
+        return Stream.of(new KMPNaive(), new KMPWithLPS(), new KMPWithOptimizedLPS());
     }
 }
