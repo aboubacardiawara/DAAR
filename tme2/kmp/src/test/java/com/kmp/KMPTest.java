@@ -1,9 +1,11 @@
 package com.kmp;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -38,6 +40,22 @@ public class KMPTest {
         // Test avec un motif vide (le motif vide est toujours présent dans un texte
         // vide)
         assertEquals(0, kmpImplementation.search("ABABABACD", ""));
+    }
+
+    @Test
+    public void testLPSOptimizationMami() {
+        int[] lps = {-1, 0, 0, 1, 0};
+        int[] expectedResult = {-1,0,-1,1,0};
+
+        assertArrayEquals(expectedResult, LPSOptimizer.optimise("mami", lps));
+    }
+
+    @Test
+    public void testLPSOptimizationMAMAMIA() {
+        int[] lps = {-1, 0, 0, 1, 2, 3, 0, 0};
+        int[] expectedResult = {-1,0,-1,0,-1,3,0,0};
+        
+        assertArrayEquals(expectedResult, LPSOptimizer.optimise("MAMAMIA", lps));
     }
 
     static Stream<ISearchEngine> kmpImplementations() {
