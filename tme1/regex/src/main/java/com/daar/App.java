@@ -7,8 +7,8 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         String regEx = "S(a|g|r)+on";
-        Reconnaissance.search("note.txt", regEx);
-        //Reconnaissance.experimental();
+        //Reconnaissance.search("note.txt", regEx);
+        Reconnaissance.experimental();
 
     }
 }

@@ -6,6 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.logging.Logger;
 
 import com.daar.automate.AutomateBuilder;
@@ -44,23 +47,29 @@ public class Reconnaissance{
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             long t0 = System.currentTimeMillis();
             IAutomate automate = new AutomateBuilder().buildFromRegex(regex);
-            BufferedWriter writer = new BufferedWriter(new FileWriter("result.txt"));
+           // BufferedWriter writer = new BufferedWriter(new FileWriter("result.txt"));
             long t1 = System.currentTimeMillis();
             Logger LOGGER = Logger.getLogger(Reconnaissance.class.getName());
-            LOGGER.info("[creation and optimization] Durée: " + (t1 - t0) + " (ms)");
+            //LOGGER.info("[creation and optimization] Durée: " + (t1 - t0) + " (ms)");
             t0 = System.currentTimeMillis();
             String ligne;
+            int count_lignes= 0;
             while ((ligne = bufferedReader.readLine()) != null) {
-                if (match(ligne, automate))
-                    writer.write(ligne + "\n");
+                if (match(ligne, automate)){
+                    
+                    System.out.println(ligne);
+                    //writer.write(ligne + "\n");
+                    count_lignes++;
+                }
+                    
             }
-            writer.close();
-            bufferedReader.close();
-            fileReader.close();
+           //writer.close();
+           bufferedReader.close();
+           //fileReader.close();
             
-            t1 = System.currentTimeMillis();
-            LOGGER.info("[Search] Durée: " + (t1 - t0) + " (ms)");
-
+           t1 = System.currentTimeMillis();
+           System.out.println("le nombre de lignes " +count_lignes);
+           LOGGER.info("[Search] Durée: " + (t1 - t0) + " (ms)");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,9 +93,13 @@ public class Reconnaissance{
         BufferedWriter writer3 = new BufferedWriter(new FileWriter("Time_Egrep.txt"));
         BufferedWriter writer4 = new BufferedWriter(new FileWriter("Time_AFD.txt"));
         String fileName="note.txt";
-        for (int x = 0; x <5; x++) { 
+        Path path = Paths.get(fileName);
+
+        for (int x = 0; x <7; x++) { 
             //on fait varier la taille du fichier note on duplique a chaque fois le conenued de note 
             try {
+                long file_size= Files.size(path)/(1024*1024);
+                System.out.println(file_size +"\n");
                 //time for Egrep
                 ProcessBuilder processBuilder = new ProcessBuilder("egrep",regEx,fileName);
                 long startTime = System.currentTimeMillis();
@@ -101,7 +114,7 @@ public class Reconnaissance{
                 long endTime = System.currentTimeMillis(); 
                 reader.close();
                 long executionTime = endTime - startTime;
-                writer3.write( executionTime+ "\n");
+                writer3.write(file_size+" "+executionTime+ "\n");
 
                 //time for AFD:
                 long t0 = System.currentTimeMillis();
@@ -111,14 +124,14 @@ public class Reconnaissance{
                 String ligne;
                 while ((ligne = bufferedReader.readLine()) != null) {
                     if (match(ligne, automate))
-                        //System.out.print(ligne + "\n");
+                        System.out.print(ligne + "\n");
                         continue;
                 }
                 bufferedReader.close();
                 fileReader.close();
 
                 long t1 = System.currentTimeMillis();
-                writer4.write( t1-t0+ "\n");
+                writer4.write(file_size+ " " +(t1-t0)+ "\n");
                 //duplique le contenue de note.txt attention peut bloqueer si
                 dupliquer(fileName); 
             } catch (Exception e) {

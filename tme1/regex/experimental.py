@@ -11,11 +11,8 @@ n=10
 show_Time=True 
 if (not show_Time):
         x = list(range(1,n+1))
-
         y = [int(ligne.strip()) for ligne in lignes1]
-
         plt.plot(x,y)
-
         y = [int(ligne.strip()) for ligne in lignes2]
         plt.plot(x,y)
 else:
@@ -24,10 +21,15 @@ else:
         with open('Time_Egrep.txt', 'r') as file4:
                 lignes4 = file4.readlines()
         n=5
-        x = list(range(1,n+1))
-        y = [int(ligne.strip()) for ligne in lignes3]
-        plt.plot(x,y) #afd 
-        y = [int(ligne.strip()) for ligne in lignes4]
-        plt.plot(x,y) #egrep
+        x= [int(ligne.split()[0]) for ligne in lignes3]
+        plt.title('comparaison du temps d execution entre egrep et AFD')
+        plt.xlabel('file size MB') 
+        plt.ylabel('Time in ms')
+        y= [int(ligne.split()[1]) for ligne in lignes3]
+        plt.plot(x,y,c ='red' , label ="afd") #afd 
+        yy = [int(ligne.split()[1]) for ligne in lignes4]
+        plt.plot(x,yy,c ='blue' , label ="egrep") #egrep
+        plt.legend(prop = {'size': 10})
+
 
 plt.savefig('xp.png')
