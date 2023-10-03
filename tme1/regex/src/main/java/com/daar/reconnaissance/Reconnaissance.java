@@ -2,6 +2,7 @@ package com.daar.reconnaissance;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -58,9 +59,7 @@ public class Reconnaissance{
             int count_lignes= 0;
             while ((ligne = bufferedReader.readLine()) != null) {
                 if (match(ligne, automate)){
-                    
                     System.out.println(ligne);
-                    //writer.write(ligne + "\n");
                     count_lignes++;
                 }
                     
@@ -68,7 +67,6 @@ public class Reconnaissance{
            //writer.close();
            bufferedReader.close();
            //fileReader.close();
-            
            t1 = System.currentTimeMillis();
            System.out.println("le nombre de lignes " +count_lignes);
            LOGGER.info("[Search] Durée: " + (t1 - t0) + " (ms)");
@@ -77,48 +75,42 @@ public class Reconnaissance{
         }
     }
     
-
-
    
     /**
      * 
      */
-    public static  void experimental() {
-        testTailleAutomate();
+    public static  void experimental(String fileName,int nbr_dupliquer) {
+        //testTailleAutomate();
 
-        testDureeRechercheAutomate();
+        testDureeRechercheAutomate(fileName,nbr_dupliquer);
     }
 
-    private static void testDureeRechercheAutomate() {
+    private static void testDureeRechercheAutomate(String fileName,int nbr_dupliquer) {
+        File file = new File(fileName);
+        if (!file.exists()) {
+            return;
+        }
         try {
         String regEx = "S(a|g|r)+on";
-        BufferedWriter writer3 = new BufferedWriter(new FileWriter("Time_Egrep.txt"));
-        BufferedWriter writer4 = new BufferedWriter(new FileWriter("Time_AFD.txt"));
-        String fileName="note.txt";
-        Path path = Paths.get(fileName);
-         
-        for (int x = 0; x <7; x++) { 
-            //on fait varier la taille du fichier note on duplique a chaque fois le conenued de note 
+        BufferedWriter writer3 = new BufferedWriter(new FileWriter("Results/Time_Egrep.txt",true));
+        BufferedWriter writer4 = new BufferedWriter(new FileWriter("Results/Time_AFD.txt",true));
+        for (int x=0;x<=nbr_dupliquer; x++){ 
             try {
-                long file_size= Files.size(path)/(1024*1024);
-                System.out.println(file_size +"\n");
-                //time for Egrep
+                long file_size= file.length();
+                //Time for Egrep
                 ProcessBuilder processBuilder = new ProcessBuilder("egrep",regEx,fileName);
                 long startTime = System.currentTimeMillis();
                 processBuilder.redirectErrorStream(true);
                 Process process = processBuilder.start();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    //System.out.println(line);  //est ce que on garde
-                }
+                //BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
                 int exitCode = process.waitFor();
+                System.out.print(fileName);
                 long endTime = System.currentTimeMillis(); 
-                reader.close();
+                //reader.close();
                 long executionTime = endTime - startTime;
                 writer3.write(file_size+" "+executionTime+ "\n");
 
-                //time for AFD:
+                //Time for AFD:
                 long t0 = System.currentTimeMillis();
                 FileReader fileReader = new FileReader(fileName);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -126,15 +118,13 @@ public class Reconnaissance{
                 String ligne;
                 while ((ligne = bufferedReader.readLine()) != null) {
                     if (match(ligne, automate))
-                        System.out.print(ligne + "\n");
-                        continue;
+                        System.out.println(ligne);
                 }
                 bufferedReader.close();
                 fileReader.close();
 
-                long t1 = System.currentTimeMillis();
-                writer4.write(file_size+ " " +(t1-t0)+ "\n");
-                //duplique le contenue de note.txt attention peut bloqueer si
+                long t1 = System.currentTimeMillis()-t0;
+                writer4.write(file_size+ " " +t1+ "\n");
                 dupliquer(fileName); 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -146,6 +136,8 @@ public class Reconnaissance{
             e.printStackTrace();
         }
     }
+
+
 
     private static void testTailleAutomate() {
         try {
