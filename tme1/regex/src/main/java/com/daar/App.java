@@ -9,6 +9,7 @@ public class App {
         String regEx = "S(a|g|r)+on";
         //Reconnaissance.search("note.txt", regEx);
         Reconnaissance.experimental();
+        Reconnaissance.experimental2();
 
     }
 }

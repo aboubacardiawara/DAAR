@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,6 +18,7 @@ import com.daar.automate.NoSuchTransition;
 import com.daar.parsing.RegExTree;
 import com.daar.parsing.RegexParser;
 import com.daar.automatetotab.AutomatetoTab;
+import java.net.*;
 
 public class Reconnaissance{
 
@@ -94,7 +96,7 @@ public class Reconnaissance{
         BufferedWriter writer4 = new BufferedWriter(new FileWriter("Time_AFD.txt"));
         String fileName="note.txt";
         Path path = Paths.get(fileName);
-
+         
         for (int x = 0; x <7; x++) { 
             //on fait varier la taille du fichier note on duplique a chaque fois le conenued de note 
             try {
