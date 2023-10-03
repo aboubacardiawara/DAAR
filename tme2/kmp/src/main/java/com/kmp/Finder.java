@@ -37,7 +37,7 @@ public class Finder {
             while ((line = bufferedReader.readLine()) != null) {
                 int position = kmpImplementation.search(line, pattern);
                 if (position != -1) {
-                    System.out.println(position + " : " + line);
+                    //System.out.println(position + " : " + line);
                 }
             }
             fileReader.close();

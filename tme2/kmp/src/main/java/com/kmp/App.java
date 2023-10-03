@@ -8,7 +8,10 @@ public class App {
             System.exit(1);
         }
         Long startTime = System.currentTimeMillis();
-        new Finder().finder(args[1], args[0]);
+        Finder finder = new Finder();
+        finder.setSearchEngineToKmpWithOptimizedLPS();
+        finder.finder(args[0], args[1]);
+
         Long endTime = System.currentTimeMillis();
         System.out.println("Temps d'execution : " + (endTime - startTime) + " ms");
     }
