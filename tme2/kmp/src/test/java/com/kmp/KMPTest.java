@@ -44,20 +44,48 @@ public class KMPTest {
         assertEquals(0, kmpImplementation.search("ABABABACD", ""));
     }
 
+    
+    @Test
+    public void testLPSMami() {
+        String pattern = "mami";
+        int[] lps = {0, 0, 1, 0};
+
+        assertArrayEquals(lps, new KMPWithLPS().computeLPSArray(pattern));
+    }
+
+
+    @Test
+    public void testLPSMAMAMIA() {
+        String pattern = "MAMAMIA";
+        int[] lps = {0, 0, 1, 2, 3, 0, 0};
+        assertArrayEquals(lps, new KMPWithLPS().computeLPSArray(pattern));
+    }
+    
+
+    @Test
+    public void testLPSWikipedia() {
+        String pattern = "ABCDABD";
+        int[] lps = new KMPWithLPS().computeLPSArray(pattern);
+        int[] expectedResult = {0, 0, 0, 0, 1, 2, 0};
+
+        assertArrayEquals(expectedResult, lps);
+    }
+
     @Test
     public void testLPSOptimizationMami() {
+        String pattern = "mami";
         int[] lps = {-1, 0, 0, 1, 0};
         int[] expectedResult = {-1,0,-1,1,0};
 
-        assertArrayEquals(expectedResult, LPSOptimizer.optimise("mami", lps));
+        assertArrayEquals(expectedResult, LPSOptimizer.optimise(pattern, lps));
     }
 
     @Test
     public void testLPSOptimizationMAMAMIA() {
+        String pattern = "MAMAMIA";
         int[] lps = {-1, 0, 0, 1, 2, 3, 0, 0};
         int[] expectedResult = {-1,0,-1,0,-1,3,0,0};
-        
-        assertArrayEquals(expectedResult, LPSOptimizer.optimise("MAMAMIA", lps));
+        assertArrayEquals(expectedResult, LPSOptimizer.optimise(pattern, lps));
     }
 
     static Stream<ISearchEngine> kmpImplementations() {

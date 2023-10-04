@@ -1,6 +1,8 @@
 /home/lecasseur/git/DAAR/tme2/kmp/src/main/java/com/kmp/App.java
 /home/lecasseur/git/DAAR/tme2/kmp/src/main/java/com/kmp/searchengine/impl/LPSOptimizer.java
 /home/lecasseur/git/DAAR/tme2/kmp/src/main/java/com/kmp/searchengine/impl/KMPWithOptimizedLPS.java
+/home/lecasseur/git/DAAR/tme2/kmp/src/main/java/com/kmp/Finder.java
 /home/lecasseur/git/DAAR/tme2/kmp/src/main/java/com/kmp/searchengine/impl/KMPWithLPS.java
 /home/lecasseur/git/DAAR/tme2/kmp/src/main/java/com/kmp/searchengine/impl/KMPNaive.java
 /home/lecasseur/git/DAAR/tme2/kmp/src/main/java/com/kmp/searchengine/interfaces/ISearchEngine.java
+/home/lecasseur/git/DAAR/tme2/kmp/src/main/java/com/kmp/Experimentation.java

@@ -37,6 +37,9 @@ public class KMPWithLPS implements ISearchEngine {
 
         while (textIndex < textLength) {
             char textChar = text.charAt(textIndex);
+            if (patternIndex == -1) {
+                System.out.println("ici");
+            }
             char patternChar = pattern.charAt(patternIndex);
 
             if (textChar == patternChar) {
@@ -65,7 +68,7 @@ public class KMPWithLPS implements ISearchEngine {
      * @param pattern The pattern for which to compute the LPS array.
      * @return The LPS array for the pattern.
      */
-    protected int[] computeLPSArray(String pattern) {
+    public int[] computeLPSArray(String pattern) {
         int patternLength = pattern.length();
         int[] lps = new int[patternLength];
         int length = 0;

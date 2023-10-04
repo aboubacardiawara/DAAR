@@ -8,7 +8,7 @@ public class KMPWithOptimizedLPS extends KMPWithLPS {
      * @return The LPS array for the pattern.
      */
     @Override
-    protected int[] computeLPSArray(String pattern) {
+    public int[] computeLPSArray(String pattern) {
         int[] lps = super.computeLPSArray(pattern);
         return LPSOptimizer.optimise(pattern, lps);
     }

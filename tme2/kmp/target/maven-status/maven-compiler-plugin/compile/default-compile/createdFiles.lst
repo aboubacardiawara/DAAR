@@ -1,6 +1,10 @@
 com/kmp/searchengine/impl/KMPNaive.class
-com/kmp/App.class
-com/kmp/searchengine/impl/KMPWithLPS.class
+com/kmp/Experimentation.class
+com/kmp/XpResult.class
 com/kmp/searchengine/impl/KMPWithOptimizedLPS.class
 com/kmp/searchengine/impl/LPSOptimizer.class
+com/kmp/Finder.class
 com/kmp/searchengine/interfaces/ISearchEngine.class
+com/kmp/App.class
+com/kmp/searchengine/impl/KMPWithLPS.class
+com/kmp/Experimentation$1.class
