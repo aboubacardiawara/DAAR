@@ -1,1 +1,4 @@
-com\kmp\App.class
+com/kmp/searchengine/impl/KMPNaive.class
+com/kmp/App.class
+com/kmp/searchengine/impl/KMPWithLPS.class
+com/kmp/searchengine/interfaces/ISearchEngine.class

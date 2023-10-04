@@ -1,3 +1,7 @@
 {
-  "java.configuration.updateBuildConfiguration": "automatic"
+  "java.configuration.updateBuildConfiguration": "automatic",
+  // The following will hide the js and map files in the editor
+    "files.exclude": {
+        "**/xp_ressources/xp_files/*": true,
+    }
 }
