@@ -1,0 +1,622 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007f17517a608c, pid=179470, tid=179471
+#
+# JRE version:  (17.0.8.1+1) (build )
+# Java VM: OpenJDK 64-Bit Server VM (17.0.8.1+1, mixed mode, tiered, compressed oops, compressed class ptrs, g1 gc, linux-amd64)
+# Problematic frame:
+# V  [libjvm.so+0xba608c]  Method::is_final_method(AccessFlags) const+0x1c
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/share/apport/apport -p%p -s%s -c%c -d%d -P%P -u%u -g%g -- %E" (or dumping to /home/lecasseur/git/DAAR/tme2/kmp/core.179470)
+#
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Dapplication.home=/home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64 -Xms8m -Djdk.module.main=jdk.jcmd jdk.jcmd/sun.tools.jcmd.JCmd 176876 VM.uptime
+
+Host: Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz, 8 cores, 15G, Ubuntu 22.04.2 LTS
+Time: Tue Oct  3 12:51:01 2023 CEST elapsed time: 0.046573 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f174c026020):  JavaThread "Unknown thread" [_thread_in_vm, id=179471, stack(0x00007f1750a19000,0x00007f1750b19000)]
+
+Stack: [0x00007f1750a19000,0x00007f1750b19000],  sp=0x00007f1750b178d8,  free space=1018k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0xba608c]  Method::is_final_method(AccessFlags) const+0x1c
+V  [libjvm.so+0xa5b8bb]  klassVtable::initialize_vtable(GrowableArray<InstanceKlass*>*)+0x11b
+V  [libjvm.so+0xe92d0e]  universe_post_init()+0xde
+V  [libjvm.so+0x7fd40f]  init_globals()+0xbf
+V  [libjvm.so+0xe6a9d7]  Threads::create_vm(JavaVMInitArgs*, bool*)+0x387
+V  [libjvm.so+0x8bbe82]  JNI_CreateJavaVM+0x52
+C  [libjli.so+0x4a0f]  JavaMain+0x8f
+C  [libjli.so+0x8d09]  ThreadJavaMain+0x9
+
+
+siginfo: si_signo: 11 (SIGSEGV), si_code: 1 (SEGV_MAPERR), si_addr: 0x0000000000841fb4
+
+Register to memory mapping:
+
+RAX=0x0 is NULL
+RBX=0xffffffffffffffff is an unknown value
+RCX=0x0 is NULL
+RDX=0x0000000000841f0f is an unknown value
+RSP=0x00007f1750b178d8 points into unknown readable memory: 0x00007f1751658f90 | 90 8f 65 51 17 7f 00 00
+RBP=0x00007f1750b179d0 points into unknown readable memory: 0x00007f1750b17a60 | 60 7a b1 50 17 7f 00 00
+RSI=0x0000000020000020 is an unknown value
+RDI=0x00007f171805d630 is pointing into metadata
+R8 =0x00000000ffffffff is an unknown value
+R9 =0x0 is NULL
+R10=0x0 is NULL
+R11=0x00007f1750b17a20 points into unknown readable memory: 0x00007f171805d630 | 30 d6 05 18 17 7f 00 00
+R12=0x00007f1750b17a90 points into unknown readable memory: 0x000000080004d528 | 28 d5 04 00 08 00 00 00
+R13=0x00007f174c026020 points into unknown readable memory: 0x00007f1751e19800 | 00 98 e1 51 17 7f 00 00
+R14=0x0000000000000005 is an unknown value
+R15=0x00007f1750b17a20 points into unknown readable memory: 0x00007f171805d630 | 30 d6 05 18 17 7f 00 00
+
+
+Registers:
+RAX=0x0000000000000000, RBX=0xffffffffffffffff, RCX=0x0000000000000000, RDX=0x0000000000841f0f
+RSP=0x00007f1750b178d8, RBP=0x00007f1750b179d0, RSI=0x0000000020000020, RDI=0x00007f171805d630
+R8 =0x00000000ffffffff, R9 =0x0000000000000000, R10=0x0000000000000000, R11=0x00007f1750b17a20
+R12=0x00007f1750b17a90, R13=0x00007f174c026020, R14=0x0000000000000005, R15=0x00007f1750b17a20
+RIP=0x00007f17517a608c, EFLAGS=0x0000000000010206, CSGSFS=0x002b000000000033, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x00007f1750b178d8)
+0x00007f1750b178d8:   00007f1751658f90 00007f1750b178f0
+0x00007f1750b178e8:   00007f17522db26c 00007f1750b17920
+0x00007f1750b178f8:   00007f17518bd21c 0000000000000005
+0x00007f1750b17908:   000000000000001f 00007f174c026020 
+
+Instructions: (pc=0x00007f17517a608c)
+0x00007f17517a5f8c:   c7 45 c0 00 00 00 00 83 e6 01 48 c7 45 d8 00 00
+0x00007f17517a5f9c:   00 00 e8 4d 78 1e 00 8b 55 d0 48 8b 43 08 4c 89
+0x00007f17517a5fac:   e7 66 89 50 2c 4c 8b 6b 08 e8 d6 6e 1e 00 48 8b
+0x00007f17517a5fbc:   55 c0 41 88 45 1e 48 8b 43 08 48 89 10 48 83 c4
+0x00007f17517a5fcc:   38 5b 41 5c 41 5d 5d c3 66 66 2e 0f 1f 84 00 00
+0x00007f17517a5fdc:   00 00 00 90 48 8b 57 08 45 31 c0 0f b7 42 20 85
+0x00007f17517a5fec:   c0 74 6c 69 c8 cd cc cc cc 81 f9 33 33 33 33 77
+0x00007f17517a5ffc:   5e 80 7a 30 2a 75 58 80 7a 31 b7 75 52 8d 70 ff
+0x00007f17517a600c:   83 c0 2f 48 98 80 3c 02 b1 75 44 83 fe 04 7e 39
+0x00007f17517a601c:   b8 04 00 00 00 bf 0a 48 00 00 80 7c 02 30 2a 75
+0x00007f17517a602c:   33 0f b6 4c 02 31 80 f9 0e 77 29 49 89 f8 49 d3
+0x00007f17517a603c:   e8 49 f7 d0 41 83 e0 01 75 1a 80 7c 02 32 b5 75
+0x00007f17517a604c:   0e 48 83 c0 05 39 c6 7f d1 41 b8 01 00 00 00 44
+0x00007f17517a605c:   89 c0 c3 90 45 31 c0 44 89 c0 c3 90 0f 1f 84 00
+0x00007f17517a606c:   00 00 00 00 48 8b 57 08 31 c0 f6 42 1c 40 75 2b
+0x00007f17517a607c:   48 8b 52 08 8b 4f 28 48 8b 52 18 48 85 d2 74 11
+0x00007f17517a608c:   f6 82 a5 00 00 00 02 74 08 f7 c1 02 04 00 00 74
+0x00007f17517a609c:   0a 09 ce c1 ee 04 89 f0 83 e0 01 c3 0f 1f 84 00
+0x00007f17517a60ac:   00 00 00 00 48 8b 57 08 45 31 c0 f6 42 1c 40 75
+0x00007f17517a60bc:   2f 48 8b 42 08 8b 4f 28 48 8b 50 18 8b 82 a4 00
+0x00007f17517a60cc:   00 00 48 85 d2 74 0d f6 c4 02 74 08 f7 c1 02 04
+0x00007f17517a60dc:   00 00 74 0c 09 c8 c1 e8 04 41 89 c0 41 83 e0 01
+0x00007f17517a60ec:   44 89 c0 c3 48 8b 47 08 45 31 c0 48 8b 40 08 48
+0x00007f17517a60fc:   8b 40 18 48 85 c0 74 14 f6 80 a5 00 00 00 02 74
+0x00007f17517a610c:   0b f7 47 28 02 04 00 00 41 0f 94 c0 44 89 c0 c3
+0x00007f17517a611c:   0f 1f 40 00 48 8b 47 08 f6 40 1c 40 75 36 48 8b
+0x00007f17517a612c:   40 08 48 8b 50 18 8b 47 28 48 85 d2 74 10 f6 82
+0x00007f17517a613c:   a5 00 00 00 02 74 07 a9 02 04 00 00 74 16 09 c6
+0x00007f17517a614c:   b8 01 00 00 00 83 e6 10 74 0a c3 66 0f 1f 84 00
+0x00007f17517a615c:   00 00 00 00 83 7f 2c fe 0f 94 c0 c3 0f 1f 84 00
+0x00007f17517a616c:   00 00 00 00 48 8b 47 08 f6 40 1c 40 75 36 48 8b
+0x00007f17517a617c:   40 08 8b 4f 28 48 8b 50 18 8b 82 a4 00 00 00 48 
+
+
+Stack slot to memory mapping:
+stack at sp + 0 slots: 0x00007f1751658f90: <offset 0x0000000000a58f90> in /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/server/libjvm.so at 0x00007f1750c00000
+stack at sp + 1 slots: 0x00007f1750b178f0 points into unknown readable memory: 0x00007f1750b17920 | 20 79 b1 50 17 7f 00 00
+stack at sp + 2 slots: 0x00007f17522db26c: __tls_get_addr+0x000000000000003c in /lib64/ld-linux-x86-64.so.2 at 0x00007f17522c3000
+stack at sp + 3 slots: 0x00007f1750b17920 points into unknown readable memory: 0x00007f1750b179d0 | d0 79 b1 50 17 7f 00 00
+stack at sp + 4 slots: 0x00007f17518bd21c: <offset 0x0000000000cbd21c> in /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/server/libjvm.so at 0x00007f1750c00000
+stack at sp + 5 slots: 0x0000000000000005 is an unknown value
+stack at sp + 6 slots: 0x000000000000001f is an unknown value
+stack at sp + 7 slots: 0x00007f174c026020 points into unknown readable memory: 0x00007f1751e19800 | 00 98 e1 51 17 7f 00 00
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007f1751f3fa80, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x00007f174c090710 GCTaskThread "GC Thread#0" [stack: 0x00007f174bf00000,0x00007f174c000000] [id=179472]
+  0x00007f174c0a12e0 ConcurrentGCThread "G1 Main Marker" [stack: 0x00007f1730f03000,0x00007f1731003000] [id=179473]
+  0x00007f174c0a2250 ConcurrentGCThread "G1 Conc#0" [stack: 0x00007f1730e01000,0x00007f1730f01000] [id=179474]
+  0x00007f174c0ca0e0 ConcurrentGCThread "G1 Refine#0" [stack: 0x00007f17304f7000,0x00007f17305f7000] [id=179475]
+  0x00007f174c0cafd0 ConcurrentGCThread "G1 Service" [stack: 0x00007f17303f5000,0x00007f17304f5000] [id=179476]
+
+=>0x00007f174c026020 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=179471, stack(0x00007f1750a19000,0x00007f1750b19000)]
+
+Threads with active compile tasks:
+
+VM state: not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap address: 0x000000070a200000, size: 3934 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+
+CDS archive(s) not mapped
+Compressed class space mapped at: 0x0000000800000000-0x0000000840000000, reserved size: 1073741824
+Narrow klass base: 0x0000000800000000, Narrow klass shift: 0, Narrow klass range: 0x40000000
+
+GC Precious Log:
+ CPUs: 8 total, 8 available
+ Memory: 15729M
+ Large Page Support: Disabled
+ NUMA Support: Disabled
+ Compressed Oops: Enabled (Zero based)
+ Heap Region Size: 2M
+ Heap Min Capacity: 8M
+ Heap Initial Capacity: 8M
+ Heap Max Capacity: 3934M
+ Pre-touch: Disabled
+ Parallel Workers: 8
+ Concurrent Workers: 2
+ Concurrent Refinement Workers: 8
+ Periodic GC: Disabled
+
+Heap:
+ garbage-first heap   total 8192K, used 0K [0x000000070a200000, 0x0000000800000000)
+  region size 2048K, 1 young (2048K), 0 survivors (0K)
+ Metaspace       used 1119K, committed 1152K, reserved 1114112K
+  class space    used 95K, committed 128K, reserved 1048576K
+
+Heap Regions: E=young(eden), S=young(survivor), O=old, HS=humongous(starts), HC=humongous(continues), CS=collection set, F=free, OA=open archive, CA=closed archive, TAMS=top-at-mark-start (previous, next)
+|   0|0x000000070a200000, 0x000000070a200000, 0x000000070a400000|  0%| F|  |TAMS 0x000000070a200000, 0x000000070a200000| Untracked 
+|   1|0x000000070a400000, 0x000000070a400000, 0x000000070a600000|  0%| F|  |TAMS 0x000000070a400000, 0x000000070a400000| Untracked 
+|   2|0x000000070a600000, 0x000000070a600000, 0x000000070a800000|  0%| F|  |TAMS 0x000000070a600000, 0x000000070a600000| Untracked 
+|   3|0x000000070a800000, 0x000000070a80a440, 0x000000070aa00000|  2%| E|  |TAMS 0x000000070a800000, 0x000000070a800000| Complete 
+
+Card table byte_map: [0x00007f17392a2000,0x00007f1739a51000] _byte_map_base: 0x00007f1735a51000
+
+Marking Bits (Prev, Next): (CMBitMap*) 0x00007f174c091190, (CMBitMap*) 0x00007f174c0911d0
+ Prev Bits: [0x00007f1734d7b000, 0x00007f1738af3000)
+ Next Bits: [0x00007f1731003000, 0x00007f1734d7b000)
+
+Polling page: 0x00007f17522bf000
+
+Metaspace:
+
+Usage:
+  Non-class:   1023.93 KB used.
+      Class:     95.26 KB used.
+       Both:      1.09 MB used.
+
+Virtual space:
+  Non-class space:       64.00 MB reserved,       1.00 MB (  2%) committed,  1 nodes.
+      Class space:        1.00 GB reserved,     128.00 KB ( <1%) committed,  1 nodes.
+             Both:        1.06 GB reserved,       1.12 MB ( <1%) committed. 
+
+Chunk freelists:
+   Non-Class:  12.00 MB
+       Class:  15.75 MB
+        Both:  27.75 MB
+
+MaxMetaspaceSize: unlimited
+CompressedClassSpaceSize: 1.00 GB
+Initial GC threshold: 21.00 MB
+Current GC threshold: 17179869184.00 GB
+CDS: off
+MetaspaceReclaimPolicy: balanced
+ - commit_granule_bytes: 65536.
+ - commit_granule_words: 8192.
+ - virtual_space_node_default_size: 8388608.
+ - enlarge_chunks_in_place: 1.
+ - new_chunks_are_fully_committed: 0.
+ - uncommit_free_chunks: 1.
+ - use_allocation_guard: 0.
+ - handle_deallocations: 1.
+
+
+Internal statistics:
+
+num_allocs_failed_limit: 0.
+num_arena_births: 2.
+num_arena_deaths: 0.
+num_vsnodes_births: 2.
+num_vsnodes_deaths: 0.
+num_space_committed: 18.
+num_space_uncommitted: 0.
+num_chunks_returned_to_freelist: 0.
+num_chunks_taken_from_freelist: 3.
+num_chunk_merges: 0.
+num_chunk_splits: 2.
+num_chunks_enlarged: 0.
+num_inconsistent_stats: 0.
+
+CodeHeap 'non-profiled nmethods': size=120028Kb used=0Kb max_used=0Kb free=120028Kb
+ bounds [0x00007f1741cc9000, 0x00007f1741f39000, 0x00007f1749200000]
+CodeHeap 'profiled nmethods': size=120028Kb used=0Kb max_used=0Kb free=120028Kb
+ bounds [0x00007f173a200000, 0x00007f173a470000, 0x00007f1741737000]
+CodeHeap 'non-nmethods': size=5704Kb used=170Kb max_used=353Kb free=5534Kb
+ bounds [0x00007f1741737000, 0x00007f17419a7000, 0x00007f1741cc9000]
+ total_blobs=24 nmethods=0 adapters=5
+ compilation: enabled
+              stopped_count=0, restarted_count=0
+ full_count=0
+
+Compilation events (0 events):
+No events
+
+GC Heap History (0 events):
+No events
+
+Dll operation events (1 events):
+Event: 0.003 Loaded shared library /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjava.so
+
+Deoptimization events (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Events (20 events):
+Event: 0.037 loading class java/lang/Short
+Event: 0.037 loading class java/lang/Short done
+Event: 0.037 loading class java/lang/Integer
+Event: 0.038 loading class java/lang/Integer done
+Event: 0.038 loading class java/lang/Long
+Event: 0.038 loading class java/lang/Long done
+Event: 0.038 loading class java/util/Iterator
+Event: 0.038 loading class java/util/Iterator done
+Event: 0.038 loading class java/lang/reflect/RecordComponent
+Event: 0.038 loading class java/lang/reflect/RecordComponent done
+Event: 0.038 loading class jdk/internal/vm/vector/VectorSupport
+Event: 0.039 loading class jdk/internal/vm/vector/VectorSupport done
+Event: 0.039 loading class jdk/internal/vm/vector/VectorSupport$VectorPayload
+Event: 0.039 loading class jdk/internal/vm/vector/VectorSupport$VectorPayload done
+Event: 0.039 loading class jdk/internal/vm/vector/VectorSupport$Vector
+Event: 0.039 loading class jdk/internal/vm/vector/VectorSupport$Vector done
+Event: 0.039 loading class jdk/internal/vm/vector/VectorSupport$VectorMask
+Event: 0.039 loading class jdk/internal/vm/vector/VectorSupport$VectorMask done
+Event: 0.039 loading class jdk/internal/vm/vector/VectorSupport$VectorShuffle
+Event: 0.039 loading class jdk/internal/vm/vector/VectorSupport$VectorShuffle done
+
+
+Dynamic libraries:
+70a200000-70aa00000 rw-p 00000000 00:00 0 
+70aa00000-800040000 ---p 00000000 00:00 0 
+800040000-800060000 rw-p 00000000 00:00 0 
+800060000-840000000 ---p 00000000 00:00 0 
+55ad64db7000-55ad64db8000 r--p 00000000 103:07 1730252                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/bin/jcmd
+55ad64db8000-55ad64db9000 r-xp 00001000 103:07 1730252                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/bin/jcmd
+55ad64db9000-55ad64dba000 r--p 00002000 103:07 1730252                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/bin/jcmd
+55ad64dba000-55ad64dbb000 r--p 00002000 103:07 1730252                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/bin/jcmd
+55ad64dbb000-55ad64dbc000 rw-p 00003000 103:07 1730252                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/bin/jcmd
+55ad655bc000-55ad65604000 rw-p 00000000 00:00 0                          [heap]
+7f1714000000-7f1714021000 rw-p 00000000 00:00 0 
+7f1714021000-7f1718000000 ---p 00000000 00:00 0 
+7f1718000000-7f1718100000 rw-p 00000000 00:00 0 
+7f1718100000-7f171c000000 ---p 00000000 00:00 0 
+7f171c000000-7f171c021000 rw-p 00000000 00:00 0 
+7f171c021000-7f1720000000 ---p 00000000 00:00 0 
+7f1721d69000-7f1724000000 rw-p 00000000 00:00 0 
+7f1724000000-7f1724021000 rw-p 00000000 00:00 0 
+7f1724021000-7f1728000000 ---p 00000000 00:00 0 
+7f1728000000-7f1728021000 rw-p 00000000 00:00 0 
+7f1728021000-7f172c000000 ---p 00000000 00:00 0 
+7f172c000000-7f172c021000 rw-p 00000000 00:00 0 
+7f172c021000-7f1730000000 ---p 00000000 00:00 0 
+7f173021b000-7f17303f3000 rw-p 00000000 00:00 0 
+7f17303f3000-7f17303f4000 ---p 00000000 00:00 0 
+7f17303f4000-7f17304f5000 rw-p 00000000 00:00 0 
+7f17304f5000-7f17304f6000 ---p 00000000 00:00 0 
+7f17304f6000-7f1730dff000 rw-p 00000000 00:00 0 
+7f1730dff000-7f1730e00000 ---p 00000000 00:00 0 
+7f1730e00000-7f1730f01000 rw-p 00000000 00:00 0 
+7f1730f01000-7f1730f02000 ---p 00000000 00:00 0 
+7f1730f02000-7f1731023000 rw-p 00000000 00:00 0 
+7f1731023000-7f1734d7b000 ---p 00000000 00:00 0 
+7f1734d7b000-7f1734d9b000 rw-p 00000000 00:00 0 
+7f1734d9b000-7f1738af3000 ---p 00000000 00:00 0 
+7f1738af3000-7f1738af7000 rw-p 00000000 00:00 0 
+7f1738af7000-7f17392a2000 ---p 00000000 00:00 0 
+7f17392a2000-7f17392a6000 rw-p 00000000 00:00 0 
+7f17392a6000-7f1739a51000 ---p 00000000 00:00 0 
+7f1739a51000-7f1739a55000 rw-p 00000000 00:00 0 
+7f1739a55000-7f173a200000 ---p 00000000 00:00 0 
+7f173a200000-7f173a470000 rwxp 00000000 00:00 0 
+7f173a470000-7f1741737000 ---p 00000000 00:00 0 
+7f1741737000-7f17419a7000 rwxp 00000000 00:00 0 
+7f17419a7000-7f1741cc9000 ---p 00000000 00:00 0 
+7f1741cc9000-7f1741f39000 rwxp 00000000 00:00 0 
+7f1741f39000-7f1749200000 ---p 00000000 00:00 0 
+7f1749200000-7f174be1b000 r--s 00000000 103:07 1730574                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/modules
+7f174be62000-7f174befe000 rw-p 00000000 00:00 0 
+7f174befe000-7f174beff000 ---p 00000000 00:00 0 
+7f174beff000-7f174c000000 rw-p 00000000 00:00 0 
+7f174c000000-7f174c144000 rw-p 00000000 00:00 0 
+7f174c144000-7f1750000000 ---p 00000000 00:00 0 
+7f175003b000-7f1750848000 rw-p 00000000 00:00 0 
+7f1750848000-7f175092e000 ---p 00000000 00:00 0 
+7f175092e000-7f1750933000 rw-p 00000000 00:00 0 
+7f1750933000-7f1750a19000 ---p 00000000 00:00 0 
+7f1750a19000-7f1750a1d000 ---p 00000000 00:00 0 
+7f1750a1d000-7f1750b19000 rw-p 00000000 00:00 0 
+7f1750b19000-7f1750b27000 r--p 00000000 103:07 2774556                   /usr/lib/x86_64-linux-gnu/libm.so.6
+7f1750b27000-7f1750ba3000 r-xp 0000e000 103:07 2774556                   /usr/lib/x86_64-linux-gnu/libm.so.6
+7f1750ba3000-7f1750bfe000 r--p 0008a000 103:07 2774556                   /usr/lib/x86_64-linux-gnu/libm.so.6
+7f1750bfe000-7f1750bff000 r--p 000e4000 103:07 2774556                   /usr/lib/x86_64-linux-gnu/libm.so.6
+7f1750bff000-7f1750c00000 rw-p 000e5000 103:07 2774556                   /usr/lib/x86_64-linux-gnu/libm.so.6
+7f1750c00000-7f1750e53000 r--p 00000000 103:07 1730582                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/server/libjvm.so
+7f1750e53000-7f1751b75000 r-xp 00253000 103:07 1730582                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/server/libjvm.so
+7f1751b75000-7f1751e02000 r--p 00f75000 103:07 1730582                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/server/libjvm.so
+7f1751e02000-7f1751ebb000 r--p 01201000 103:07 1730582                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/server/libjvm.so
+7f1751ebb000-7f1751ef0000 rw-p 012ba000 103:07 1730582                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/server/libjvm.so
+7f1751ef0000-7f1751f4a000 rw-p 00000000 00:00 0 
+7f1751f58000-7f1751fd7000 rw-p 00000000 00:00 0 
+7f1751fd7000-7f1751fe4000 r--p 00000000 103:07 1730552                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjava.so
+7f1751fe4000-7f1751ff6000 r-xp 0000d000 103:07 1730552                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjava.so
+7f1751ff6000-7f1751ffc000 r--p 0001f000 103:07 1730552                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjava.so
+7f1751ffc000-7f1751ffd000 ---p 00025000 103:07 1730552                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjava.so
+7f1751ffd000-7f1751ffe000 r--p 00025000 103:07 1730552                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjava.so
+7f1751ffe000-7f1751fff000 rw-p 00026000 103:07 1730552                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjava.so
+7f1751fff000-7f1752000000 rw-p 00000000 00:00 0 
+7f1752000000-7f1752028000 r--p 00000000 103:07 2773907                   /usr/lib/x86_64-linux-gnu/libc.so.6
+7f1752028000-7f17521bd000 r-xp 00028000 103:07 2773907                   /usr/lib/x86_64-linux-gnu/libc.so.6
+7f17521bd000-7f1752215000 r--p 001bd000 103:07 2773907                   /usr/lib/x86_64-linux-gnu/libc.so.6
+7f1752215000-7f1752219000 r--p 00214000 103:07 2773907                   /usr/lib/x86_64-linux-gnu/libc.so.6
+7f1752219000-7f175221b000 rw-p 00218000 103:07 2773907                   /usr/lib/x86_64-linux-gnu/libc.so.6
+7f175221b000-7f1752228000 rw-p 00000000 00:00 0 
+7f1752235000-7f1752237000 r--p 00000000 103:07 1730573                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libzip.so
+7f1752237000-7f175223b000 r-xp 00002000 103:07 1730573                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libzip.so
+7f175223b000-7f175223d000 r--p 00006000 103:07 1730573                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libzip.so
+7f175223d000-7f175223e000 r--p 00007000 103:07 1730573                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libzip.so
+7f175223e000-7f175223f000 rw-p 00008000 103:07 1730573                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libzip.so
+7f175223f000-7f1752244000 rw-p 00000000 00:00 0 
+7f1752244000-7f175224b000 ---p 00000000 00:00 0 
+7f175224b000-7f175224f000 r--p 00000000 103:07 1730556                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjimage.so
+7f175224f000-7f1752262000 r-xp 00004000 103:07 1730556                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjimage.so
+7f1752262000-7f1752268000 r--p 00017000 103:07 1730556                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjimage.so
+7f1752268000-7f175226a000 r--p 0001c000 103:07 1730556                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjimage.so
+7f175226a000-7f175226b000 rw-p 0001e000 103:07 1730556                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjimage.so
+7f175226b000-7f175226c000 r--p 00000000 103:07 2774878                   /usr/lib/x86_64-linux-gnu/librt.so.1
+7f175226c000-7f175226d000 r-xp 00001000 103:07 2774878                   /usr/lib/x86_64-linux-gnu/librt.so.1
+7f175226d000-7f175226e000 r--p 00002000 103:07 2774878                   /usr/lib/x86_64-linux-gnu/librt.so.1
+7f175226e000-7f175226f000 r--p 00002000 103:07 2774878                   /usr/lib/x86_64-linux-gnu/librt.so.1
+7f175226f000-7f1752270000 rw-p 00003000 103:07 2774878                   /usr/lib/x86_64-linux-gnu/librt.so.1
+7f1752270000-7f1752275000 rw-p 00000000 00:00 0 
+7f1752275000-7f1752276000 r--p 00000000 103:07 2774049                   /usr/lib/x86_64-linux-gnu/libdl.so.2
+7f1752276000-7f1752277000 r-xp 00001000 103:07 2774049                   /usr/lib/x86_64-linux-gnu/libdl.so.2
+7f1752277000-7f1752278000 r--p 00002000 103:07 2774049                   /usr/lib/x86_64-linux-gnu/libdl.so.2
+7f1752278000-7f1752279000 r--p 00002000 103:07 2774049                   /usr/lib/x86_64-linux-gnu/libdl.so.2
+7f1752279000-7f175227a000 rw-p 00003000 103:07 2774049                   /usr/lib/x86_64-linux-gnu/libdl.so.2
+7f175227a000-7f175227b000 r--p 00000000 103:07 2774822                   /usr/lib/x86_64-linux-gnu/libpthread.so.0
+7f175227b000-7f175227c000 r-xp 00001000 103:07 2774822                   /usr/lib/x86_64-linux-gnu/libpthread.so.0
+7f175227c000-7f175227d000 r--p 00002000 103:07 2774822                   /usr/lib/x86_64-linux-gnu/libpthread.so.0
+7f175227d000-7f175227e000 r--p 00002000 103:07 2774822                   /usr/lib/x86_64-linux-gnu/libpthread.so.0
+7f175227e000-7f175227f000 rw-p 00003000 103:07 2774822                   /usr/lib/x86_64-linux-gnu/libpthread.so.0
+7f175227f000-7f1752282000 r--p 00000000 103:07 1730557                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjli.so
+7f1752282000-7f175228c000 r-xp 00003000 103:07 1730557                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjli.so
+7f175228c000-7f175228f000 r--p 0000d000 103:07 1730557                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjli.so
+7f175228f000-7f1752290000 ---p 00010000 103:07 1730557                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjli.so
+7f1752290000-7f1752291000 r--p 00010000 103:07 1730557                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjli.so
+7f1752291000-7f1752292000 rw-p 00011000 103:07 1730557                   /home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64/lib/libjli.so
+7f1752292000-7f1752294000 r--p 00000000 103:07 2775245                   /usr/lib/x86_64-linux-gnu/libz.so.1.2.11
+7f1752294000-7f17522a5000 r-xp 00002000 103:07 2775245                   /usr/lib/x86_64-linux-gnu/libz.so.1.2.11
+7f17522a5000-7f17522ab000 r--p 00013000 103:07 2775245                   /usr/lib/x86_64-linux-gnu/libz.so.1.2.11
+7f17522ab000-7f17522ac000 ---p 00019000 103:07 2775245                   /usr/lib/x86_64-linux-gnu/libz.so.1.2.11
+7f17522ac000-7f17522ad000 r--p 00019000 103:07 2775245                   /usr/lib/x86_64-linux-gnu/libz.so.1.2.11
+7f17522ad000-7f17522ae000 rw-p 0001a000 103:07 2775245                   /usr/lib/x86_64-linux-gnu/libz.so.1.2.11
+7f17522b7000-7f17522bf000 rw-s 00000000 103:07 2620169                   /tmp/hsperfdata_lecasseur/179470
+7f17522bf000-7f17522c0000 ---p 00000000 00:00 0 
+7f17522c0000-7f17522c1000 r--p 00000000 00:00 0 
+7f17522c1000-7f17522c3000 rw-p 00000000 00:00 0 
+7f17522c3000-7f17522c5000 r--p 00000000 103:07 2773567                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7f17522c5000-7f17522ef000 r-xp 00002000 103:07 2773567                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7f17522ef000-7f17522fa000 r--p 0002c000 103:07 2773567                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7f17522fa000-7f17522fb000 ---p 00000000 00:00 0 
+7f17522fb000-7f17522fd000 r--p 00037000 103:07 2773567                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7f17522fd000-7f17522ff000 rw-p 00039000 103:07 2773567                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7ffce7639000-7ffce765b000 rw-p 00000000 00:00 0                          [stack]
+7ffce76dd000-7ffce76e1000 r--p 00000000 00:00 0                          [vvar]
+7ffce76e1000-7ffce76e3000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsyscall]
+
+
+VM Arguments:
+jvm_args: -Dapplication.home=/home/lecasseur/.vscode/extensions/redhat.java-1.24.2023100304-linux-x64/jre/17.0.8.1-linux-x86_64 -Xms8m -Djdk.module.main=jdk.jcmd 
+java_command: jdk.jcmd/sun.tools.jcmd.JCmd 176876 VM.uptime
+java_class_path (initial): <not set>
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 2                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 8                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 2097152                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 8388608                                   {product} {command line}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 4125097984                                {product} {ergonomic}
+   size_t MaxNewSize                               = 2474639360                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 2097152                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {command line}
+    uintx NonNMethodCodeHeapSize                   = 5839372                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122909434                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122909434                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 4125097984                             {manageable} {ergonomic}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+PATH=/home/lecasseur/.nvm/versions/node/v16.13.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/lecasseur/invite/node-v17.0.0-linux-x64/bin
+USERNAME=lecasseur
+LD_LIBRARY_PATH=:/usr/local/lib:
+SHELL=/bin/bash
+DISPLAY=:1
+LANG=en_GB.UTF-8
+LC_NUMERIC=fr_FR.UTF-8
+LC_TIME=fr_FR.UTF-8
+TERM=xterm-256color
+
+Active Locale:
+LC_ALL=C
+LC_COLLATE=C
+LC_CTYPE=C
+LC_MESSAGES=C
+LC_MONETARY=C
+LC_NUMERIC=C
+LC_TIME=C
+
+Signal Handlers:
+   SIGSEGV: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+    SIGBUS: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+    SIGFPE: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+   SIGPIPE: javaSignalHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+   SIGXFSZ: javaSignalHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+    SIGILL: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+   SIGUSR2: SR_handler in libjvm.so, mask=00000000000000000000000000000000, flags=SA_RESTART|SA_SIGINFO, blocked
+    SIGHUP: SIG_DFL, mask=00000000000000000000000000000000, flags=none, blocked
+    SIGINT: SIG_DFL, mask=00000000000000000000000000000000, flags=none, blocked
+   SIGTERM: SIG_DFL, mask=00000000000000000000000000000000, flags=none, blocked
+   SIGQUIT: UserHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+   SIGTRAP: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=22.04
+DISTRIB_CODENAME=jammy
+DISTRIB_DESCRIPTION="Ubuntu 22.04.2 LTS"
+uname: Linux 5.19.0-46-generic #47~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Jun 21 15:35:31 UTC 2 x86_64
+OS uptime: 1 days 3:44 hours
+libc: glibc 2.35 NPTL 2.35 
+rlimit (soft/hard): STACK 8192k/infinity , CORE 0k/infinity , NPROC 62608/62608 , NOFILE 1048576/1048576 , AS infinity/infinity , CPU infinity/infinity , DATA infinity/infinity , FSIZE infinity/infinity , MEMLOCK 2013420k/2013420k
+load average: 2.58 3.14 3.60
+
+/proc/meminfo:
+MemTotal:       16107380 kB
+MemFree:         4995248 kB
+MemAvailable:   11909348 kB
+Buffers:          328676 kB
+Cached:          7317172 kB
+SwapCached:           40 kB
+Active:          3967112 kB
+Inactive:        5804764 kB
+Active(anon):       3012 kB
+Inactive(anon):  2766048 kB
+Active(file):    3964100 kB
+Inactive(file):  3038716 kB
+Unevictable:      423636 kB
+Mlocked:              64 kB
+SwapTotal:       2097148 kB
+SwapFree:        2094804 kB
+Zswap:                 0 kB
+Zswapped:              0 kB
+Dirty:             22868 kB
+Writeback:             0 kB
+AnonPages:       2549676 kB
+Mapped:           902316 kB
+Shmem:            643032 kB
+KReclaimable:     402516 kB
+Slab:             632372 kB
+SReclaimable:     402516 kB
+SUnreclaim:       229856 kB
+KernelStack:       18708 kB
+PageTables:        36440 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    10150836 kB
+Committed_AS:    9644296 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:      143528 kB
+VmallocChunk:          0 kB
+Percpu:            11072 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:         0 kB
+FilePmdMapped:         0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+DirectMap4k:      647352 kB
+DirectMap2M:    13766656 kB
+DirectMap1G:     2097152 kB
+
+/sys/kernel/mm/transparent_hugepage/enabled: always [madvise] never
+/sys/kernel/mm/transparent_hugepage/defrag (defrag/compaction efforts parameter): always defer defer+madvise [madvise] never
+
+Process Memory:
+Virtual Size: 6063400K (peak: 6063400K)
+Resident Set Size: 26488K (peak: 26488K) (anon: 8988K, file: 17500K, shmem: 0K)
+Swapped out: 0K
+C-Heap outstanding allocations: 23076K, retained: 791K
+glibc malloc tunables: (default)
+
+/proc/sys/kernel/threads-max (system-wide limit on the number of threads): 125216
+/proc/sys/vm/max_map_count (maximum number of memory map areas a process may have): 65530
+/proc/sys/kernel/pid_max (system-wide limit on number of process identifiers): 4194304
+
+container (cgroup) information:
+container_type: cgroupv2
+cpu_cpuset_cpus: not supported
+cpu_memory_nodes: not supported
+active_processor_count: 8
+cpu_quota: not supported
+cpu_period: not supported
+cpu_shares: not supported
+memory_limit_in_bytes: unlimited
+memory_and_swap_limit_in_bytes: unlimited
+memory_soft_limit_in_bytes: unlimited
+memory_usage_in_bytes: 1073256 k
+memory_max_usage_in_bytes: not supported
+memory_swap_current_in_bytes: unlimited
+memory_swap_max_limit_in_bytes: unlimited
+maximum number of tasks: 18782
+current number of tasks: 231
+
+Steal ticks since vm start: 0
+Steal ticks percentage since vm start:  0.000
+
+CPU: total 8 (initial active 8) (4 cores per cpu, 2 threads per core) family 6 model 142 stepping 12 microcode 0xf4, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, fma, vzeroupper, clflush, clflushopt
+CPU Model and flags from /proc/cpuinfo:
+model name	: Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust sgx bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities
+
+Online cpus: 0-7
+Offline cpus: 
+BIOS frequency limitation: <Not Available>
+Frequency switch latency (ns): 0
+Available cpu frequencies: <Not Available>
+Current governor: powersave
+Core performance/turbo boost: <Not Available>
+
+Memory: 4k page, physical 16107380k(4995248k free), swap 2097148k(2094804k free)
+Page Sizes: 4k
+
+vm_info: OpenJDK 64-Bit Server VM (17.0.8.1+1) for linux-amd64 JRE (17.0.8.1+1), built on Aug 24 2023 00:00:00 by "admin" with gcc 10.3.0
+
+END.
