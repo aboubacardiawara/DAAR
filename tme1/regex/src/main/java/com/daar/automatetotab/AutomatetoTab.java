@@ -14,7 +14,7 @@ public class AutomatetoTab {
 
     private int id = 0;
 
-    public IAutomate minimizeAutomate(IAutomate automate) {
+    public IAutomate determinizeAutomate(IAutomate automate) {
         return tableToAutomate(this.automateLocalToTab(automate));
     }
 
