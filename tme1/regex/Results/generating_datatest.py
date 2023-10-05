@@ -1,8 +1,8 @@
 import requests
-i=2000
-j=50
+i=2200
+j=104
 status = set()
-while  i <2100:
+while  i <3000:
     url = 'https://www.gutenberg.org/files/'+str(i)+'/'+str(i)+'-8.txt'
     response = requests.get(url)
     if response.status_code!=404: 
