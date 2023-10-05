@@ -81,10 +81,59 @@ public class Reconnaissance{
      */
     public static  void experimental(String fileName,int nbr_dupliquer) {
         //testTailleAutomate();
-
         testDureeRechercheAutomate(fileName,nbr_dupliquer);
     }
 
+    public static  void experimental_avrg(String regex,int nbr_dupliquer) throws IOException {
+        long totale_egrep=0;
+        long totale_afd=0;
+        int nb_files=10;
+        String regEx = regex;
+        long file_size=0;
+        BufferedWriter writer3 = new BufferedWriter(new FileWriter("Results/Time_AFD_average.txt",true));
+        BufferedWriter writer4 = new BufferedWriter(new FileWriter("Results/Time_Egrep_average.txt",true));
+        for (int i= 0; i<nb_files; i++){
+            String file_test="/Users/linaazerouk/Documents/M2/Daar/projet1Daar/DAAR/tme1/regex/Results/test_files/testfile"+i+".txt";     
+            file_size= new File(file_test).length();
+           
+                for (int x=0;x<=nbr_dupliquer; x++){ 
+                    try {
+                        //Time for Egrep
+                        ProcessBuilder processBuilder = new ProcessBuilder("egrep",regEx,file_test);
+                        long startTime = System.currentTimeMillis();
+                        processBuilder.redirectErrorStream(true);
+                        Process process = processBuilder.start();
+                        int exitCode = process.waitFor();
+                        long endTime = System.currentTimeMillis(); 
+                        long executionTime = endTime - startTime;
+                        totale_egrep= executionTime+totale_egrep;
+
+                        //Time for AFD:
+                        long t0 = System.currentTimeMillis();
+                        FileReader fileReader = new FileReader(file_test);
+                        BufferedReader bufferedReader = new BufferedReader(fileReader);
+                        IAutomate automate = new AutomateBuilder().buildFromRegex(regEx);
+                        String ligne;
+                        while ((ligne = bufferedReader.readLine()) != null) {
+                            if (match(ligne, automate))
+                            System.out.println(ligne);
+                        }
+                        bufferedReader.close();
+                        fileReader.close();
+                        long t1 = System.currentTimeMillis()-t0;
+                        totale_afd= t1+totale_afd;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            
+        }
+        writer3.write(file_size+" "+(totale_afd/nb_files)+ "\n");
+        writer4.write(file_size+ " " +(totale_egrep/nb_files)+ "\n");
+        writer3.close();
+        writer4.close();
+    }
+        
     private static void testDureeRechercheAutomate(String fileName,int nbr_dupliquer) {
         File file = new File(fileName);
         if (!file.exists()) {
@@ -141,28 +190,33 @@ public class Reconnaissance{
 
     private static void testTailleAutomate() {
         try {
-        BufferedWriter writer1 = new BufferedWriter(new FileWriter("size_result_experimental_epsilon.txt"));
-        BufferedWriter writer2= new BufferedWriter(new FileWriter("size_result_experimental_deterministic.txt"));
-        String regex= "ab";
+        BufferedWriter writer1 = new BufferedWriter(new FileWriter("Results/size_result_experimental_epsilon.txt"));
+        BufferedWriter writer2= new BufferedWriter(new FileWriter("Results/size_result_experimental_AFD_non_optimisé.txt"));
+        BufferedWriter writer3= new BufferedWriter(new FileWriter("Results/size_result_experimental_AFD_optimise.txt"));
+
+        String regex= "c|d*c";
         RegexParser parser = new RegexParser();
         int numPoints = 10;
         int[] yPoints_epsilon= new int[numPoints];
         int[] yPoints_deterministic= new int[numPoints];
-
+        int [] yPoints_deterministic_optimized= new int[numPoints];
         //TEST: pour la taille des automates
-        for (int x = 0; x <10; x++) {
+        for (int x = 0; x <numPoints; x++) {
             try {
             RegExTree regexTree = parser.parse(regex);
             IAutomate automateWithEpsilonTransitions = regexTree.toAutomate();
             yPoints_epsilon[x] =automateWithEpsilonTransitions.size(); 
             
             AutomatetoTab regexTable = new AutomatetoTab();
-            IAutomate deterministicAutomate = regexTable.determinizeAutomate(automateWithEpsilonTransitions);
-            yPoints_deterministic[x] =deterministicAutomate.size();
+            IAutomate AFD = regexTable.determinizeAutomate(automateWithEpsilonTransitions);
+            yPoints_deterministic[x] =AFD.size();
 
-            regex=regex+regex;
+            AFD.optimize();
+            yPoints_deterministic_optimized[x] = AFD.size();
+            regex=regex+"*"+regex;
             writer1.write(yPoints_epsilon[x] + "\n");
             writer2.write(yPoints_deterministic[x] + "\n");
+            writer3.write(yPoints_deterministic_optimized[x] + "\n");
 
         } catch (Exception e) {
                 e.printStackTrace();
@@ -170,7 +224,8 @@ public class Reconnaissance{
         }
         writer1.close();
         writer2.close();
-         } catch (IOException e) {
+        writer3.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
