@@ -341,22 +341,21 @@ public class Automate implements IAutomate {
         return this.sizeAux(this, new HashSet<Integer>());
     }
 
-    private int sizeAux(IAutomate automate,Set<Integer> visited2) {
-       
-        if (visited2.contains(automate.getId())) {
+    private int sizeAux(IAutomate automate,Set<Integer> visited) {
+        if (visited.contains(automate.getId())) {
             return 0;
         }else {
             int count = 1;
-            visited2.add(automate.getId());
+            visited.add(automate.getId());
             //this.
             
             for (Map.Entry<Character, IAutomate> entry : automate.getTransitions().entrySet()) {
                 IAutomate transition = entry.getValue();
-                count += sizeAux(transition, visited2);
+                count += sizeAux(transition, visited);
             }
 
             for (IAutomate automateLocal : automate.getEmptyTransitions()) {
-                count += sizeAux(automateLocal, visited2);
+                count += sizeAux(automateLocal, visited);
             }
 
             return count;
