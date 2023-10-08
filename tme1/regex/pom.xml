@@ -17,6 +17,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
+    <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
   </properties>
 
   <dependencies>
@@ -77,17 +78,24 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
-          <version>3.0.0</version>
+          <version>3.0.0</version> <!-- Assurez-vous d'utiliser la dernière version disponible -->
           <executions>
             <execution>
+              <id>default-cli</id>
               <goals>
                 <goal>java</goal>
               </goals>
+              <configuration>
+                <mainClass>com.daar.App</mainClass>
+                <arguments>
+                  <argument>note.txt</argument>
+                  <argument>S(a|r|g)+on</argument>
+                </arguments>
+              </configuration>
+
             </execution>
+
           </executions>
-          <configuration>
-            <mainClass>com.daar.App</mainClass>
-          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>

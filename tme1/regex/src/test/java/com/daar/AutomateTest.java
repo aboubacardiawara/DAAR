@@ -125,4 +125,13 @@ public class AutomateTest {
         assertTrue(Reconnaissance.match("plusieurs", automate));
     }
 
+    /**
+     * Vérifie si un AFD a une liste de transition epsilon empty
+     */
+    @Test
+    public void Test_empty_epsilon() {
+        IAutomate automate = this.automateBuilder.buildFromRegex("a*|b*");
+        assertTrue(automate.getEmptyTransitions().isEmpty());
+    }
+
 }

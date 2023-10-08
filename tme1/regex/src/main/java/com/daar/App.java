@@ -11,7 +11,7 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         if (args.length != 2) {
-            System.out.println("Usage: mvn exec:java -Dexec.args=\"<file> <regex>\"");
+            System.out.println("Lire le read me pour l'utilisation de l'application");
             System.exit(1);
         }
         // xp();
@@ -44,6 +44,7 @@ public class App {
     }
 
     public static void app(String file, String regex) {
+        System.out.println("file: " + file);
         Reconnaissance.search(file, regex);
     }
 }

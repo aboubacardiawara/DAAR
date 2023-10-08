@@ -26,6 +26,14 @@ Vous verrez la description de l'application et les commandes disponibles.
 
 ## Execution de l'application avec des paramètres
 
-```bash
-mvn exec:java -Dexec.args="<nom_du_fichier> <regex>"
+Ouvrir le fichier pom.xml et modifier la valeur de la propriété "exec.args" dans la balise "configuration" de la balise "plugin" "exec-maven-plugin" comme suit:
+
+```xml
+<configuration>
+    <mainClass>com.daar.App</mainClass>
+    <arguments>
+        <argument>note.txt</argument>
+        <argument>S(a|r|g)+on</argument>
+    </arguments>
+</configuration>
 ```
