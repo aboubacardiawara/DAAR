@@ -80,6 +80,15 @@ public class AutomateBuilderTest {
             fail("Error should not occur");
         }
     }
+    /**
+     * Vérifie si un AFD a une liste de transition epsilon empty
+     */
+    @Test
+    public void Test_empty_epsilon() {
+        IAutomate automate = this.automateBuilder.buildFromRegex("a*|b*");
+        assertTrue(automate.getEmptyTransitions().isEmpty());
+    }
+
 
     private IAutomate exampleAutomateAcceptingA() {
         return this.automateBuilder.buildFrom('a');
